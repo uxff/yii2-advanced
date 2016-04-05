@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'A dot publicserver MapTopo',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -39,7 +39,7 @@ AppAsset::register($this);
         ['label' => 'Contact', 'url' => ['/site/contact']],
         //['label' => 'Myform', 'url' => ['/myform/entry']],
         ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
-        ['label' => 'Memcache Test', 'url' => ['/mctest/index']],
+        ['label' => 'MapTopo', 'url' => ['/mctest/index']],
         ['label' => 'About', 'url' => ['/site/about']],
     ];
     if (Yii::$app->user->isGuest) {
