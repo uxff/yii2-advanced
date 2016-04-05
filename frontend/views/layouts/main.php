@@ -37,10 +37,9 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Myform', 'url' => ['/myform/entry']],
+        //['label' => 'Myform', 'url' => ['/myform/entry']],
         ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
-        ['label' => 'Redis Test', 'url' => ['/redis-test/index']],
-        ['label' => 'Memcache Test', 'url' => ['/mc-test/index']],
+        ['label' => 'Memcache Test', 'url' => ['/mctest/index']],
         ['label' => 'About', 'url' => ['/site/about']],
     ];
     if (Yii::$app->user->isGuest) {
@@ -71,7 +70,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; A dot publicserver <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

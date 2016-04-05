@@ -2,7 +2,6 @@
 
 namespace frontend\controllers;
 use Yii;
-use frontend\models\Mckeytest;
 
 
 class MctestController extends \yii\web\Controller
@@ -15,23 +14,11 @@ class MctestController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        $model = new Mckeytest();
-
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
-            }
-        }
-
-        return $this->render('index', [
-            'model' => $model,
-        ]);
+        return $this->actionMakenewmap();
     }
 
-    public function actionMymap()
+    public function actionShowmap()
     {
-        //echo __METHOD__;print_r(Yii::$app->cache->get('hello'));exit;
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
         $px  = isset($_GET['px']) ? $_GET['px'] : 6;
         $ver = $ver * 1 ? $ver * 1 : 1;
@@ -48,13 +35,13 @@ class MctestController extends \yii\web\Controller
             $x = (int)($i%$this->_width);
             $neighberStr = '';
             // 外围第一圈 显示
-            $neighbers = $this->getNeighberPos($x, $y);
-            foreach ($neighbers as $neighberDot) {
-                $neighberStr .= $neighberDot[0].','.$neighberDot[1].'='.$map[$neighberDot[1]*$this->_width+$neighberDot[0]]."\n";
-            }
-            $neighberAvg = $this->calcNeighberAvg1($x, $y, $map);
-            $neighberStr .= 'avg='.$neighberAvg."\n";
-            $neighberStr .= 'fall='.(int)(($neighberAvg-$mapDot)/2)."\n";
+            //$neighbers = $this->getNeighberPos($x, $y);
+            //foreach ($neighbers as $neighberDot) {
+            //    $neighberStr .= $neighberDot[0].','.$neighberDot[1].'='.$map[$neighberDot[1]*$this->_width+$neighberDot[0]]."\n";
+            //}
+            //$neighberAvg = $this->calcNeighberAvg1($x, $y, $map);
+            //$neighberStr .= 'avg='.$neighberAvg."\n";
+            //$neighberStr .= 'fall='.(int)(($neighberAvg-$mapDot)/2)."\n";
 
             // 为了快速计算 去掉外围第二圈显示
             //$neighbers2 = $this->getNeighberPos2($x, $y);
@@ -71,7 +58,7 @@ class MctestController extends \yii\web\Controller
             }
         }
         $mapStr .= '</tr></table>';
-        return $this->render('mymap', [
+        return $this->render('showmap', [
             'map' => $map,
             'mapStr' => $mapStr,
             'ver' => $ver,
@@ -121,7 +108,7 @@ class MctestController extends \yii\web\Controller
         }
         $newver = $this->upVersion();
         $this->saveMap($map, $newver, $ver);
-        $this->redirect(['mctest/mymap', 'ver'=>$newver]);
+        $this->redirect(['mctest/showmap', 'ver'=>$newver]);
     }
     public function actionSharpmymap() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
@@ -129,7 +116,7 @@ class MctestController extends \yii\web\Controller
         $map = $this->sharpMymap($map['map']);
         $newver = $this->upVersion();
         $this->saveMap($map, $newver, $ver);
-        $this->redirect(['mctest/mymap', 'ver'=>$newver]);
+        $this->redirect(['mctest/showmap', 'ver'=>$newver]);
     }
     // 钝化
     protected function passivateMap($map, $r=1) {
@@ -253,7 +240,7 @@ class MctestController extends \yii\web\Controller
         if ($ver) {
             $ret = Yii::$app->cache->set($key, 0, time());
         }
-        $this->redirect(['mctest/mymap', 'ver'=>$ver]);
+        $this->redirect(['mctest/showmap', 'ver'=>$ver]);
     }
     public function actionMakenewmap() {
         $width = isset($_GET['width']) ? (int)$_GET['width'] : $this->_width;
@@ -263,7 +250,7 @@ class MctestController extends \yii\web\Controller
         }
         $map = $this->makeMap();
         $this->saveMap($map, $newver);
-        $this->redirect(['mctest/mymap', 'ver'=>$newver]);
+        $this->redirect(['mctest/showmap', 'ver'=>$newver]);
     }
     protected function makeMap($width = 0) {
         $width = $width ? $width : $this->_width;
@@ -407,7 +394,7 @@ class MctestController extends \yii\web\Controller
         $this->_width = $this->_width * $zoomTimes;
         $this->_height = $this->_height * $zoomTimes;
         $this->saveMap($map, $newver, $ver);
-        $this->redirect(['mctest/mymap', 'ver'=>$newver, 'px'=>$px]);
+        $this->redirect(['mctest/showmap', 'ver'=>$newver, 'px'=>$px]);
     }
 
 }
