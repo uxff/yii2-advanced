@@ -52,3 +52,18 @@ environments/            contains environment-based overrides
 tests                    contains various tests for the advanced application
     codeception/         contains tests developed with Codeception PHP Testing Framework
 ```
+
+坑总结：
+1 git 提交每次需要密码：
+	http://blog.chinaunix.net/uid-26359455-id-3223565.html
+	1.1 # ssh-keygen -t rsa -C "xxx@gmail.com"
+	1.2 将.ssh/id_rsa.pub拷贝到GitHub网站
+	1.3 # eval `ssh-agent`
+	1.4 # ssh-add
+	（输入passphrase）(本次没执行1.4)
+	1.5 测试是否联通
+	    # ssh git@github.com
+	1.6 如果有origin或origin is already exist
+	    # git remote rm origin
+	    # git remote add origin uxff@github.com:uxff/yii2-advanved.git
+
