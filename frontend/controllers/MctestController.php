@@ -37,6 +37,7 @@ class MctestController extends \yii\web\Controller
         //ksort($map);
 //print_r($map);exit;
         $mapStr = '<table><tr>';
+        $i = 0;
         if (!empty($map))
         foreach ($map as $i=>$mapDot) {
             // $mapDot is a deep value
