@@ -17,6 +17,15 @@ class MctestController extends \yii\web\Controller
         return $this->actionMakenewmap();
     }
 
+    public function actionDebugmap()
+    {
+        
+        $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
+        $ver = $ver * 1 ? $ver * 1 : 1;
+        $stMap = $this->getMymap($ver);
+        print_r($stMap);
+    }
+
     public function actionShowmap()
     {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
