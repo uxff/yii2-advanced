@@ -21,9 +21,16 @@
 -->
 <pre>
 <?php
-#echo $mapStr;
+if ($showtd) {
+    echo $mapStr;
+} else {
 ?>
-<img src="index.php?r=mctest/gdmap&ver=<?php echo $ver;?>&px=<?php echo $px;?>"/>
+    <img src="index.php?r=mctest/gdmap&ver=<?php echo $ver;?>&px=<?php echo $px;?>"/>
+<?php
+}
+
+?>
+
 </pre>
 <span>width=<?php echo $width;?></span>
 <span>height=<?php echo $height;?></span>

@@ -26,6 +26,10 @@ class MctestController extends \yii\web\Controller
         print_r($stMap);
     }
 
+    public function actionShowmap() {
+        return $this->actionShowgdmap();
+    }
+
     public function actionGdmaphtml() {
         echo '<img src="index.php?r=mctest/gdmap"/>';
     }
@@ -41,12 +45,12 @@ class MctestController extends \yii\web\Controller
             $image = imagecreatetruecolor($this->_width * $px, $this->_height * $px);
             
             $white      = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
-            $gray       = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);         //为图像分配颜色为灰色
-            $darkgray   = imagecolorallocate($image, 0x90, 0x90, 0x90);         //为图像分配颜色为暗灰色
-            $navy       = imagecolorallocate($image, 0x00, 0x00, 0x80);         //为图像分配颜色为深蓝色
-            $darknavy   = imagecolorallocate($image, 0x00, 0x00, 0x50);         //为图像分配颜色为暗深蓝色
-            $red        = imagecolorallocate($image, 0xFF, 0x00, 0x00);         //为图像分配颜色为红色
-            $darkred    = imagecolorallocate($image, 0x90, 0x00, 0x00);         //为图像分配颜色为暗红色            
+            //$gray       = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);         //为图像分配颜色为灰色
+            //$darkgray   = imagecolorallocate($image, 0x90, 0x90, 0x90);         //为图像分配颜色为暗灰色
+            //$navy       = imagecolorallocate($image, 0x00, 0x00, 0x80);         //为图像分配颜色为深蓝色
+            //$darknavy   = imagecolorallocate($image, 0x00, 0x00, 0x50);         //为图像分配颜色为暗深蓝色
+            //$red        = imagecolorallocate($image, 0xFF, 0x00, 0x00);         //为图像分配颜色为红色
+            //$darkred    = imagecolorallocate($image, 0x90, 0x00, 0x00);         //为图像分配颜色为暗红色            
 
             $colorStep = 256 / ($this->_deep+1);
             $colorArr = [];
@@ -63,27 +67,13 @@ class MctestController extends \yii\web\Controller
                 imagefilledrectangle($image, $x, $y, $x+$px, $y+$px, $colorArr[$mapDot]);
             }
 
-            //for ($i=0; $i<$this->_deep; ++$i) {
-            //    $x = $i * 2;
-            //    $y = $i * 2;
-            //    imagefilledrectangle($image, $x, $y, $x+2, $y+2, $colorArr[$i]);
-            //}
-            
-            //for ($i = 60; $i >50; $i--) {                //循环10次画出立体效果
-            //    imagefilledarc($image, 50, $i, 100, 50, -160, 40, $darknavy, IMG_ARC_PIE);
-            //    imagefilledarc($image, 50, $i, 100, 50, 40, 75, $darkgray, IMG_ARC_PIE);
-            //    imagefilledarc($image, 50, $i, 100, 50, 75, 200, $darkred, IMG_ARC_PIE);
-            //}
             // 输出
             header('Content-type:image/png');
-            imagepng($image);
+            //imagepng($image);
+            imagejpeg($image);
             imagedestroy($image);
         }
         return null;
-    }
-
-    public function actionShowmap() {
-        return $this->actionShowgdmap();
     }
 
     public function actionShowgdmap() {
@@ -109,6 +99,8 @@ class MctestController extends \yii\web\Controller
             'height' => $this->_height,
             'deep' => $this->_deep,
             'i' => $i,
+            'showtd' => 0,
+            'showimg' => 1,
             'count' => count($map),
         ]);
     }
@@ -123,7 +115,10 @@ class MctestController extends \yii\web\Controller
         $mapStr = '<table><tr>';
         $i = 0;
         if (!empty($map))
-        foreach ($map as $i=>$mapDot) {
+        //foreach ($map as $i=>$mapDot)
+        for ($i=0; $i<$this->_width * $this->_height; ++$i)
+        {
+            $mapDot = isset($map[$i]) ? $map[$i] : 0;
             // $mapDot is a deep value
             $y = (int)($i/$this->_width);
             $x = (int)($i%$this->_width);
@@ -146,7 +141,7 @@ class MctestController extends \yii\web\Controller
             //$neighberStr .= 'avg='.$neighberAvg2."\n";
             //$neighberStr .= 'fall='.(int)(($neighberAvg2-$mapDot)/2)."\n";
 
-            $mapStr .= sprintf('<td key="%d" style="background-color:#2%x2;color:#FF6;font-size:6px;width:'.$px.'px;height:'.$px.'px" title="'.$neighberStr.'" val="%02d"></td>', $i, (int)(15-$mapDot/$this->_deep*16), $mapDot);
+            $mapStr .= sprintf('<td key="%d" style="background-color:#2%x2;color:#FF6;font-size:9px;width:'.$px.'px;height:'.$px.'px" title="'.$neighberStr.'" val="">%02d</td>', $i, (int)(15-$mapDot/$this->_deep*16), $mapDot);
             if (($i+1)%$this->_width==0) {
                 $mapStr .= '</tr><tr>';
             }
@@ -162,6 +157,8 @@ class MctestController extends \yii\web\Controller
             'height' => $this->_height,
             'deep' => $this->_deep,
             'i' => $i,
+            'showtd' => 1,
+            'showimg' => 0,
             'count' => count($map),
         ]);
     }
@@ -269,6 +266,9 @@ class MctestController extends \yii\web\Controller
     ###
     */
     protected function getNeighberPos($x, $y) {
+    //    return $this->getNeighberPos1($x, $y);
+    //}
+    //protected function getNeighberPos1($x, $y) {
         $arrDot = [];
         // x+1, y
         if ($x+1<$this->_width) {
@@ -325,6 +325,7 @@ class MctestController extends \yii\web\Controller
             'width' => $this->_width,
             'height' => $this->_height,
             'deep' => $this->_deep,
+            'count' => count($map),
         ];
         if ($map) {
             Yii::$app->cache->set($key, $arr, 86400);
@@ -429,7 +430,7 @@ class MctestController extends \yii\web\Controller
             $val = $map[$dot[1]*$this->_width+$dot[0]];
             $sum += $val;
         }
-        $avg = (int)($sum/count($dotPos));
+        $avg = $sum ? (int)($sum/count($dotPos)) : $map[$y * $this->_width + $x];
         return $avg;
     }
 
@@ -437,20 +438,43 @@ class MctestController extends \yii\web\Controller
         @param $zoomTimes 放大倍数 一个细化成三个
     */
     public function refine($map, $zoomTimes=3) {
-        //$this->_width;
-        //$this->_height;
         $newMap = [];
         foreach ($map as $i=>$mapDot) {
+            // 放大之前的坐标
             $y = (int)($i/$this->_width);
             $x = (int)($i%$this->_width);
-            $neighberAvg = $this->calcNeighberAvg1($x, $y, $map);
-            //$abs = abs($neighberAvg-$this->_deep);
-            //$vec = ($neighberAvg-$this->_deep/2 > 0) ? 1 : -1;
+            $neighberAvg = $this->calcNeighberAvg2($x, $y, $map);
+            //// 填充周边
             $this->pushDot($newMap, $x, $y, $mapDot, $neighberAvg, $zoomTimes);
-            //$mapDot = mt_rand($min, $max);//(int)(log($abs, 3))*$vec;
-            //$mapDot = $mapDot >= $this->_deep ? $this->_deep-1 : $mapDot;
-            //$mapDot = $mapDot < 0 ? 0 : $mapDot;
-            //$newMap[$i] = $mapDot;
+            // 放大之前的邻居
+            $arrDotPos = $this->getNeighberPos($x, $y);
+            $arrDotPosVal = [];
+            // 获得放大前周边点坐标和值
+            foreach ($arrDotPos as $dot) {
+                $neighberVal = $map[$dot[1]*$this->_width+$dot[0]];
+                $arrDotPosVal[] = [
+                    'x' => $dot[0],
+                    'y' => $dot[1],
+                    'v' => $neighberVal,
+                ];
+                // 利用原来坐标差值找出新坐标 ($dot[0]-$x)取值范围在-1到1 表示周围差值
+                $tx = (int)($x * $zoomTimes + $zoomTimes/2) + ($dot[0]-$x);
+                $ty = (int)($y * $zoomTimes + $zoomTimes/2) + ($dot[1]-$y);
+                $tIndex = $this->_width * $zoomTimes * $ty + $tx;
+                // 计算随机大小范围
+                $min = $neighberVal>$mapDot ? $mapDot : $neighberVal;
+                $max = $neighberVal>$mapDot ? $neighberVal : $mapDot;
+                
+                // 给随机值
+                $r = mt_rand($min, $max);
+                //Yii::error($i.': min='.$min.' max='.$max.' mapDot='.$mapDot.' tx='.$tx.' ty='.$ty.' r='.$r, __METHOD__);
+                $newMap[$tIndex] = $r;
+            }
+            // 中间坐标保持原来数据
+            $tCenterX = (int)($x * $zoomTimes + $zoomTimes/2);
+            $tCenterY = (int)($y * $zoomTimes + $zoomTimes/2);
+            $tCenterIndex = $this->_width * $zoomTimes * $tCenterY + $tCenterX;
+            $newMap[$tCenterIndex] = $mapDot;
         }
         ksort($newMap);
         return $newMap;
