@@ -11,6 +11,7 @@ class MctestController extends \yii\web\Controller
     private $_deep = 32;
     const MC_KEY_PRE        = 'my_map_0';
     const MC_KEY_VER_PRE    = 'my_map_version';
+    const DEFAULT_PX = 2;
 
     public function actionIndex()
     {
@@ -31,20 +32,21 @@ class MctestController extends \yii\web\Controller
 
     public function actionGdmap() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
-        $px  = isset($_GET['px']) ? $_GET['px'] : 6;
+        $px  = isset($_GET['px']) ? (int)$_GET['px'] : self::DEFAULT_PX;
+        $px  = $px < 1 ? 1 : $px;
         $ver = $ver * 1 ? $ver * 1 : 1;
         $stMap = $this->getMymap($ver);
         $map = $stMap['map'];
         if (!empty($map)) {
             $image = imagecreatetruecolor($this->_width * $px, $this->_height * $px);
             
-            $white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
-            $gray = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);           //为图像分配颜色为灰色
-            $darkgray = imagecolorallocate($image, 0x90, 0x90, 0x90);       //为图像分配颜色为暗灰色
-            $navy = imagecolorallocate($image, 0x00, 0x00, 0x80);           //为图像分配颜色为深蓝色
-            $darknavy = imagecolorallocate($image, 0x00, 0x00, 0x50);       //为图像分配颜色为暗深蓝色
-            $red = imagecolorallocate($image, 0xFF, 0x00, 0x00);           //为图像分配颜色为红色
-            $darkred = imagecolorallocate($image, 0x90, 0x00, 0x00);       //为图像分配颜色为暗红色            
+            $white      = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
+            $gray       = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);         //为图像分配颜色为灰色
+            $darkgray   = imagecolorallocate($image, 0x90, 0x90, 0x90);         //为图像分配颜色为暗灰色
+            $navy       = imagecolorallocate($image, 0x00, 0x00, 0x80);         //为图像分配颜色为深蓝色
+            $darknavy   = imagecolorallocate($image, 0x00, 0x00, 0x50);         //为图像分配颜色为暗深蓝色
+            $red        = imagecolorallocate($image, 0xFF, 0x00, 0x00);         //为图像分配颜色为红色
+            $darkred    = imagecolorallocate($image, 0x90, 0x00, 0x00);         //为图像分配颜色为暗红色            
 
             $colorStep = 256 / ($this->_deep+1);
             $colorArr = [];
@@ -60,6 +62,7 @@ class MctestController extends \yii\web\Controller
             
                 imagefilledrectangle($image, $x, $y, $x+$px, $y+$px, $colorArr[$mapDot]);
             }
+
             //for ($i=0; $i<$this->_deep; ++$i) {
             //    $x = $i * 2;
             //    $y = $i * 2;
@@ -80,14 +83,43 @@ class MctestController extends \yii\web\Controller
     }
 
     public function actionShowmap() {
+        return $this->actionShowgdmap();
+    }
+
+    public function actionShowgdmap() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
-        $px  = isset($_GET['px']) ? $_GET['px'] : 6;
+        $px  = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
+        $px  = $px < 1 ? 1 : $px;
+        $ver = $ver * 1 ? $ver * 1 : 1;
+        $stMap = $this->getMymap($ver);
+        $map = $stMap['map'];
+
+        $mapStr = '';
+        $i = 0;
+        if (!empty($map)) {
+            
+        }
+        return $this->render('showmap', [
+            'map' => $map,
+            'mapStr' => $mapStr,
+            'ver' => $ver,
+            'pre' => $stMap['pre'],
+            'px' => $px,
+            'width' => $this->_width,
+            'height' => $this->_height,
+            'deep' => $this->_deep,
+            'i' => $i,
+            'count' => count($map),
+        ]);
+    }
+    public function actionShowtdmap() {
+        $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
+        $px  = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
         $ver = $ver * 1 ? $ver * 1 : 1;
         $stMap = $this->getMymap($ver);
         $map = $stMap['map'];
         // 通过refine生成的map必须排序
-        //ksort($map);
-//print_r($map);exit;
+
         $mapStr = '<table><tr>';
         $i = 0;
         if (!empty($map))
@@ -162,6 +194,7 @@ class MctestController extends \yii\web\Controller
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
         $rad = isset($_GET['rad']) ? $_GET['rad'] : 1;
         $union = isset($_GET['union']) ? $_GET['union'] : 0;
+        $px = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
         $map = $this->getMymap($ver);
         if ($union) {
             $map = $this->passivateMapUnion($map['map'], $rad, $union);
@@ -170,15 +203,16 @@ class MctestController extends \yii\web\Controller
         }
         $newver = $this->upVersion();
         $this->saveMap($map, $newver, $ver);
-        $this->redirect(['mctest/showmap', 'ver'=>$newver]);
+        $this->redirect(['mctest/showmap', 'ver'=>$newver, 'px'=>$px]);
     }
     public function actionSharpmymap() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
+        $px = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
         $map = $this->getMymap($ver);
         $map = $this->sharpMymap($map['map']);
         $newver = $this->upVersion();
         $this->saveMap($map, $newver, $ver);
-        $this->redirect(['mctest/showmap', 'ver'=>$newver]);
+        $this->redirect(['mctest/showmap', 'ver'=>$newver, 'px'=>$px]);
     }
     // 钝化
     protected function passivateMap($map, $r=1) {
@@ -447,7 +481,7 @@ class MctestController extends \yii\web\Controller
     public function actionRefine() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
         $zoomTimes = isset($_GET['zoomTimes']) ? $_GET['zoomTimes'] : 3;
-        $px = isset($_GET['px']) ? $_GET['px'] : 6;
+        $px = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
         $px = (int)($px/$zoomTimes);
         $px = $px<1 ? 1 : $px;
         $map = $this->getMymap($ver);
