@@ -17,8 +17,7 @@ class MctestController extends \yii\web\Controller
         return $this->actionMakenewmap();
     }
 
-    public function actionDebugmap()
-    {
+    public function actionDebugmap() {
         
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
         $ver = $ver * 1 ? $ver * 1 : 1;
@@ -26,8 +25,61 @@ class MctestController extends \yii\web\Controller
         print_r($stMap);
     }
 
-    public function actionShowmap()
-    {
+    public function actionGdmaphtml() {
+        echo '<img src="index.php?r=mctest/gdmap"/>';
+    }
+
+    public function actionGdmap() {
+        $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
+        $px  = isset($_GET['px']) ? $_GET['px'] : 6;
+        $ver = $ver * 1 ? $ver * 1 : 1;
+        $stMap = $this->getMymap($ver);
+        $map = $stMap['map'];
+        if (!empty($map)) {
+            $image = imagecreatetruecolor($this->_width * $px, $this->_height * $px);
+            
+            $white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
+            $gray = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);           //为图像分配颜色为灰色
+            $darkgray = imagecolorallocate($image, 0x90, 0x90, 0x90);       //为图像分配颜色为暗灰色
+            $navy = imagecolorallocate($image, 0x00, 0x00, 0x80);           //为图像分配颜色为深蓝色
+            $darknavy = imagecolorallocate($image, 0x00, 0x00, 0x50);       //为图像分配颜色为暗深蓝色
+            $red = imagecolorallocate($image, 0xFF, 0x00, 0x00);           //为图像分配颜色为红色
+            $darkred = imagecolorallocate($image, 0x90, 0x00, 0x00);       //为图像分配颜色为暗红色            
+
+            $colorStep = 256 / ($this->_deep+1);
+            $colorArr = [];
+            for ($i=0; $i<$this->_deep; ++$i) {
+                $color = imagecolorallocate($image, 1, ($i+1)*$colorStep, 1);
+                $colorArr[$i] = $color;
+            }
+            imagefill($image, 0, 0, $white);
+            foreach ($map as $i=>$mapDot) {
+                // $mapDot is a deep value
+                $y = (int)($i/$this->_width) * $px;
+                $x = (int)($i%$this->_width) * $px;
+            
+                imagefilledrectangle($image, $x, $y, $x+$px, $y+$px, $colorArr[$mapDot]);
+            }
+            //for ($i=0; $i<$this->_deep; ++$i) {
+            //    $x = $i * 2;
+            //    $y = $i * 2;
+            //    imagefilledrectangle($image, $x, $y, $x+2, $y+2, $colorArr[$i]);
+            //}
+            
+            //for ($i = 60; $i >50; $i--) {                //循环10次画出立体效果
+            //    imagefilledarc($image, 50, $i, 100, 50, -160, 40, $darknavy, IMG_ARC_PIE);
+            //    imagefilledarc($image, 50, $i, 100, 50, 40, 75, $darkgray, IMG_ARC_PIE);
+            //    imagefilledarc($image, 50, $i, 100, 50, 75, 200, $darkred, IMG_ARC_PIE);
+            //}
+            // 输出
+            header('Content-type:image/png');
+            imagepng($image);
+            imagedestroy($image);
+        }
+        return null;
+    }
+
+    public function actionShowmap() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
         $px  = isset($_GET['px']) ? $_GET['px'] : 6;
         $ver = $ver * 1 ? $ver * 1 : 1;
