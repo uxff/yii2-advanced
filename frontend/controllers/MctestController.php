@@ -11,7 +11,7 @@ class MctestController extends \yii\web\Controller
     private $_deep = 32;
     const MC_KEY_PRE        = 'my_map_0';
     const MC_KEY_VER_PRE    = 'my_map_version';
-    const DEFAULT_PX = 2;
+    const DEFAULT_PX = 4;
 
     public function actionIndex()
     {
@@ -54,8 +54,12 @@ class MctestController extends \yii\web\Controller
 
             $colorStep = 256 / ($this->_deep+1);
             $colorArr = [];
+            $colorTpl = $this->colorArr2(5);
+            //print_r($colorTpl);exit;
             for ($i=0; $i<$this->_deep; ++$i) {
-                $color = imagecolorallocate($image, 1, ($i+1)*$colorStep, 1);
+                //$tplIndex = count($colorTpl) - 1 - (int)($i / ($this->_deep / count($colorTpl)));
+                $tplIndex = (int)($i / ($this->_deep / count($colorTpl)));
+                $color = imagecolorallocate($image, $colorTpl[$tplIndex]['r'], $colorTpl[$tplIndex]['g'], $colorTpl[$tplIndex]['b']);
                 $colorArr[$i] = $color;
             }
             imagefill($image, 0, 0, $white);
@@ -515,6 +519,202 @@ class MctestController extends \yii\web\Controller
         $this->_height = $this->_height * $zoomTimes;
         $this->saveMap($map, $newver, $ver);
         $this->redirect(['mctest/showmap', 'ver'=>$newver, 'px'=>$px]);
+    }
+    // redis test
+    public function actionRedis() {
+        $key = 'test1';
+        Yii::$app->redis->set($key, 1);
+        $val = Yii::$app->redis->get($key);
+        echo 'val='.$val;
+    }
+
+    public function actionGdmap2() {
+        $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
+        $px  = isset($_GET['px']) ? (int)$_GET['px'] : self::DEFAULT_PX;
+        $px  = $px < 1 ? 1 : $px;
+        $ver = $ver * 1 ? $ver * 1 : 1;
+        $image = imagecreatetruecolor(100 * $px, 100 * $px);
+        
+        $white      = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
+        //$gray       = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);         //为图像分配颜色为灰色
+        //$darkgray   = imagecolorallocate($image, 0x90, 0x90, 0x90);         //为图像分配颜色为暗灰色
+        //$navy       = imagecolorallocate($image, 0x00, 0x00, 0x80);         //为图像分配颜色为深蓝色
+        //$darknavy   = imagecolorallocate($image, 0x00, 0x00, 0x50);         //为图像分配颜色为暗深蓝色
+        //$red        = imagecolorallocate($image, 0xFF, 0x00, 0x00);         //为图像分配颜色为红色
+        //$darkred    = imagecolorallocate($image, 0x90, 0x00, 0x00);         //为图像分配颜色为暗红色            
+
+        imagefill($image, 0, 0, $white);
+        $colorArr = [];
+        for ($i=0; $i<20; ++$i) {
+            $color = imagecolorallocate($image, 1, ($i)*12, 1);
+            $colorArr[$i] = $color;
+        }
+        for ($i=0; $i<count($colorArr); ++$i) {
+            // $mapDot is a deep value
+            $x = (int)($i) * $px;
+            $y = 0;//(int)($i) * $px;
+        
+            imagefilledrectangle($image, $x, $y, $x+$px, $y+$px, $colorArr[$i]);
+        }
+
+        // 输出
+        header('Content-type:image/png');
+        //imagepng($image);
+        imagejpeg($image);
+        imagedestroy($image);
+        return null;
+    }
+    public function actionGdmaphtml2() {
+        echo '<img src="index.php?r=mctest/gdmap2"/>';
+    }
+    public function actionDrawcolorstep() {
+        $px  = isset($_GET['px']) ? (int)$_GET['px'] : self::DEFAULT_PX;
+        $px *= 4;
+        $mapStr = '<table><tr>';
+        $i = 0;
+        $j = 0;
+        $colorArr = [];
+        $stepCount = 5;
+        $colorArr = $this->colorArr2($stepCount);
+        $stepCount = count($colorArr);
+        for ($j=0; $j<$stepCount; ++$j)
+        {
+            for ($i=0; $i<$stepCount; ++$i) {
+                // $mapDot is a deep value
+                $x = (int)($i) * $px;
+                $y = 0;//(int)($i) * $px;
+                //$color = $this->rgb(($i)*12, ($stepCount-$i-1)*12, 0);
+            
+                //imagefilledrectangle($image, $x, $y, $x+$px, $y+$px, $colorArr[$i]);
+                $mapStr .= sprintf('<td key="%d" style="background-color:#%06X;color:#FF6;font-size:9px;width:'.$px.'px;height:'.$px.'px" title="'.'" val="">'.'%d</td>', $i, $colorArr[$i]['rgb'], $i);
+            }
+            //if (($j+1)%$stepCount==0) {
+                $mapStr .= '</tr><tr>';
+            //}
+        }
+        $mapStr .= '</tr></table>';
+        echo $mapStr;
+    }
+    public function rgb($r, $g, $b) {
+        $r = (int)$r;
+        $g = (int)$g;
+        $b = (int)$b;
+        return [
+            'r' => $r,
+            'g' => $g,
+            'b' => $b,
+            '#' => sprintf('%02X%02X%02X', $r, $g, $b),
+            'rgb' => (($r)<<16) + (($g)<<8) + ($b),
+        ];
+    }
+    /*
+        @param $max 数组的最大length
+    */
+    public function colorArr($max = 30) {
+        $r = 0;
+        $g = 0;
+        $b = 0;
+        $colorArr = [];
+        $xStart = 0;   // -0.5 pi
+        $xEnd = M_PI;   // 3/4  pi
+        $step = M_PI / $max;
+        Yii::warning('xStart='.$xStart.' xEnd='.$xEnd.' step='.$step, __METHOD__);
+        for ($i=0; $i<$max; ++$i) {
+            $x = $xStart + $i * $step;
+            //$r =  cos($x) * 255;
+            //$g =  sin($x+M_PI/4) * 255;
+            //$b =  sin($x-M_PI/4) * 255;
+            $r =  sin($x-M_PI/3) * 255;
+            $g =  sin($x) * 255;
+            $b =  sin($x*2) * 255;
+            //$b =  sin($x/2) * 255;
+            // 不能小于0
+            $r = $r>0 ? (int)$r : 0;
+            $g = $g>0 ? (int)$g : 0;
+            $b = $b>0 ? (int)$b : 0;
+            Yii::warning('i='.$i.' x='.$x.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+            $colorArr[] = $this->rgb($r, $g, $b);
+        }
+        return $colorArr;
+    }
+    /*
+        @param $max 每个色组数组的最大length
+    */
+    public function colorArr2($max = 4) {
+        $r = 0;
+        $g = 0;
+        $b = 0;
+        $colorArr = [];
+        $xStart = 0;   // -0.5 pi
+        $xEnd = M_PI;   // 3/4  pi
+        $sectionSize = (int)($max);
+        $step = (int)(256 / $sectionSize);
+        //Yii::warning('xStart='.$xStart.' xEnd='.$xEnd.' step='.$step, __METHOD__);
+        //// 蓝到青
+        //for ($i=0; $i<$sectionSize*1; ++$i) {
+        //    $r = 0;
+        //    $g = $i * $step;
+        //    $b = 250;
+        //    Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+        //    $colorArr[] = $this->rgb($r, $g, $b);
+        //}
+        //// 青到绿
+        //for ($i=0; $i<$sectionSize*1; ++$i) {
+        //    $r = 0;
+        //    $g = 255;// - $i * $step * 0.1;
+        //    $b = 255 - $i * $step;
+        //    Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+        //    $colorArr[] = $this->rgb($r, $g, $b);
+        //}
+        // 绿到黄
+        for ($i=0; $i<$sectionSize*1; ++$i) {
+            $r = $i * ($step + 1);
+            $g = 256 - ($sectionSize - $i) * $step * 0.3;
+            $b = 0;
+            //Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+            $colorArr[] = $this->rgb($r, $g, $b);
+        }
+        // 黄到红
+        for ($i=0; $i<$sectionSize*1; ++$i) {
+            $r = 255;
+            $g = 255 - ( ($i)) * ($step * 0.7) - $i*$sectionSize/2;// - $i * $sectionSize;
+            $b = 0;
+            //Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+            $colorArr[] = $this->rgb($r, $g, $b);
+        }
+        // 红到紫
+        for ($i=0; $i<$sectionSize*1/2; ++$i) {
+            $r = 255 - $i * $step;
+            $g = 0;
+            $b = $i * $step;
+            //Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+            $colorArr[] = $this->rgb($r, $g, $b);
+        }
+        // 红到紫
+        for ($i=0; $i<$sectionSize*1/2; ++$i) {
+            $r = 255 - ($sectionSize/2) * $step+ $i*$step;
+            $g = 0 + $i*$step;
+            $b = ($sectionSize/2) * $step+ $i*$step;
+            //Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+            $colorArr[] = $this->rgb($r, $g, $b);
+        }
+        //// 红到紫
+        //for ($i=0; $i<$sectionSize*1; ++$i) {
+        //    $r = 250;//255 - $i * $step;
+        //    $g = 0;
+        //    $b = $i * $step;
+        //    Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+        //    $colorArr[] = $this->rgb($r, $g, $b);
+        //}
+        //// 紫到白
+        //for ($i=0; $i<$sectionSize*1; ++$i) {
+        //    $r = 250;
+        //    $g = $i * $step;
+        //    $b = 250;
+        //    Yii::warning('i='.$i.' r='.$r.' g='.$g.' b='.$b, __METHOD__);
+        //    $colorArr[] = $this->rgb($r, $g, $b);
+        //}
+        return $colorArr;
     }
 
 }

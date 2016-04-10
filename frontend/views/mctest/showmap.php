@@ -8,6 +8,7 @@
 <a href="index.php?r=mctest/refine&ver=<?php echo $ver;?>&zoomTimes=2&px=<?php echo $px;?>">细化 x2</a>&nbsp;
 <a href="index.php?r=mctest/refine&ver=<?php echo $ver;?>&zoomTimes=3&px=<?php echo $px;?>">细化 x3</a>&nbsp;
 <a href="index.php?r=mctest/refine&ver=<?php echo $ver;?>&zoomTimes=4&px=<?php echo $px;?>">细化 x4</a>&nbsp;
+<a href="index.php?r=mctest/refine&ver=<?php echo $ver;?>&zoomTimes=5&px=<?php echo $px;?>">细化 x5</a>&nbsp;
 <a href="index.php?r=mctest/showmap&ver=<?php echo $pre;?>&px=<?php echo $px;?>">撤销</a>&nbsp;
 &nbsp;&nbsp;
 <a href="index.php?r=mctest/showmap&ver=<?php echo $ver;?>&px=<?php echo (int)($px+1);?>">放大 +</a>&nbsp;
