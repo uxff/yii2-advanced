@@ -28,10 +28,14 @@ if ($showtd) {
 </pre>
 <span>width=<?php echo $width;?></span>
 <span>height=<?php echo $height;?></span>
+<!--
 <span>deep=<?php echo $deep;?></span>
+-->
 <span>i=<?php echo $i;?></span>
 <span>dur=<?php echo $dur;?></span>
 <span>count=<?php echo $count;?></span>
+<span>maxLived=<?php echo $maxLived;?></span>
+<span>maxLivedDur=<?php echo $maxLivedDur;?></span>
 <script>
 var gotonew = function () {
     window.location = 'index.php?r=lifegame/makenewmap'+'&width='+document.getElementById('new_width').value;

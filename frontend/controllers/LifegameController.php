@@ -9,7 +9,9 @@ class LifegameController extends \yii\web\Controller
     private $_width = 20;
     private $_height = 20;
     private $_deep = 32;
-    private $_maxLife = 5;
+    private $_lifeCount = 5;
+    private $_maxLived = 0;
+    private $_maxLivedDur = 0;
     const MC_KEY_PRE        = 'lg_map_0';
     const MC_KEY_VER_PRE    = 'lg_map_version';
     const DEFAULT_PX = 4;
@@ -153,19 +155,21 @@ class LifegameController extends \yii\web\Controller
         }
         $mapStr .= '</tr></table>';
         return $this->render('showmap', [
-            'map' => $map,
-            'mapStr' => $mapStr,
-            'ver' => $ver,
-            'pre' => $stMap['pre'],
-            'dur' => $stMap['dur'],
-            'px' => $px,
-            'width' => $this->_width,
-            'height' => $this->_height,
-            'deep' => $this->_deep,
-            'i' => $i,
-            'showtd' => 1,
-            'showimg' => 0,
-            'count' => $this->_maxLife,
+            'map'           => $map,
+            'mapStr'        => $mapStr,
+            'ver'           => $ver,
+            'pre'           => $stMap['pre'],
+            'dur'           => $stMap['dur'],
+            'px'            => $px,
+            'width'         => $this->_width,
+            'height'        => $this->_height,
+            'deep'          => $this->_deep,
+            'i'             => $i,
+            'showtd'        => 1,
+            'showimg'       => 0,
+            'count'         => $this->_lifeCount,
+            'maxLived'      => $this->_maxLived,
+            'maxLivedDur'   => $this->_maxLivedDur,
         ]);
     }
     protected function getMymap($ver = 1) {
@@ -174,7 +178,9 @@ class LifegameController extends \yii\web\Controller
         $this->_width = isset($val['width']) ? $val['width'] : $this->_width;
         $this->_height = isset($val['height']) ? $val['height'] : $this->_height;
         $this->_deep = isset($val['deep']) ? $val['deep'] : $this->_deep;
-        $this->_maxLife = isset($val['count']) ? $val['count'] : $this->_maxLife;
+        $this->_lifeCount = isset($val['count']) ? $val['count'] : $this->_lifeCount;
+        $this->_maxLived = isset($val['maxLived']) ? $val['maxLived'] : $this->_maxLived;
+        $this->_maxLivedDur = isset($val['maxLivedDur']) ? $val['maxLivedDur'] : $this->_maxLivedDur;
         return $val;
     }
     protected function getVersion() {
@@ -198,9 +204,17 @@ class LifegameController extends \yii\web\Controller
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
         $px = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
         $map = $this->getMymap($ver);
-        $newmap = $this->makeLife($map['map']);
+        // 执行多次
+        $times = 200;
+        $tmpmap = $map['map'];
+        for ($i=1; $i<=$times; ++$i) {
+            $tmpmap = $this->makeLife($tmpmap);
+            ($this->_lifeCount > $this->_maxLived) && (($this->_maxLived = $this->_lifeCount) && ($this->_maxLivedDur = $map['dur']+$i));
+        }
+        $newmap = $tmpmap;
+
         $newver = $this->upVersion();
-        $this->saveMap($newmap, $newver, $ver, $map['dur']+1);
+        $this->saveMap($newmap, $newver, $ver, $map['dur']+$times);
         $this->redirect(['lifegame/showmap', 'ver'=>$newver, 'px'=>$px]);
     }
     // 生存规则
@@ -214,7 +228,7 @@ class LifegameController extends \yii\web\Controller
     */
     protected function makeLife($map) {
         $newMap = $map;
-        $this->_maxLife = 0;
+        $this->_lifeCount = 0;
         foreach ($map as $i=>$mapDot) {
             $y = (int)($i/$this->_width);
             $x = (int)($i%$this->_width);
@@ -232,7 +246,7 @@ class LifegameController extends \yii\web\Controller
                     $newMap[$i] = 0;
                 }
             }
-            $this->_maxLife += $newMap[$i];
+            $this->_lifeCount += $newMap[$i];
         }
         return $newMap;
     }
@@ -300,7 +314,9 @@ class LifegameController extends \yii\web\Controller
             'width' => $this->_width,
             'height' => $this->_height,
             'deep' => $this->_deep,
-            'count' => $this->_maxLife,
+            'count' => $this->_lifeCount,
+            'maxLived' => $this->_maxLived,
+            'maxLivedDur' => $this->_maxLivedDur,
         ];
         if ($map) {
             Yii::$app->cache->set($key, $arr, 86400);
