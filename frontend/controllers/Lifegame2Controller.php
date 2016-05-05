@@ -324,6 +324,9 @@ class Lifegame2Controller extends \yii\web\Controller
             // 依次计算白点周围的个数
             $y = $dot[1];
             $x = $dot[0];
+            if (isset($map[$y.'_'.$x])) {
+                continue;
+            }
             $sum = $this->calcNeighber($x, $y, $map);
             if ($sum == 3) {
                 $arrPos[$y.'_'.$x] = 1;
