@@ -343,7 +343,9 @@ class User extends Component
      */
     public function getIsGuest()
     {
-        return $this->getIdentity() === null;
+        $identity = $this->getIdentity();
+        // 只允许一个浏览器登录
+        return $identity === null || $identity->login_sess != session_id();
     }
 
     /**
@@ -466,6 +468,15 @@ class User extends Component
      */
     protected function afterLogin($identity, $cookieBased, $duration)
     {
+        if (!$cookieBased) {
+            $identity->last_login = date('Y-m-d H:i:s', time());
+        }
+        if (!$this->enableAutoLogin) {
+            $identity->login_sess = session_id();
+        }
+        if (!$cookieBased || !$this->enableAutoLogin) {
+            $identity->save();
+        }
         $this->trigger(self::EVENT_AFTER_LOGIN, new UserEvent([
             'identity' => $identity,
             'cookieBased' => $cookieBased,
