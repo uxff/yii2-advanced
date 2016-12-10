@@ -205,4 +205,36 @@ class Controller extends \yii\base\Controller
     {
         return Yii::$app->getResponse()->redirect(Yii::$app->getRequest()->getUrl() . $anchor);
     }
+    
+    /*
+        ajax 返回 json 处理
+    */
+    public function showJson($arr) {
+        header('Content-type: application/json');
+        echo @json_encode($arr);
+        exit;
+    }
+    /*
+        返回固定格式的错误
+    */
+    public function jsonData($msg, $code=1, $value = array()) {
+        $arr = array(
+            'code' => $code,
+            'msg' => $msg,
+            'data' => $value,
+        );
+        return $this->showJson($arr);
+    }
+    /*
+        返回固定格式的错误
+    */
+    public function jsonError($msg, $value = array(), $code=1) {
+        return $this->jsonData($msg, $code, $value);
+    }
+    /*
+        返回固定格式的错误
+    */
+    public function jsonSuccess($msg, $value = array(), $code=0) {
+        return $this->jsonData($msg, $code, $value);
+    }
 }

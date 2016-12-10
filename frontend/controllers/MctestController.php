@@ -17,6 +17,15 @@ class MctestController extends \yii\web\Controller
     {
         return $this->actionMakenewmap();
     }
+    public function actionCmdget() {
+        $key = $_GET['key'];
+        $ret = Yii::$app->cache->get($key);
+        echo 'ret=';print_r($ret);
+    }
+    public function actionCmdSet($key, $value) {
+        $ret = Yii::$app->cache->set($key, $value, 3600);
+        echo 'ret=';print_r($ret);
+    }
 
     public function actionDebugmap() {
         

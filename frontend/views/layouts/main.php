@@ -39,7 +39,14 @@ AppAsset::register($this);
         ['label' => 'Contact', 'url' => ['/site/contact']],
         //['label' => 'Myform', 'url' => ['/myform/entry']],
         ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
-        ['label' => 'MapTopo', 'url' => ['/mctest/index']],
+        ['label' => 'MapTopo', 
+            'items'=>[
+                ['label' => 'MapTopo', 'url' => ['/mctest/index']],
+                ['label' => 'Lifegame', 'url' => ['/lifegame/index']],
+                ['label' => 'Lifegame2', 'url' => ['/lifegame2/index']],
+                ['label' => 'Galaxy Simulate', 'url' => ['/galaxysim/index']],
+            ]
+        ],
         ['label' => 'About', 'url' => ['/site/about']],
     ];
     if (Yii::$app->user->isGuest) {
