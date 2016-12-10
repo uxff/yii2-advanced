@@ -65,6 +65,7 @@ tests                    contains various tests for the advanced application
 	    # ssh git@github.com 
 	1.6 如果有origin或origin is already exist 
 	    # git remote rm origin 
-	    # git remote add origin uxff@github.com:uxff/yii2-advanved.git 
+	    # git remote add origin git@github.com:uxff/yii2-advanved.git 
+            # 注意是git@github.com....而不是uxff@github.com....
 	1.7 接下来推送使用# git push origin master 而不是# git push -u origin master 
 
