@@ -76,11 +76,11 @@ class CaptchaAction extends Action
     /**
      * @var integer the minimum length for randomly generated word. Defaults to 6.
      */
-    public $minLength = 6;
+    public $minLength = 4;
     /**
      * @var integer the maximum length for randomly generated word. Defaults to 7.
      */
-    public $maxLength = 7;
+    public $maxLength = 5;
     /**
      * @var integer the offset between characters. Defaults to -2. You can adjust this property
      * in order to decrease or increase the readability of the captcha.

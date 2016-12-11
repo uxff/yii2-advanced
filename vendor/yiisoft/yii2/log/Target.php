@@ -58,7 +58,7 @@ abstract class Target extends Component
      * Note that a variable must be accessible via `$GLOBALS`. Otherwise it won't be logged.
      * Defaults to `['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER']`.
      */
-    public $logVars = ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'];
+    public $logVars = [];//['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'];
     /**
      * @var callable a PHP callable that returns a string to be prefixed to every exported message.
      *

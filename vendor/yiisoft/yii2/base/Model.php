@@ -597,6 +597,26 @@ class Model extends Component implements IteratorAggregate, ArrayAccess, Arrayab
     }
 
     /**
+     * Returns the last error.
+     * @param int $count .
+     * @return string the error message. Null is returned if no error.
+     */
+    public function lastError($count=1) {
+            $content = '';
+            $i = 0;
+            foreach ($this->_errors as $key=>$errors) {
+                foreach ($errors as $error) {
+                    $content .= $error.'('.$key.') ';
+                }
+                ++$i;
+                if ($i>$count) {
+                    break;
+                }
+            }
+            return $content;
+    }
+
+    /**
      * Adds a new error to the specified attribute.
      * @param string $attribute attribute name
      * @param string $error new error message
