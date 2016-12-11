@@ -15,7 +15,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'enableSession' => false,
+            'enableSession' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -23,16 +23,18 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'logFile' => '@app/runtime/logs/yii2a.log',
+                    //'categories' => ['orders'],
                 ],
             ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        //'session' => [
-        //    'timeout' => 3600,
-        //    //'domain' => '.yii2frontend.lo',
-        //],
+        'session' => [
+            'timeout' => 3600,
+        //    'domain' => '.yii2o.lo',
+        ],
     ],
     'params' => $params,
 ];
