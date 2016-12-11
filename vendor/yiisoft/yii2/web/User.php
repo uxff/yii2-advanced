@@ -343,9 +343,7 @@ class User extends Component
      */
     public function getIsGuest()
     {
-        $identity = $this->getIdentity();
-        // 只允许一个浏览器登录
-        return $identity === null || $identity->login_sess != session_id();
+    	return $this->getIdentity() === null;
     }
 
     /**
@@ -470,9 +468,6 @@ class User extends Component
     {
         if (!$cookieBased) {
             $identity->last_login = date('Y-m-d H:i:s', time());
-        }
-        if (!$this->enableAutoLogin) {
-            $identity->login_sess = session_id();
         }
         if (!$cookieBased || !$this->enableAutoLogin) {
             $identity->save();
