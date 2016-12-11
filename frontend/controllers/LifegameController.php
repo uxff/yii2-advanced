@@ -14,7 +14,7 @@ class LifegameController extends \yii\web\Controller
     private $_maxLivedDur = 0;
     const MC_KEY_PRE        = 'lg_map_0';
     const MC_KEY_VER_PRE    = 'lg_map_version';
-    const DEFAULT_PX = 4;
+    const DEFAULT_PX = 2;
 
     public function actionIndex()
     {
@@ -121,6 +121,7 @@ class LifegameController extends \yii\web\Controller
 
         $mapStr = '<table><tr>';
         $i = 0;
+        if (false)
         if (!empty($map))
         //foreach ($map as $i=>$mapDot)
         for ($i=0; $i<$this->_width * $this->_height; ++$i)
@@ -202,10 +203,11 @@ class LifegameController extends \yii\web\Controller
 
     public function actionMakelife() {
         $ver = isset($_GET['ver']) ? $_GET['ver'] : 1;
+        $dur = isset($_GET['dur']) ? $_GET['dur'] : 1;
         $px = isset($_GET['px']) ? $_GET['px'] : self::DEFAULT_PX;
         $map = $this->getMymap($ver);
         // 执行多次
-        $times = 200;
+        $times = $dur;
         $tmpmap = $map['map'];
         for ($i=1; $i<=$times; ++$i) {
             $tmpmap = $this->makeLife($tmpmap);
@@ -229,7 +231,11 @@ class LifegameController extends \yii\web\Controller
     protected function makeLife($map) {
         $newMap = $map;
         $this->_lifeCount = 0;
-        foreach ($map as $i=>$mapDot) {
+        //foreach ($map as $i=>$mapDot)
+        $len = strlen($map);
+        for ($i=0; $i < $len; ++$i)
+        {
+            $mapDot = $map[$i];
             $y = (int)($i/$this->_width);
             $x = (int)($i%$this->_width);
             $lifeCount = $this->calcNeighber($x, $y, $map);
@@ -344,9 +350,9 @@ class LifegameController extends \yii\web\Controller
         $width = $width ? $width : $this->_width;
         $height = $width ? $width : $this->_height;
         $deep = $this->_deep;
-        $arr = [];
+        $arr = '';
         for ($i=0; $i<$width*$height; ++$i) {
-            $arr[$i] = 0;//mt_rand(0, $deep-1);
+            $arr .= '0';//mt_rand(0, $deep-1);
         }
         /*
             **
@@ -358,6 +364,7 @@ class LifegameController extends \yii\web\Controller
         $arr[($mHeight-1)*$width+($mWidth-0)] = 1;$arr[($mHeight-1)*$width+($mWidth+1)] = 1;
         $arr[($mHeight+0)*$width+($mWidth-1)] = 1;$arr[($mHeight+0)*$width+($mWidth-0)] = 1;
         $arr[($mHeight+1)*$width+($mWidth-0)] = 1;
+        //print_r($arr);exit;
         return $arr;
     }
     protected function findNeighber($x, $y, $r) {

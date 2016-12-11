@@ -1,7 +1,8 @@
 <div style="position:absolute">
 <i class="fa fa-cubes"></i>
 </div>
-<a href="index.php?r=lifegame/makelife&ver=<?php echo $ver;?>&px=<?php echo $px;?>">生存</a>&nbsp;
+迭代:<input type="text" name="dur" id="dur" value="<?php echo $dur ? $dur : 1;?>" style="width:40px"/>
+<a href="javascript:;" r="index.php?r=lifegame/makelife&ver=<?php echo $ver;?>&px=<?php echo $px;?>" onclick="gotomakelife(this)">生存</a>&nbsp;
 <a href="index.php?r=lifegame/showmap&ver=<?php echo $pre;?>&px=<?php echo $px;?>">撤销</a>&nbsp;
 &nbsp;&nbsp;
 <a href="index.php?r=lifegame/showmap&ver=<?php echo $ver;?>&px=<?php echo (int)($px+1);?>">放大 +</a>&nbsp;
@@ -39,5 +40,8 @@ if ($showtd) {
 <script>
 var gotonew = function () {
     window.location = 'index.php?r=lifegame/makenewmap'+'&width='+document.getElementById('new_width').value;
+}
+var gotomakelife = function (o) {
+    window.location = $(o).attr('r') + '&dur='+$('#dur').val();
 }
 </script>
