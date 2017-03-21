@@ -84,6 +84,6 @@ class RedistestController extends \yii\console\Controller {
         // 已实现 pub/sub 机制 阻塞读
         $ret = $redis->subscribe(['f'], function ($redis, $chan, $msg){echo 'chan='.$chan.' msg='.$msg."\n";});
         print_r($ret);
-        sleep(10);
+        //sleep(10);
     }
 }

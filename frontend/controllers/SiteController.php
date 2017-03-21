@@ -16,7 +16,7 @@ use yii\filters\AccessControl;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends \frontend\controllers\BaseController
 {
     /**
      * @inheritdoc
@@ -72,7 +72,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        \Yii::warning('write log in site warning', __METHOD__);
+        \Yii::warning('write log in site warning');
         return $this->render('index');
     }
 

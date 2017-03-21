@@ -268,13 +268,14 @@ class McasyncController extends \yii\console\Controller {
                 ++$saveCount;
             }
         }
+	$orbCount = count($this->list);
         // 
         $this->mergeAdd();
         $this->saveList($this->list);
         //$endTime = time();
         list($endTimeMsec, $endTimeSec) = explode(' ', microtime());
         $timeSpan = ($endTimeSec - $startTimeSec) + ($endTimeMsec - $startTimeMsec);
-        $speed = $times / (($timeSpan)*1.0 +0.000021);
+        $speed = $times*$orbCount*$orbCount / (($timeSpan)*1.0 +0.000021);
         $cqps = $saveCount / (($timeSpan)*1.0 +0.000021);
         echo "list.count=".count($this->list)." timeSpan=".$timeSpan." cps=$speed cqps=$cqps\n";
         //print_r($this->list);

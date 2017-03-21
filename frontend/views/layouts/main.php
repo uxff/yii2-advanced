@@ -36,6 +36,13 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'OAuth', 
+            'items'=>[
+                ['label' => 'Weibo', 'url' => ['weibo/index']],
+                ['label' => 'TencentWeibo', 'url' => ['tencent/index']],
+                ['label' => 'Wechat', 'url' => ['wechat/index']],
+            ]
+        ],
         ['label' => 'Contact', 'url' => ['/site/contact']],
         //['label' => 'Myform', 'url' => ['/myform/entry']],
         ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
