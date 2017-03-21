@@ -66,6 +66,8 @@ class WeiboController extends Controller
                 'msg' => $msg,
             ]);
         }
+        // 授权成功 成功后需要把授权信息存放在数据库
+        
         return $this->redirect(['site/index', 'from'=>'oauth']);
     }
 
