@@ -194,6 +194,7 @@ class GraspController extends Controller
 
     public function init() {
         parent::init();
+        header("Content-Type:text/html; charset=utf-8");
     }
 
     public function getWbClient() {
@@ -229,6 +230,105 @@ class GraspController extends Controller
             $this->jsonError($ms['error']);
         }
 
-        $this->jsonSuccess('ok', $ms);
+        $line = $ms['statuses'];
+        $okList = [];
+
+        for ($i=0; $i<count($line); ++$i) {
+            // 条件不符合的去掉
+            if (isset($line[$i]['retweeted_status']))
+            {
+                //print_r('转播的微博:['.$line[$i]['text'].']自:['.$line[$i]['retweeted_status']['text'].']<br/>');
+                continue;
+            }
+            if (!in_array($line[$i]['user']['name'], $this->listen_list))
+            {
+                //print_r('非专业微博:['.$line[$i]['text'].']<br/>');
+                continue;
+            }
+            $hasIntent = false;
+            foreach ($this->unlike_word as $kw)
+            {
+                if (strpos($line[$i]['text'], $kw))
+                {
+                    //print_r('过滤的微博:['.$line[$i]['text'].']含有屏蔽词汇:['.$kw.']<br/>');
+                    $hasIntent = true;
+                    break;
+                }
+            }
+            if ($hasIntent)
+            {
+                continue;
+            }
+            // 条件符合，追加到缓存变量
+            //echo('合适微博：【'.$line[$i]['text'].'】<br/>');
+            $okList[] = $line[$i];
+        }
+
+        $allNum = $this->saveCandidate($okList);
+
+        $this->jsonSuccess('ok', [
+            'homeline_count' => count($ms['statuses']),
+            'ok_count' => count($okList),
+            'all_saved' => $allNum,
+        ]);
+    }
+    public function actionPut() {
+        $one = $this->popCandidate();
+
+        if (empty($one)) {
+            $this->jsonError('none candidate content');
+        }
+
+        $c = $this->getWbClient();
+        $text = $one['text'];
+
+        // 如果有图片，使用图片发布接口
+        if (isset($one['original_pic']) && !empty($one['original_pic'])) {
+            //$ret = $c->upload_url_text($text, $one['original_pic']);
+            $ret = $c->upload($text, $one['original_pic']);
+        }
+        else {
+            // 无图片 使用无图片接口
+            $ret = $c->update($text);
+        }
+
+        $this->jsonSuccess('ok', [
+            'wb' => $one,
+            'ret' => $ret,
+        ]);
+    }
+    /*
+        保存到队列
+    */
+    public function getCandidateFile() {
+        return Yii::$app->getRuntimePath().'/wbcandidate.txt';
+    }
+    public function saveCandidate($list) {
+        $filepath = $this->getCandidateFile();
+        $cntList = [];
+        $ret = false;
+        try {
+            $cnt = file_get_contents($filepath);
+            if (!empty($cnt)) {
+                $cntList = json_decode($cnt, true);
+            }
+            $cntList = array_merge($cntList, $list);
+            file_put_contents($filepath, json_encode($cntList));
+            $ret = count($cntList);
+        } catch (Excetion $e) {
+            $msg = $e->getMessage();
+        }
+        return $ret;
+    }
+    public function getCandidate() {
+        $filepath = $this->getCandidateFile();
+        return json_decode(file_get_contents($filepath), true);
+    }
+    public function popCandidate() {
+        $filepath = $this->getCandidateFile();
+        $line = json_decode(file_get_contents($filepath), true);
+        $one = array_shift($line);
+        file_put_contents($filepath, json_encode($line));
+        return $one;
     }
 }

@@ -291,8 +291,6 @@ class GraspController extends \yii\console\Controller {
                 else // 无图片 使用无图片接口
                 {
                         $ret = $wc->update($text);
-                {
-                        $ret = $wc->update($text);
                         print_r('weibo put :<br/>');
                         dump($ret);
                 }
