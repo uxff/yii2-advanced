@@ -15,9 +15,15 @@ class WeiboController extends Controller
 {
     const WB_AKEY = '2213721265';
     const WB_SKEY = '2c472f8aadcdceb22095d97e0a30d688';
-    const WB_CALLBACK_URL = 'http://yii2a.lo/oauthcallback.php';
+    public $WB_CALLBACK_URL;
     public $o;
     public $wb_url;
+
+    public function init() {
+        parent::init();
+        $this->WB_CALLBACK_URL = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/oauthcallback.php';
+    }
+
     public function behaviors()
     {
         return [
@@ -36,9 +42,8 @@ class WeiboController extends Controller
      */
     public function actionIndex()
     {
-
         $this->o = new WeiboOAuthV2(self::WB_AKEY, self::WB_SKEY);
-        $this->wb_url = $this->o->getAuthorizeURL( self::WB_CALLBACK_URL, 'code', 'wb');
+        $this->wb_url = $this->o->getAuthorizeURL( $this->WB_CALLBACK_URL, 'code', 'wb');
         return $this->render('index', [
             'wb_url' => $this->wb_url,
             'info' => $msg,
@@ -46,19 +51,20 @@ class WeiboController extends Controller
     }
 
     /**
-     * Displays a single Customer_contact model.
-     * @param integer $id
+     * 
+     * @param string $code
      * @return mixed
      */
     public function actionCodetotoken($code)
     {
         $keys = array();
         $keys['code'] = $code;
-        $keys['redirect_uri'] = self::WB_CALLBACK_URL;
+        $keys['redirect_uri'] = $this->WB_CALLBACK_URL;
         try {
             $this->o = new WeiboOAuthV2(self::WB_AKEY, self::WB_SKEY);
             $token = $this->o->getAccessToken('code', $keys);
         } catch (Exception $e) {
+            // 授权失败
             $msg = $e->getMessage();
             return $this->render('codetotoken', [
                 'wb_url' => $this->wb_url,
@@ -67,73 +73,69 @@ class WeiboController extends Controller
             ]);
         }
         // 授权成功 成功后需要把授权信息存放在数据库
-        
+        try {
+            $sql = 'select * from wbauth where wid='.$token['uid'];
+            $ret = Yii::$app->db->createCommand($sql)->queryAll();
+            if (empty($ret)) {
+                // insert
+                $arr = [
+                    'wid' => $token['uid'],
+                    'token' => $token['access_token'],
+                    'expires_in' => $token['expires_in'],
+                    'create_time' => date('Y-m-d H:i:s'),
+                ];
+                $insertRet = Yii::$app->db->createCommand()->insert('wbauth', $arr)->execute();
+            } else {
+                // update 
+                $arr = [
+                    //'wid' => $token['uid'],
+                    'token' => $token['access_token'],
+                    'expires_in' => $token['expires_in'],
+                ];
+                $updateRet = Yii::$app->db->createCommand()->update('wbauth', $arr, ['wid'=>$token['uid']])->execute();
+            }
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+        }
         return $this->redirect(['site/index', 'from'=>'oauth']);
+        //return $this->render('codetotoken', [
+        //    'wb_url' => $this->wb_url,
+        //    'info' => $token,
+        //    'msg' => $msg,
+        //]);
     }
 
-    /**
-     * Creates a new Customer_contact model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
+    public function actionHello()
     {
-        $model = new Customer_contact();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing Customer_contact model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing Customer_contact model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Customer_contact model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Customer_contact the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Customer_contact::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+        /* 建表
+CREATE TABLE `wbauth` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `wid` bigint(20) NOT NULL,
+  `token` varchar(40) NOT NULL DEFAULT '',
+  `expires_in` int(10) unsigned NOT NULL DEFAULT '0',
+  `create_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间(认证时间)',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `mark` int(10) unsigned NOT NULL DEFAULT '0',
+  `level` int(10) unsigned NOT NULL DEFAULT '0',
+  `verify` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `wid` (`wid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        */
+        //print_r($_SERVER);
+        $arr = [
+            'wid' => 1,
+            'token' => 'ssss',
+            'expires_in' => 1212,
+        ];
+        try {
+            $insertRet = Yii::$app->db->createCommand()->insert('wbauth', $arr)->execute();
+            if (!$inserRet) {
+                echo 'ret is false:';
+            }
+            print_r($inserRet);exit;
+        } catch (Exception $e) {
+            echo 'exception:';echo $e->getMessage();exit;
         }
     }
 }
