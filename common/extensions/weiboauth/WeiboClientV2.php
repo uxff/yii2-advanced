@@ -1,6 +1,9 @@
 <?php
 namespace common\extensions\weiboauth;
 
+use common\extensions\weiboauth\WeiboOAuthV2;
+
+
 /**
  * ÐÂÀËÎ¢²©²Ù×÷ÀàV2
  *
