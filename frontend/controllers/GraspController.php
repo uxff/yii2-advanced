@@ -311,12 +311,16 @@ class GraspController extends Controller
             $cnt = file_get_contents($filepath);
             if (!empty($cnt)) {
                 $cntList = json_decode($cnt, true);
+                if (empty($cntlist)) {
+                    $cntList = [];
+                }
             }
             $cntList = array_merge($cntList, $list);
             file_put_contents($filepath, json_encode($cntList));
             $ret = count($cntList);
         } catch (Excetion $e) {
             $msg = $e->getMessage();
+            Yii::warning('save candidate failed:'.$msg);
         }
         return $ret;
     }
