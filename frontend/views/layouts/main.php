@@ -43,9 +43,12 @@ AppAsset::register($this);
                 ['label' => 'Wechat', 'url' => ['wechat/index']],
             ]
         ],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-        //['label' => 'Myform', 'url' => ['/myform/entry']],
-        ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
+        ['label' => 'Dudads', 
+            'items' =>[
+                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
+            ],
+        ],
         ['label' => 'MapTopo', 
             'items'=>[
                 ['label' => 'MapTopo', 'url' => ['/mctest/index']],
