@@ -21,7 +21,12 @@ class WeiboController extends Controller
 
     public function init() {
         parent::init();
-        $this->WB_CALLBACK_URL = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/oauthcallback.php';
+        $scheme = 'http';
+        if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS']=='on' || $_SERVER['HTTPS']==1)
+         || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']=='https') {
+            $scheme = 'https';
+        }
+        $this->WB_CALLBACK_URL = $scheme.'://'.$_SERVER['HTTP_HOST'].'/oauthcallback.php';
     }
 
     public function behaviors()
