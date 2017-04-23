@@ -123,6 +123,8 @@ CREATE TABLE `wbauth` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         */
         //print_r($_SERVER);
+        echo 'hello';
+        return false;
         $arr = [
             'wid' => 1,
             'token' => 'ssss',

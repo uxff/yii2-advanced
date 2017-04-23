@@ -580,7 +580,7 @@ class GraspController extends \yii\console\Controller {
 
 	public function actionHello() {
 		echo 'hello :'.__METHOD__;
-		$ret = Yii::$app->djdb->createCommand('show tables;')->queryAll();
+		$ret = Yii::$app->db->createCommand('show tables;')->queryAll();
 		print_r($ret);
 	}
 }

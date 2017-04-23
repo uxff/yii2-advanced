@@ -270,6 +270,7 @@ class GraspController extends Controller
             'homeline_count' => count($ms['statuses']),
             'ok_count' => count($okList),
             'all_saved' => $allNum,
+            'list' => $okList,
         ]);
     }
     public function actionPut() {
