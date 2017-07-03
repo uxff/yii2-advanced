@@ -71,15 +71,17 @@ class WeiboController extends Controller
         } catch (Exception $e) {
             // 授权失败
             $msg = $e->getMessage();
+            Yii::error('auth failed:'.$e->getMessage().' code='.$code);
             return $this->render('codetotoken', [
                 'wb_url' => $this->wb_url,
                 'info' => $token,
                 'msg' => $msg,
             ]);
         }
+        Yii::warning('code='.$code.' token='.json_encode($token));
         // 授权成功 成功后需要把授权信息存放在数据库
         try {
-            $sql = 'select * from wbauth where wid='.$token['uid'];
+            $sql = 'select wid from wbauth where wid='.$token['uid'];
             $ret = Yii::$app->db->createCommand($sql)->queryAll();
             if (empty($ret)) {
                 // insert
@@ -90,6 +92,9 @@ class WeiboController extends Controller
                     'create_time' => date('Y-m-d H:i:s'),
                 ];
                 $insertRet = Yii::$app->db->createCommand()->insert('wbauth', $arr)->execute();
+                if (!$insertRet) {
+                     Yii::error('insert wbauth error:');
+                }
             } else {
                 // update 
                 $arr = [
@@ -101,6 +106,12 @@ class WeiboController extends Controller
             }
         } catch (Exception $e) {
             $msg = $e->getMessage();
+            Yii::error('save wbauth error:'.$e->getMessage());
+            return $this->render('codetotoken', [
+                'wb_url' => $this->wb_url,
+                'info' => $token,
+                'msg' => $msg,
+            ]);
         }
         return $this->redirect(['site/index', 'from'=>'oauth']);
         //return $this->render('codetotoken', [

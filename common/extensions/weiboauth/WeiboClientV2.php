@@ -3,11 +3,10 @@ namespace common\extensions\weiboauth;
 
 use common\extensions\weiboauth\WeiboOAuthV2;
 
-
 /**
- * ĞÂÀËÎ¢²©²Ù×÷ÀàV2
+ * æ–°æµªå¾®åšæ“ä½œç±»V2
  *
- * Ê¹ÓÃÇ°ĞèÒªÏÈÊÖ¹¤µ÷ÓÃ \common\extensions\weiboauth\WeiboOAuthV2 <br />
+ * ä½¿ç”¨å‰éœ€è¦å…ˆæ‰‹å·¥è°ƒç”¨saetv2.ex.class.php <br />
  *
  * @package sae
  * @author Easy Chen, Elmer Zhang,Lazypeople
@@ -16,42 +15,40 @@ use common\extensions\weiboauth\WeiboOAuthV2;
 class WeiboClientV2
 {
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 * 
 	 * @access public
-	 * @param mixed $akey Î¢²©¿ª·ÅÆ½Ì¨Ó¦ÓÃAPP KEY
-	 * @param mixed $skey Î¢²©¿ª·ÅÆ½Ì¨Ó¦ÓÃAPP SECRET
-	 * @param mixed $access_token OAuthÈÏÖ¤·µ»ØµÄtoken
-	 * @param mixed $refresh_token OAuthÈÏÖ¤·µ»ØµÄtoken secret
+	 * @param mixed $akey å¾®åšå¼€æ”¾å¹³å°åº”ç”¨APP KEY
+	 * @param mixed $skey å¾®åšå¼€æ”¾å¹³å°åº”ç”¨APP SECRET
+	 * @param mixed $access_token OAuthè®¤è¯è¿”å›çš„token
+	 * @param mixed $refresh_token OAuthè®¤è¯è¿”å›çš„token secret
 	 * @return void
 	 */
 	function __construct( $akey, $skey, $access_token, $refresh_token = NULL)
 	{
 		$this->oauth = new WeiboOAuthV2( $akey, $skey, $access_token, $refresh_token );
 	}
-
 	/**
-	 * ¿ªÆôµ÷ÊÔĞÅÏ¢
+	 * å¼€å¯è°ƒè¯•ä¿¡æ¯
 	 *
-	 * ¿ªÆôµ÷ÊÔĞÅÏ¢ºó£¬SDK»á½«Ã¿´ÎÇëÇóÎ¢²©APIËù·¢ËÍµÄPOST Data¡¢HeadersÒÔ¼°ÇëÇóĞÅÏ¢¡¢·µ»ØÄÚÈİÊä³ö³öÀ´¡£
+	 * å¼€å¯è°ƒè¯•ä¿¡æ¯åï¼ŒSDKä¼šå°†æ¯æ¬¡è¯·æ±‚å¾®åšAPIæ‰€å‘é€çš„POST Dataã€Headersä»¥åŠè¯·æ±‚ä¿¡æ¯ã€è¿”å›å†…å®¹è¾“å‡ºå‡ºæ¥ã€‚
 	 *
 	 * @access public
-	 * @param bool $enable ÊÇ·ñ¿ªÆôµ÷ÊÔĞÅÏ¢
+	 * @param bool $enable æ˜¯å¦å¼€å¯è°ƒè¯•ä¿¡æ¯
 	 * @return void
 	 */
 	function set_debug( $enable )
 	{
 		$this->oauth->debug = $enable;
 	}
-
 	/**
-	 * ÉèÖÃÓÃ»§IP
+	 * è®¾ç½®ç”¨æˆ·IP
 	 *
-	 * SDKÄ¬ÈÏ½«»áÍ¨¹ı$_SERVER['REMOTE_ADDR']»ñÈ¡ÓÃ»§IP£¬ÔÚÇëÇóÎ¢²©APIÊ±½«ÓÃ»§IP¸½¼Óµ½Request HeaderÖĞ¡£µ«Ä³Ğ©Çé¿öÏÂ$_SERVER['REMOTE_ADDR']È¡µ½µÄIP²¢·ÇÓÃ»§IP£¬¶øÊÇÒ»¸ö¹Ì¶¨µÄIP£¨ÀıÈçÊ¹ÓÃSAEµÄCron»òTaskQueue·şÎñÊ±£©£¬´ËÊ±¾ÍÓĞ¿ÉÄÜ»áÔì³É¸Ã¹Ì¶¨IP´ïµ½Î¢²©APIµ÷ÓÃÆµÂÊÏŞ¶î£¬µ¼ÖÂAPIµ÷ÓÃÊ§°Ü¡£´ËÊ±¿ÉÊ¹ÓÃ±¾·½·¨ÉèÖÃÓÃ»§IP£¬ÒÔ±ÜÃâ´ËÎÊÌâ¡£
+	 * SDKé»˜è®¤å°†ä¼šé€šè¿‡$_SERVER['REMOTE_ADDR']è·å–ç”¨æˆ·IPï¼Œåœ¨è¯·æ±‚å¾®åšAPIæ—¶å°†ç”¨æˆ·IPé™„åŠ åˆ°Request Headerä¸­ã€‚ä½†æŸäº›æƒ…å†µä¸‹$_SERVER['REMOTE_ADDR']å–åˆ°çš„IPå¹¶éç”¨æˆ·IPï¼Œè€Œæ˜¯ä¸€ä¸ªå›ºå®šçš„IPï¼ˆä¾‹å¦‚ä½¿ç”¨SAEçš„Cronæˆ–TaskQueueæœåŠ¡æ—¶ï¼‰ï¼Œæ­¤æ—¶å°±æœ‰å¯èƒ½ä¼šé€ æˆè¯¥å›ºå®šIPè¾¾åˆ°å¾®åšAPIè°ƒç”¨é¢‘ç‡é™é¢ï¼Œå¯¼è‡´APIè°ƒç”¨å¤±è´¥ã€‚æ­¤æ—¶å¯ä½¿ç”¨æœ¬æ–¹æ³•è®¾ç½®ç”¨æˆ·IPï¼Œä»¥é¿å…æ­¤é—®é¢˜ã€‚
 	 *
 	 * @access public
-	 * @param string $ip ÓÃ»§IP
-	 * @return bool IPÎª·Ç·¨IP×Ö·û´®Ê±£¬·µ»Øfalse£¬·ñÔò·µ»Øtrue
+	 * @param string $ip ç”¨æˆ·IP
+	 * @return bool IPä¸ºéæ³•IPå­—ç¬¦ä¸²æ—¶ï¼Œè¿”å›falseï¼Œå¦åˆ™è¿”å›true
 	 */
 	function set_remote_ip( $ip )
 	{
@@ -62,16 +59,15 @@ class WeiboClientV2
 			return false;
 		}
 	}
-
 	/**
-	 * »ñÈ¡×îĞÂµÄ¹«¹²Î¢²©ÏûÏ¢
+	 * è·å–æœ€æ–°çš„å…¬å…±å¾®åšæ¶ˆæ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/public_timeline statuses/public_timeline}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/public_timeline statuses/public_timeline}
 	 *
 	 * @access public
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $base_app ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $base_app æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function public_timeline( $page = 1, $count = 50, $base_app = 0 )
@@ -80,22 +76,21 @@ class WeiboClientV2
 		$params['count'] = intval($count);
 		$params['page'] = intval($page);
 		$params['base_app'] = intval($base_app);
-		return $this->oauth->get('statuses/public_timeline', $params);//¿ÉÄÜÊÇ½Ó¿ÚµÄbug²»ÄÜ²¹È«
+		return $this->oauth->get('statuses/public_timeline', $params);//å¯èƒ½æ˜¯æ¥å£çš„bugä¸èƒ½è¡¥å…¨
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§¼°ÆäËù¹Ø×¢ÓÃ»§µÄ×îĞÂÎ¢²©ÏûÏ¢¡£
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·åŠå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®åšæ¶ˆæ¯ã€‚
 	 *
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§¼°ÆäËù¹Ø×¢ÓÃ»§µÄ×îĞÂÎ¢²©ÏûÏ¢¡£ºÍÓÃ»§µÇÂ¼ http://weibo.com ºóÔÚ¡°ÎÒµÄÊ×Ò³¡±ÖĞ¿´µ½µÄÄÚÈİÏàÍ¬¡£Í¬friends_timeline()
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/home_timeline statuses/home_timeline}
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·åŠå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®åšæ¶ˆæ¯ã€‚å’Œç”¨æˆ·ç™»å½• http://weibo.com ååœ¨â€œæˆ‘çš„é¦–é¡µâ€ä¸­çœ‹åˆ°çš„å†…å®¹ç›¸åŒã€‚åŒfriends_timeline()
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/home_timeline statuses/home_timeline}
 	 * 
 	 * @access public
-	 * @param int $page Ö¸¶¨·µ»Ø½á¹ûµÄÒ³Âë¡£¸ù¾İµ±Ç°µÇÂ¼ÓÃ»§Ëù¹Ø×¢µÄÓÃ»§Êı¼°ÕâĞ©±»¹Ø×¢ÓÃ»§·¢±íµÄÎ¢²©Êı£¬·­Ò³¹¦ÄÜ×î¶àÄÜ²é¿´µÄ×Ü¼ÇÂ¼Êı»áÓĞËù²»Í¬£¬Í¨³£×î¶àÄÜ²é¿´1000Ìõ×óÓÒ¡£Ä¬ÈÏÖµ1¡£¿ÉÑ¡¡£
-	 * @param int $count Ã¿´Î·µ»ØµÄ¼ÇÂ¼Êı¡£È±Ê¡Öµ50£¬×î´óÖµ200¡£¿ÉÑ¡¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄÎ¢²©ÏûÏ¢£¨¼´±Èsince_id·¢±íÊ±¼äÍíµÄÎ¢²©ÏûÏ¢£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÎ¢²©ÏûÏ¢¡£¿ÉÑ¡¡£
-	 * @param int $base_app ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int $feature ¹ıÂËÀàĞÍID£¬0£ºÈ«²¿¡¢1£ºÔ­´´¡¢2£ºÍ¼Æ¬¡¢3£ºÊÓÆµ¡¢4£ºÒôÀÖ£¬Ä¬ÈÏÎª0¡£
+	 * @param int $page æŒ‡å®šè¿”å›ç»“æœçš„é¡µç ã€‚æ ¹æ®å½“å‰ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„ç”¨æˆ·æ•°åŠè¿™äº›è¢«å…³æ³¨ç”¨æˆ·å‘è¡¨çš„å¾®åšæ•°ï¼Œç¿»é¡µåŠŸèƒ½æœ€å¤šèƒ½æŸ¥çœ‹çš„æ€»è®°å½•æ•°ä¼šæœ‰æ‰€ä¸åŒï¼Œé€šå¸¸æœ€å¤šèƒ½æŸ¥çœ‹1000æ¡å·¦å³ã€‚é»˜è®¤å€¼1ã€‚å¯é€‰ã€‚
+	 * @param int $count æ¯æ¬¡è¿”å›çš„è®°å½•æ•°ã€‚ç¼ºçœå€¼50ï¼Œæœ€å¤§å€¼200ã€‚å¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„å¾®åšæ¶ˆæ¯ï¼ˆå³æ¯”since_idå‘è¡¨æ—¶é—´æ™šçš„å¾®åšæ¶ˆæ¯ï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„å¾®åšæ¶ˆæ¯ã€‚å¯é€‰ã€‚
+	 * @param int $base_app æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $feature è¿‡æ»¤ç±»å‹IDï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŸåˆ›ã€2ï¼šå›¾ç‰‡ã€3ï¼šè§†é¢‘ã€4ï¼šéŸ³ä¹ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function home_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0 )
@@ -113,45 +108,42 @@ class WeiboClientV2
 		$params['page'] = intval($page);
 		$params['base_app'] = intval($base_app);
 		$params['feature'] = intval($feature);
-
 		return $this->oauth->get('statuses/home_timeline', $params);
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§¼°ÆäËù¹Ø×¢ÓÃ»§µÄ×îĞÂÎ¢²©ÏûÏ¢¡£
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·åŠå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®åšæ¶ˆæ¯ã€‚
 	 *
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§¼°ÆäËù¹Ø×¢ÓÃ»§µÄ×îĞÂÎ¢²©ÏûÏ¢¡£ºÍÓÃ»§µÇÂ¼ http://weibo.com ºóÔÚ¡°ÎÒµÄÊ×Ò³¡±ÖĞ¿´µ½µÄÄÚÈİÏàÍ¬¡£Í¬home_timeline()
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/friends_timeline statuses/friends_timeline}
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·åŠå…¶æ‰€å…³æ³¨ç”¨æˆ·çš„æœ€æ–°å¾®åšæ¶ˆæ¯ã€‚å’Œç”¨æˆ·ç™»å½• http://weibo.com ååœ¨â€œæˆ‘çš„é¦–é¡µâ€ä¸­çœ‹åˆ°çš„å†…å®¹ç›¸åŒã€‚åŒhome_timeline()
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/friends_timeline statuses/friends_timeline}
 	 * 
 	 * @access public
-	 * @param int $page Ö¸¶¨·µ»Ø½á¹ûµÄÒ³Âë¡£¸ù¾İµ±Ç°µÇÂ¼ÓÃ»§Ëù¹Ø×¢µÄÓÃ»§Êı¼°ÕâĞ©±»¹Ø×¢ÓÃ»§·¢±íµÄÎ¢²©Êı£¬·­Ò³¹¦ÄÜ×î¶àÄÜ²é¿´µÄ×Ü¼ÇÂ¼Êı»áÓĞËù²»Í¬£¬Í¨³£×î¶àÄÜ²é¿´1000Ìõ×óÓÒ¡£Ä¬ÈÏÖµ1¡£¿ÉÑ¡¡£
-	 * @param int $count Ã¿´Î·µ»ØµÄ¼ÇÂ¼Êı¡£È±Ê¡Öµ50£¬×î´óÖµ200¡£¿ÉÑ¡¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄÎ¢²©ÏûÏ¢£¨¼´±Èsince_id·¢±íÊ±¼äÍíµÄÎ¢²©ÏûÏ¢£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÎ¢²©ÏûÏ¢¡£¿ÉÑ¡¡£
-	 * @param int $base_app ÊÇ·ñ»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ¡£1ÎªÏŞÖÆ±¾Ó¦ÓÃÎ¢²©£¬0Îª²»×öÏŞÖÆ¡£Ä¬ÈÏÎª0¡£¿ÉÑ¡¡£
-	 * @param int $feature Î¢²©ÀàĞÍ£¬0È«²¿£¬1Ô­´´£¬2Í¼Æ¬£¬3ÊÓÆµ£¬4ÒôÀÖ. ·µ»ØÖ¸¶¨ÀàĞÍµÄÎ¢²©ĞÅÏ¢ÄÚÈİ¡£×ªÎªÎª0¡£¿ÉÑ¡¡£
+	 * @param int $page æŒ‡å®šè¿”å›ç»“æœçš„é¡µç ã€‚æ ¹æ®å½“å‰ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„ç”¨æˆ·æ•°åŠè¿™äº›è¢«å…³æ³¨ç”¨æˆ·å‘è¡¨çš„å¾®åšæ•°ï¼Œç¿»é¡µåŠŸèƒ½æœ€å¤šèƒ½æŸ¥çœ‹çš„æ€»è®°å½•æ•°ä¼šæœ‰æ‰€ä¸åŒï¼Œé€šå¸¸æœ€å¤šèƒ½æŸ¥çœ‹1000æ¡å·¦å³ã€‚é»˜è®¤å€¼1ã€‚å¯é€‰ã€‚
+	 * @param int $count æ¯æ¬¡è¿”å›çš„è®°å½•æ•°ã€‚ç¼ºçœå€¼50ï¼Œæœ€å¤§å€¼200ã€‚å¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„å¾®åšæ¶ˆæ¯ï¼ˆå³æ¯”since_idå‘è¡¨æ—¶é—´æ™šçš„å¾®åšæ¶ˆæ¯ï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„å¾®åšæ¶ˆæ¯ã€‚å¯é€‰ã€‚
+	 * @param int $base_app æ˜¯å¦åŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ã€‚1ä¸ºé™åˆ¶æœ¬åº”ç”¨å¾®åšï¼Œ0ä¸ºä¸åšé™åˆ¶ã€‚é»˜è®¤ä¸º0ã€‚å¯é€‰ã€‚
+	 * @param int $feature å¾®åšç±»å‹ï¼Œ0å…¨éƒ¨ï¼Œ1åŸåˆ›ï¼Œ2å›¾ç‰‡ï¼Œ3è§†é¢‘ï¼Œ4éŸ³ä¹. è¿”å›æŒ‡å®šç±»å‹çš„å¾®åšä¿¡æ¯å†…å®¹ã€‚è½¬ä¸ºä¸º0ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function friends_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $base_app = 0, $feature = 0 )
 	{
 		return $this->home_timeline( $since_id, $max_id, $count, $page, $base_app, $feature);
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§·¢²¼µÄÎ¢²©ĞÅÏ¢ÁĞ±í
+	 * è·å–ç”¨æˆ·å‘å¸ƒçš„å¾®åšä¿¡æ¯åˆ—è¡¨
 	 *
-	 * ·µ»ØÓÃ»§µÄ·¢²¼µÄ×î½ünÌõĞÅÏ¢£¬ºÍÓÃ»§Î¢²©Ò³Ãæ·µ»ØÄÚÈİÊÇÒ»ÖÂµÄ¡£´Ë½Ó¿ÚÒ²¿ÉÒÔÇëÇóÆäËûÓÃ»§µÄ×îĞÂ·¢±íÎ¢²©¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
+	 * è¿”å›ç”¨æˆ·çš„å‘å¸ƒçš„æœ€è¿‘næ¡ä¿¡æ¯ï¼Œå’Œç”¨æˆ·å¾®åšé¡µé¢è¿”å›å†…å®¹æ˜¯ä¸€è‡´çš„ã€‚æ­¤æ¥å£ä¹Ÿå¯ä»¥è¯·æ±‚å…¶ä»–ç”¨æˆ·çš„æœ€æ–°å‘è¡¨å¾®åšã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
 	 * 
 	 * @access public
-	 * @param int $page Ò³Âë
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£
-	 * @param mixed $uid Ö¸¶¨ÓÃ»§UID»òÎ¢²©êÇ³Æ
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄÎ¢²©ÏûÏ¢£¨¼´±Èsince_id·¢±íÊ±¼äÍíµÄÎ¢²©ÏûÏ¢£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÌáµ½µ±Ç°µÇÂ¼ÓÃ»§Î¢²©ÏûÏ¢¡£¿ÉÑ¡¡£
-	 * @param int $base_app ÊÇ·ñ»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ¡£1ÎªÏŞÖÆ±¾Ó¦ÓÃÎ¢²©£¬0Îª²»×öÏŞÖÆ¡£Ä¬ÈÏÎª0¡£
-	 * @param int $feature ¹ıÂËÀàĞÍID£¬0£ºÈ«²¿¡¢1£ºÔ­´´¡¢2£ºÍ¼Æ¬¡¢3£ºÊÓÆµ¡¢4£ºÒôÀÖ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $trim_user ·µ»ØÖµÖĞuserĞÅÏ¢¿ª¹Ø£¬0£º·µ»ØÍêÕûµÄuserĞÅÏ¢¡¢1£ºuser×Ö¶Î½ö·µ»Øuid£¬Ä¬ÈÏÎª0¡£
+	 * @param int $page é¡µç 
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚
+	 * @param mixed $uid æŒ‡å®šç”¨æˆ·UIDæˆ–å¾®åšæ˜µç§°
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„å¾®åšæ¶ˆæ¯ï¼ˆå³æ¯”since_idå‘è¡¨æ—¶é—´æ™šçš„å¾®åšæ¶ˆæ¯ï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„æåˆ°å½“å‰ç™»å½•ç”¨æˆ·å¾®åšæ¶ˆæ¯ã€‚å¯é€‰ã€‚
+	 * @param int $base_app æ˜¯å¦åŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ã€‚1ä¸ºé™åˆ¶æœ¬åº”ç”¨å¾®åšï¼Œ0ä¸ºä¸åšé™åˆ¶ã€‚é»˜è®¤ä¸º0ã€‚
+	 * @param int $feature è¿‡æ»¤ç±»å‹IDï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŸåˆ›ã€2ï¼šå›¾ç‰‡ã€3ï¼šè§†é¢‘ã€4ï¼šéŸ³ä¹ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $trim_user è¿”å›å€¼ä¸­userä¿¡æ¯å¼€å…³ï¼Œ0ï¼šè¿”å›å®Œæ•´çš„userä¿¡æ¯ã€1ï¼šuserå­—æ®µä»…è¿”å›uidï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function user_timeline_by_id( $uid = NULL , $page = 1 , $count = 50 , $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0)
@@ -171,26 +163,25 @@ class WeiboClientV2
 		$params['count'] = intval($count);
 		$params['page'] = intval($page);
 		$params['trim_user'] = intval($trim_user);
-
 		return $this->oauth->get( 'statuses/user_timeline', $params );
 	}
 	
 	
 	/**
-	 * »ñÈ¡ÓÃ»§·¢²¼µÄÎ¢²©ĞÅÏ¢ÁĞ±í
+	 * è·å–ç”¨æˆ·å‘å¸ƒçš„å¾®åšä¿¡æ¯åˆ—è¡¨
 	 *
-	 * ·µ»ØÓÃ»§µÄ·¢²¼µÄ×î½ünÌõĞÅÏ¢£¬ºÍÓÃ»§Î¢²©Ò³Ãæ·µ»ØÄÚÈİÊÇÒ»ÖÂµÄ¡£´Ë½Ó¿ÚÒ²¿ÉÒÔÇëÇóÆäËûÓÃ»§µÄ×îĞÂ·¢±íÎ¢²©¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
+	 * è¿”å›ç”¨æˆ·çš„å‘å¸ƒçš„æœ€è¿‘næ¡ä¿¡æ¯ï¼Œå’Œç”¨æˆ·å¾®åšé¡µé¢è¿”å›å†…å®¹æ˜¯ä¸€è‡´çš„ã€‚æ­¤æ¥å£ä¹Ÿå¯ä»¥è¯·æ±‚å…¶ä»–ç”¨æˆ·çš„æœ€æ–°å‘è¡¨å¾®åšã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/user_timeline statuses/user_timeline}
 	 * 
 	 * @access public
-	 * @param string $screen_name Î¢²©êÇ³Æ£¬Ö÷ÒªÊÇÓÃÀ´Çø·ÖÓÃ»§UID¸úÎ¢²©êÇ³Æ£¬µ±¶şÕßÒ»Ñù¶ø²úÉúÆçÒåµÄÊ±ºò£¬½¨ÒéÊ¹ÓÃ¸Ã²ÎÊı 
-	 * @param int $page Ò³Âë
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄÎ¢²©ÏûÏ¢£¨¼´±Èsince_id·¢±íÊ±¼äÍíµÄÎ¢²©ÏûÏ¢£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÌáµ½µ±Ç°µÇÂ¼ÓÃ»§Î¢²©ÏûÏ¢¡£¿ÉÑ¡¡£
-	 * @param int $feature ¹ıÂËÀàĞÍID£¬0£ºÈ«²¿¡¢1£ºÔ­´´¡¢2£ºÍ¼Æ¬¡¢3£ºÊÓÆµ¡¢4£ºÒôÀÖ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $trim_user ·µ»ØÖµÖĞuserĞÅÏ¢¿ª¹Ø£¬0£º·µ»ØÍêÕûµÄuserĞÅÏ¢¡¢1£ºuser×Ö¶Î½ö·µ»Øuid£¬Ä¬ÈÏÎª0¡£
-	 * @param int $base_app ÊÇ·ñ»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ¡£1ÎªÏŞÖÆ±¾Ó¦ÓÃÎ¢²©£¬0Îª²»×öÏŞÖÆ¡£Ä¬ÈÏÎª0¡£
+	 * @param string $screen_name å¾®åšæ˜µç§°ï¼Œä¸»è¦æ˜¯ç”¨æ¥åŒºåˆ†ç”¨æˆ·UIDè·Ÿå¾®åšæ˜µç§°ï¼Œå½“äºŒè€…ä¸€æ ·è€Œäº§ç”Ÿæ­§ä¹‰çš„æ—¶å€™ï¼Œå»ºè®®ä½¿ç”¨è¯¥å‚æ•° 
+	 * @param int $page é¡µç 
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„å¾®åšæ¶ˆæ¯ï¼ˆå³æ¯”since_idå‘è¡¨æ—¶é—´æ™šçš„å¾®åšæ¶ˆæ¯ï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„æåˆ°å½“å‰ç™»å½•ç”¨æˆ·å¾®åšæ¶ˆæ¯ã€‚å¯é€‰ã€‚
+	 * @param int $feature è¿‡æ»¤ç±»å‹IDï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŸåˆ›ã€2ï¼šå›¾ç‰‡ã€3ï¼šè§†é¢‘ã€4ï¼šéŸ³ä¹ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $trim_user è¿”å›å€¼ä¸­userä¿¡æ¯å¼€å…³ï¼Œ0ï¼šè¿”å›å®Œæ•´çš„userä¿¡æ¯ã€1ï¼šuserå­—æ®µä»…è¿”å›uidï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $base_app æ˜¯å¦åŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ã€‚1ä¸ºé™åˆ¶æœ¬åº”ç”¨å¾®åšï¼Œ0ä¸ºä¸åšé™åˆ¶ã€‚é»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function user_timeline_by_name( $screen_name = NULL , $page = 1 , $count = 50 , $since_id = 0, $max_id = 0, $feature = 0, $trim_user = 0, $base_app = 0 )
@@ -210,22 +201,21 @@ class WeiboClientV2
 		$params['count'] = intval($count);
 		$params['page'] = intval($page);
 		$params['trim_user'] = intval($trim_user);
-
 		return $this->oauth->get( 'statuses/user_timeline', $params );
 	}
 	
 	
 	
 	/**
-	 * ÅúÁ¿»ñÈ¡Ö¸¶¨µÄÒ»ÅúÓÃ»§µÄtimeline
+	 * æ‰¹é‡è·å–æŒ‡å®šçš„ä¸€æ‰¹ç”¨æˆ·çš„timeline
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
 	 *
-	 * @param string $screen_name  ĞèÒª²éÑ¯µÄÓÃ»§êÇ³Æ£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬Ò»´Î×î¶à20¸ö
-	 * @param int    $count        µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int    $page  ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£ 
-	 * @param int    $base_app  ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int    $feature   ¹ıÂËÀàĞÍID£¬0£ºÈ«²¿¡¢1£ºÔ­´´¡¢2£ºÍ¼Æ¬¡¢3£ºÊÓÆµ¡¢4£ºÒôÀÖ£¬Ä¬ÈÏÎª0¡£
+	 * @param string $screen_name  éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·æ˜µç§°ï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ª
+	 * @param int    $count        å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int    $page  è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚ 
+	 * @param int    $base_app  æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int    $feature   è¿‡æ»¤ç±»å‹IDï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŸåˆ›ã€2ï¼šå›¾ç‰‡ã€3ï¼šè§†é¢‘ã€4ï¼šéŸ³ä¹ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function timeline_batch_by_name( $screen_name, $page = 1, $count = 50, $feature = 0, $base_app = 0)
@@ -242,17 +232,16 @@ class WeiboClientV2
 		$params['feature'] = intval($feature);
 		return $this->oauth->get('statuses/timeline_batch', $params);
 	}
-
 	/**
-	 * ÅúÁ¿»ñÈ¡Ö¸¶¨µÄÒ»ÅúÓÃ»§µÄtimeline
+	 * æ‰¹é‡è·å–æŒ‡å®šçš„ä¸€æ‰¹ç”¨æˆ·çš„timeline
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/timeline_batch statuses/timeline_batch}
 	 *
-	 * @param string $uids  ĞèÒª²éÑ¯µÄÓÃ»§ID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬Ò»´Î×î¶à20¸ö¡£
-	 * @param int    $count        µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int    $page  ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£ 
-	 * @param int    $base_app  ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int    $feature   ¹ıÂËÀàĞÍID£¬0£ºÈ«²¿¡¢1£ºÔ­´´¡¢2£ºÍ¼Æ¬¡¢3£ºÊÓÆµ¡¢4£ºÒôÀÖ£¬Ä¬ÈÏÎª0¡£
+	 * @param string $uids  éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·IDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ªã€‚
+	 * @param int    $count        å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int    $page  è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚ 
+	 * @param int    $base_app  æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int    $feature   è¿‡æ»¤ç±»å‹IDï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŸåˆ›ã€2ï¼šå›¾ç‰‡ã€3ï¼šè§†é¢‘ã€4ï¼šéŸ³ä¹ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function timeline_batch_by_id( $uids, $page = 1, $count = 50, $feature = 0, $base_app = 0)
@@ -272,26 +261,23 @@ class WeiboClientV2
 		$params['feature'] = intval($feature);
 		return $this->oauth->get('statuses/timeline_batch', $params);
 	}
-
-
 	/**
-	 * ·µ»ØÒ»ÌõÔ­´´Î¢²©ÏûÏ¢µÄ×îĞÂnÌõ×ª·¢Î¢²©ÏûÏ¢¡£±¾½Ó¿ÚÎŞ·¨¶Ô·ÇÔ­´´Î¢²©½øĞĞ²éÑ¯¡£ 
+	 * è¿”å›ä¸€æ¡åŸåˆ›å¾®åšæ¶ˆæ¯çš„æœ€æ–°næ¡è½¬å‘å¾®åšæ¶ˆæ¯ã€‚æœ¬æ¥å£æ— æ³•å¯¹éåŸåˆ›å¾®åšè¿›è¡ŒæŸ¥è¯¢ã€‚ 
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/repost_timeline statuses/repost_timeline}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/repost_timeline statuses/repost_timeline}
 	 * 
 	 * @access public
-	 * @param int $sid Òª»ñÈ¡×ª·¢Î¢²©ÁĞ±íµÄÔ­´´Î¢²©ID¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë¡£ 
-	 * @param int $count µ¥Ò³·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£¿ÉÑ¡¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄ¼ÇÂ¼£¨±Èsince_id·¢±íÊ±¼äÍí£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄ¼ÇÂ¼¡£¿ÉÑ¡¡£
-	 * @param int $filter_by_author ×÷ÕßÉ¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÎÒ¹Ø×¢µÄÈË¡¢2£ºÄ°ÉúÈË£¬Ä¬ÈÏÎª0¡£
+	 * @param int $sid è¦è·å–è½¬å‘å¾®åšåˆ—è¡¨çš„åŸåˆ›å¾®åšIDã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ã€‚ 
+	 * @param int $count å•é¡µè¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚å¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„è®°å½•ï¼ˆæ¯”since_idå‘è¡¨æ—¶é—´æ™šï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è®°å½•ã€‚å¯é€‰ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæˆ‘å…³æ³¨çš„äººã€2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost_timeline( $sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0 )
 	{
 		$this->id_format($sid);
-
 		$params = array();
 		$params['id'] = $sid;
 		if ($since_id) {
@@ -303,20 +289,18 @@ class WeiboClientV2
 			$params['max_id'] = $max_id;
 		}
 		$params['filter_by_author'] = intval($filter_by_author);
-
 		return $this->request_with_pager( 'statuses/repost_timeline', $page, $count, $params );
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§×îĞÂ×ª·¢µÄnÌõÎ¢²©ÏûÏ¢
+	 * è·å–å½“å‰ç”¨æˆ·æœ€æ–°è½¬å‘çš„næ¡å¾®åšæ¶ˆæ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/repost_by_me statuses/repost_by_me}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/repost_by_me statuses/repost_by_me}
 	 * 
 	 * @access public
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë¡£ 
-	 * @param int $count  Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£¿ÉÑ¡¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄ¼ÇÂ¼£¨±Èsince_id·¢±íÊ±¼äÍí£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id  ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄ¼ÇÂ¼¡£¿ÉÑ¡¡£
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ã€‚ 
+	 * @param int $count  æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚å¯é€‰ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„è®°å½•ï¼ˆæ¯”since_idå‘è¡¨æ—¶é—´æ™šï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è®°å½•ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function repost_by_me( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -330,24 +314,22 @@ class WeiboClientV2
 			$this->id_format($max_id);
 			$params['max_id'] = $max_id;
 		}
-
 		return $this->request_with_pager('statuses/repost_by_me', $page, $count, $params );
 	}
-
 	/**
-	 * »ñÈ¡@µ±Ç°ÓÃ»§µÄÎ¢²©ÁĞ±í
+	 * è·å–@å½“å‰ç”¨æˆ·çš„å¾®åšåˆ—è¡¨
 	 *
-	 * ·µ»Ø×îĞÂnÌõÌáµ½µÇÂ¼ÓÃ»§µÄÎ¢²©ÏûÏ¢£¨¼´°üº¬@usernameµÄÎ¢²©ÏûÏ¢£©
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/mentions statuses/mentions}
+	 * è¿”å›æœ€æ–°næ¡æåˆ°ç™»å½•ç”¨æˆ·çš„å¾®åšæ¶ˆæ¯ï¼ˆå³åŒ…å«@usernameçš„å¾®åšæ¶ˆæ¯ï¼‰
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/mentions statuses/mentions}
 	 * 
 	 * @access public
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³ĞòºÅ¡£
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¨¼´Ò³Ãæ´óĞ¡£©£¬²»´óÓÚ200£¬Ä¬ÈÏÎª50¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄÎ¢²©ÏûÏ¢£¨¼´±Èsince_id·¢±íÊ±¼äÍíµÄÎ¢²©ÏûÏ¢£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÌáµ½µ±Ç°µÇÂ¼ÓÃ»§Î¢²©ÏûÏ¢¡£¿ÉÑ¡¡£
-	 * @param int $filter_by_author ×÷ÕßÉ¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÎÒ¹Ø×¢µÄÈË¡¢2£ºÄ°ÉúÈË£¬Ä¬ÈÏÎª0¡£
-	 * @param int $filter_by_source À´Ô´É¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÀ´×ÔÎ¢²©¡¢2£ºÀ´×ÔÎ¢Èº£¬Ä¬ÈÏÎª0¡£
-	 * @param int $filter_by_type Ô­´´É¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿Î¢²©¡¢1£ºÔ­´´µÄÎ¢²©£¬Ä¬ÈÏÎª0¡£
+	 * @param int $page è¿”å›ç»“æœçš„é¡µåºå·ã€‚
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼ˆå³é¡µé¢å¤§å°ï¼‰ï¼Œä¸å¤§äº200ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„å¾®åšæ¶ˆæ¯ï¼ˆå³æ¯”since_idå‘è¡¨æ—¶é—´æ™šçš„å¾®åšæ¶ˆæ¯ï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„æåˆ°å½“å‰ç™»å½•ç”¨æˆ·å¾®åšæ¶ˆæ¯ã€‚å¯é€‰ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæˆ‘å…³æ³¨çš„äººã€2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_source æ¥æºç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæ¥è‡ªå¾®åšã€2ï¼šæ¥è‡ªå¾®ç¾¤ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_type åŸåˆ›ç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨å¾®åšã€1ï¼šåŸåˆ›çš„å¾®åšï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function mentions( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0, $filter_by_type = 0 )
@@ -364,19 +346,16 @@ class WeiboClientV2
 		$params['filter_by_author'] = $filter_by_author;
 		$params['filter_by_source'] = $filter_by_source;
 		$params['filter_by_type'] = $filter_by_type;
-
 		return $this->request_with_pager( 'statuses/mentions', $page, $count, $params );
 	}
-
-
 	/**
-	 * ¸ù¾İID»ñÈ¡µ¥ÌõÎ¢²©ĞÅÏ¢ÄÚÈİ
+	 * æ ¹æ®IDè·å–å•æ¡å¾®åšä¿¡æ¯å†…å®¹
 	 *
-	 * »ñÈ¡µ¥ÌõIDµÄÎ¢²©ĞÅÏ¢£¬×÷ÕßĞÅÏ¢½«Í¬Ê±·µ»Ø¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/show statuses/show}
+	 * è·å–å•æ¡IDçš„å¾®åšä¿¡æ¯ï¼Œä½œè€…ä¿¡æ¯å°†åŒæ—¶è¿”å›ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/show statuses/show}
 	 * 
 	 * @access public
-	 * @param int $id Òª»ñÈ¡ÒÑ·¢±íµÄÎ¢²©ID, ÈçID²»´æÔÚ·µ»Ø¿Õ
+	 * @param int $id è¦è·å–å·²å‘è¡¨çš„å¾®åšID, å¦‚IDä¸å­˜åœ¨è¿”å›ç©º
 	 * @return array
 	 */
 	function show_status( $id )
@@ -386,13 +365,12 @@ class WeiboClientV2
 		$params['id'] = $id;
 		return $this->oauth->get('statuses/show', $params);
 	}
-
 	/**
-	 * ¸ù¾İÎ¢²©idºÅ»ñÈ¡Î¢²©µÄĞÅÏ¢
+	 * æ ¹æ®å¾®åšidå·è·å–å¾®åšçš„ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/show_batch statuses/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/show_batch statuses/show_batch}
 	 *
-	 * @param string $ids ĞèÒª²éÑ¯µÄÎ¢²©ID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı50¸ö¡£
+	 * @param string $ids éœ€è¦æŸ¥è¯¢çš„å¾®åšIDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡50ä¸ªã€‚
 	 * @return array
 	 */
     function show_batch( $ids )
@@ -408,15 +386,14 @@ class WeiboClientV2
 		}
 		return $this->oauth->get('statuses/show_batch', $params);
 	}
-
 	/**
-	 * Í¨¹ıÎ¢²©£¨ÆÀÂÛ¡¢Ë½ĞÅ£©ID»ñÈ¡ÆäMID
+	 * é€šè¿‡å¾®åšï¼ˆè¯„è®ºã€ç§ä¿¡ï¼‰IDè·å–å…¶MID
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/querymid statuses/querymid}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/querymid statuses/querymid}
 	 *
-	 * @param int|string $id  ĞèÒª²éÑ¯µÄÎ¢²©£¨ÆÀÂÛ¡¢Ë½ĞÅ£©ID£¬ÅúÁ¿Ä£Ê½ÏÂ£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı20¸ö¡£
-	 * @param int $type  »ñÈ¡ÀàĞÍ£¬1£ºÎ¢²©¡¢2£ºÆÀÂÛ¡¢3£ºË½ĞÅ£¬Ä¬ÈÏÎª1¡£
-	 * @param int $is_batch ÊÇ·ñÊ¹ÓÃÅúÁ¿Ä£Ê½£¬0£º·ñ¡¢1£ºÊÇ£¬Ä¬ÈÏÎª0¡£
+	 * @param int|string $id  éœ€è¦æŸ¥è¯¢çš„å¾®åšï¼ˆè¯„è®ºã€ç§ä¿¡ï¼‰IDï¼Œæ‰¹é‡æ¨¡å¼ä¸‹ï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡20ä¸ªã€‚
+	 * @param int $type  è·å–ç±»å‹ï¼Œ1ï¼šå¾®åšã€2ï¼šè¯„è®ºã€3ï¼šç§ä¿¡ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $is_batch æ˜¯å¦ä½¿ç”¨æ‰¹é‡æ¨¡å¼ï¼Œ0ï¼šå¦ã€1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function querymid( $id, $type = 1, $is_batch = 0 )
@@ -427,17 +404,16 @@ class WeiboClientV2
 		$params['is_batch'] = intval($is_batch);
 		return $this->oauth->get( 'statuses/querymid',  $params);
 	}
-
 	/**
-	 * Í¨¹ıÎ¢²©£¨ÆÀÂÛ¡¢Ë½ĞÅ£©MID»ñÈ¡ÆäID
+	 * é€šè¿‡å¾®åšï¼ˆè¯„è®ºã€ç§ä¿¡ï¼‰MIDè·å–å…¶ID
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/queryid statuses/queryid}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/queryid statuses/queryid}
 	 *
-	 * @param int|string $mid  ĞèÒª²éÑ¯µÄÎ¢²©£¨ÆÀÂÛ¡¢Ë½ĞÅ£©MID£¬ÅúÁ¿Ä£Ê½ÏÂ£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı20¸ö¡£
-	 * @param int $type  »ñÈ¡ÀàĞÍ£¬1£ºÎ¢²©¡¢2£ºÆÀÂÛ¡¢3£ºË½ĞÅ£¬Ä¬ÈÏÎª1¡£
-	 * @param int $is_batch ÊÇ·ñÊ¹ÓÃÅúÁ¿Ä£Ê½£¬0£º·ñ¡¢1£ºÊÇ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $inbox  ½ö¶ÔË½ĞÅÓĞĞ§£¬µ±MIDÀàĞÍÎªË½ĞÅÊ±ÓÃ´Ë²ÎÊı£¬0£º·¢¼şÏä¡¢1£ºÊÕ¼şÏä£¬Ä¬ÈÏÎª0 ¡£
-	 * @param int $isBase62 MIDÊÇ·ñÊÇbase62±àÂë£¬0£º·ñ¡¢1£ºÊÇ£¬Ä¬ÈÏÎª0¡£
+	 * @param int|string $mid  éœ€è¦æŸ¥è¯¢çš„å¾®åšï¼ˆè¯„è®ºã€ç§ä¿¡ï¼‰MIDï¼Œæ‰¹é‡æ¨¡å¼ä¸‹ï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡20ä¸ªã€‚
+	 * @param int $type  è·å–ç±»å‹ï¼Œ1ï¼šå¾®åšã€2ï¼šè¯„è®ºã€3ï¼šç§ä¿¡ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $is_batch æ˜¯å¦ä½¿ç”¨æ‰¹é‡æ¨¡å¼ï¼Œ0ï¼šå¦ã€1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $inbox  ä»…å¯¹ç§ä¿¡æœ‰æ•ˆï¼Œå½“MIDç±»å‹ä¸ºç§ä¿¡æ—¶ç”¨æ­¤å‚æ•°ï¼Œ0ï¼šå‘ä»¶ç®±ã€1ï¼šæ”¶ä»¶ç®±ï¼Œé»˜è®¤ä¸º0 ã€‚
+	 * @param int $isBase62 MIDæ˜¯å¦æ˜¯base62ç¼–ç ï¼Œ0ï¼šå¦ã€1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function queryid( $mid, $type = 1, $is_batch = 0, $inbox = 0, $isBase62 = 0)
@@ -450,14 +426,13 @@ class WeiboClientV2
 		$params['isBase62'] = intval($isBase62);
 		return $this->oauth->get('statuses/queryid', $params);
 	}
-
 	/**
-	 * °´Ìì·µ»ØÈÈÃÅÎ¢²©×ª·¢°ñµÄÎ¢²©ÁĞ±í
+	 * æŒ‰å¤©è¿”å›çƒ­é—¨å¾®åšè½¬å‘æ¦œçš„å¾®åšåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/hot/repost_daily statuses/hot/repost_daily}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/repost_daily statuses/hot/repost_daily}
 	 *
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬×î´ó²»³¬¹ı50£¬Ä¬ÈÏÎª20¡£
-	 * @param int $base_app ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œæœ€å¤§ä¸è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost_daily( $count = 20, $base_app = 0)
@@ -467,14 +442,13 @@ class WeiboClientV2
 		$params['base_app'] = intval($base_app);
 		return $this->oauth->get('statuses/hot/repost_daily',  $params);
 	}
-
 	/**
-	 * °´ÖÜ·µ»ØÈÈÃÅÎ¢²©×ª·¢°ñµÄÎ¢²©ÁĞ±í
+	 * æŒ‰å‘¨è¿”å›çƒ­é—¨å¾®åšè½¬å‘æ¦œçš„å¾®åšåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/hot/repost_weekly statuses/hot/repost_weekly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/repost_weekly statuses/hot/repost_weekly}
 	 *
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬×î´ó²»³¬¹ı50£¬Ä¬ÈÏÎª20¡£
-	 * @param int $base_app ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œæœ€å¤§ä¸è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost_weekly( $count = 20,  $base_app = 0)
@@ -484,14 +458,13 @@ class WeiboClientV2
 		$params['base_app'] = intval($base_app);
 		return $this->oauth->get( 'statuses/hot/repost_weekly',  $params);
 	}
-
 	/**
-	 * °´Ìì·µ»ØÈÈÃÅÎ¢²©ÆÀÂÛ°ñµÄÎ¢²©ÁĞ±í
+	 * æŒ‰å¤©è¿”å›çƒ­é—¨å¾®åšè¯„è®ºæ¦œçš„å¾®åšåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/hot/comments_daily statuses/hot/comments_daily}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/comments_daily statuses/hot/comments_daily}
 	 *
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬×î´ó²»³¬¹ı50£¬Ä¬ÈÏÎª20¡£
-	 * @param int $base_app ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œæœ€å¤§ä¸è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function comments_daily( $count = 20,  $base_app = 0)
@@ -501,14 +474,13 @@ class WeiboClientV2
 		$params['base_app'] = intval($base_app);
 		return $this->oauth->get( 'statuses/hot/comments_daily',  $params);
 	}
-
 	/**
-	 * °´ÖÜ·µ»ØÈÈÃÅÎ¢²©ÆÀÂÛ°ñµÄÎ¢²©ÁĞ±í
+	 * æŒ‰å‘¨è¿”å›çƒ­é—¨å¾®åšè¯„è®ºæ¦œçš„å¾®åšåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/hot/comments_weekly statuses/hot/comments_weekly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/hot/comments_weekly statuses/hot/comments_weekly}
 	 *
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬×î´ó²»³¬¹ı50£¬Ä¬ÈÏÎª20¡£
-	 * @param int $base_app ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œæœ€å¤§ä¸è¶…è¿‡50ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $base_app æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function comments_weekly( $count = 20, $base_app = 0)
@@ -518,55 +490,49 @@ class WeiboClientV2
 		$params['base_app'] = intval($base_app);
 		return $this->oauth->get( 'statuses/hot/comments_weekly', $params);
 	}
-
-
 	/**
-	 * ×ª·¢Ò»ÌõÎ¢²©ĞÅÏ¢¡£
+	 * è½¬å‘ä¸€æ¡å¾®åšä¿¡æ¯ã€‚
 	 *
-	 * ¿É¼ÓÆÀÂÛ¡£Îª·ÀÖ¹ÖØ¸´£¬·¢²¼µÄĞÅÏ¢Óë×îĞÂĞÅÏ¢Ò»Ñù»°£¬½«»á±»ºöÂÔ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/repost statuses/repost}
+	 * å¯åŠ è¯„è®ºã€‚ä¸ºé˜²æ­¢é‡å¤ï¼Œå‘å¸ƒçš„ä¿¡æ¯ä¸æœ€æ–°ä¿¡æ¯ä¸€æ ·è¯ï¼Œå°†ä¼šè¢«å¿½ç•¥ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/repost statuses/repost}
 	 * 
 	 * @access public
-	 * @param int $sid ×ª·¢µÄÎ¢²©ID
-	 * @param string $text Ìí¼ÓµÄÆÀÂÛĞÅÏ¢¡£¿ÉÑ¡¡£
-	 * @param int $is_comment ÊÇ·ñÔÚ×ª·¢µÄÍ¬Ê±·¢±íÆÀÂÛ£¬0£º·ñ¡¢1£ºÆÀÂÛ¸øµ±Ç°Î¢²©¡¢2£ºÆÀÂÛ¸øÔ­Î¢²©¡¢3£º¶¼ÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
+	 * @param int $sid è½¬å‘çš„å¾®åšID
+	 * @param string $text æ·»åŠ çš„è¯„è®ºä¿¡æ¯ã€‚å¯é€‰ã€‚
+	 * @param int $is_comment æ˜¯å¦åœ¨è½¬å‘çš„åŒæ—¶å‘è¡¨è¯„è®ºï¼Œ0ï¼šå¦ã€1ï¼šè¯„è®ºç»™å½“å‰å¾®åšã€2ï¼šè¯„è®ºç»™åŸå¾®åšã€3ï¼šéƒ½è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function repost( $sid, $text = NULL, $is_comment = 0 )
 	{
 		$this->id_format($sid);
-
 		$params = array();
 		$params['id'] = $sid;
 		$params['is_comment'] = $is_comment;
 		if( $text ) $params['status'] = $text;
-
 		return $this->oauth->post( 'statuses/repost', $params  );
 	}
-
 	/**
-	 * É¾³ıÒ»ÌõÎ¢²©
+	 * åˆ é™¤ä¸€æ¡å¾®åš
 	 * 
-	 * ¸ù¾İIDÉ¾³ıÎ¢²©ÏûÏ¢¡£×¢Òâ£ºÖ»ÄÜÉ¾³ı×Ô¼º·¢²¼µÄĞÅÏ¢¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
+	 * æ ¹æ®IDåˆ é™¤å¾®åšæ¶ˆæ¯ã€‚æ³¨æ„ï¼šåªèƒ½åˆ é™¤è‡ªå·±å‘å¸ƒçš„ä¿¡æ¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
 	 * 
 	 * @access public
-	 * @param int $id ÒªÉ¾³ıµÄÎ¢²©ID
+	 * @param int $id è¦åˆ é™¤çš„å¾®åšID
 	 * @return array
 	 */
 	function delete( $id )
 	{
 		return $this->destroy( $id );
 	}
-
 	/**
-	 * É¾³ıÒ»ÌõÎ¢²©
+	 * åˆ é™¤ä¸€æ¡å¾®åš
 	 *
-	 * É¾³ıÎ¢²©¡£×¢Òâ£ºÖ»ÄÜÉ¾³ı×Ô¼º·¢²¼µÄĞÅÏ¢¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
+	 * åˆ é™¤å¾®åšã€‚æ³¨æ„ï¼šåªèƒ½åˆ é™¤è‡ªå·±å‘å¸ƒçš„ä¿¡æ¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/destroy statuses/destroy}
 	 * 
 	 * @access public
-	 * @param int $id ÒªÉ¾³ıµÄÎ¢²©ID
+	 * @param int $id è¦åˆ é™¤çš„å¾®åšID
 	 * @return array
 	 */
 	function destroy( $id )
@@ -576,22 +542,21 @@ class WeiboClientV2
 		$params['id'] = $id;
 		return $this->oauth->post( 'statuses/destroy',  $params );
 	}
-
 	
 	/**
-	 * ·¢±íÎ¢²©
+	 * å‘è¡¨å¾®åš
 	 *
-	 * ·¢²¼Ò»ÌõÎ¢²©ĞÅÏ¢¡£
-	 * <br />×¢Òâ£ºlatºÍlong²ÎÊıĞèÅäºÏÊ¹ÓÃ£¬ÓÃÓÚ±ê¼Ç·¢±íÎ¢²©ÏûÏ¢Ê±ËùÔÚµÄµØÀíÎ»ÖÃ£¬Ö»ÓĞÓÃ»§ÉèÖÃÖĞgeo_enabled=trueÊ±ºòµØÀíÎ»ÖÃĞÅÏ¢²ÅÓĞĞ§¡£
-	 * <br />×¢Òâ£ºÎª·ÀÖ¹ÖØ¸´Ìá½»£¬µ±ÓÃ»§·¢²¼µÄÎ¢²©ÏûÏ¢ÓëÉÏ´Î³É¹¦·¢²¼µÄÎ¢²©ÏûÏ¢ÄÚÈİÒ»ÑùÊ±£¬½«·µ»Ø400´íÎó£¬¸ø³ö´íÎóÌáÊ¾£º¡°40025:Error: repeated weibo text!¡°¡£ 
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/update statuses/update}
+	 * å‘å¸ƒä¸€æ¡å¾®åšä¿¡æ¯ã€‚
+	 * <br />æ³¨æ„ï¼šlatå’Œlongå‚æ•°éœ€é…åˆä½¿ç”¨ï¼Œç”¨äºæ ‡è®°å‘è¡¨å¾®åšæ¶ˆæ¯æ—¶æ‰€åœ¨çš„åœ°ç†ä½ç½®ï¼Œåªæœ‰ç”¨æˆ·è®¾ç½®ä¸­geo_enabled=trueæ—¶å€™åœ°ç†ä½ç½®ä¿¡æ¯æ‰æœ‰æ•ˆã€‚
+	 * <br />æ³¨æ„ï¼šä¸ºé˜²æ­¢é‡å¤æäº¤ï¼Œå½“ç”¨æˆ·å‘å¸ƒçš„å¾®åšæ¶ˆæ¯ä¸ä¸Šæ¬¡æˆåŠŸå‘å¸ƒçš„å¾®åšæ¶ˆæ¯å†…å®¹ä¸€æ ·æ—¶ï¼Œå°†è¿”å›400é”™è¯¯ï¼Œç»™å‡ºé”™è¯¯æç¤ºï¼šâ€œ40025:Error: repeated weibo text!â€œã€‚ 
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/update statuses/update}
 	 * 
 	 * @access public
-	 * @param string $status Òª¸üĞÂµÄÎ¢²©ĞÅÏ¢¡£ĞÅÏ¢ÄÚÈİ²»³¬¹ı140¸öºº×Ö, Îª¿Õ·µ»Ø400´íÎó¡£
-	 * @param float $lat Î³¶È£¬·¢±íµ±Ç°Î¢²©ËùÔÚµÄµØÀíÎ»ÖÃ£¬ÓĞĞ§·¶Î§ -90.0µ½+90.0, +±íÊ¾±±Î³¡£¿ÉÑ¡¡£
-	 * @param float $long ¾­¶È¡£ÓĞĞ§·¶Î§-180.0µ½+180.0, +±íÊ¾¶«¾­¡£¿ÉÑ¡¡£
-	 * @param mixed $annotations ¿ÉÑ¡²ÎÊı¡£ÔªÊı¾İ£¬Ö÷ÒªÊÇÎªÁË·½±ãµÚÈı·½Ó¦ÓÃ¼ÇÂ¼Ò»Ğ©ÊÊºÏÓÚ×Ô¼ºÊ¹ÓÃµÄĞÅÏ¢¡£Ã¿ÌõÎ¢²©¿ÉÒÔ°üº¬Ò»¸ö»òÕß¶à¸öÔªÊı¾İ¡£ÇëÒÔjson×Ö´®µÄĞÎÊ½Ìá½»£¬×Ö´®³¤¶È²»³¬¹ı512¸ö×Ö·û£¬»òÕßÊı×é·½Ê½£¬ÒªÇójson_encodeºó×Ö´®³¤¶È²»³¬¹ı512¸ö×Ö·û¡£¾ßÌåÄÚÈİ¿ÉÒÔ×Ô¶¨¡£ÀıÈç£º'[{"type2":123}, {"a":"b", "c":"d"}]'»òarray(array("type2"=>123), array("a"=>"b", "c"=>"d"))¡£
-	 * @param int $visible    Î¢²©µÄ¿É¼ûĞÔ£¬0£ºËùÓĞÈËÄÜ¿´£¬1£º½ö×Ô¼º¿É¼û£¬2£ºÃÜÓÑ¿É¼û£¬3£ºÖ¸¶¨·Ö×é¿É¼û£¬Ä¬ÈÏÎª0
+	 * @param string $status è¦æ›´æ–°çš„å¾®åšä¿¡æ¯ã€‚ä¿¡æ¯å†…å®¹ä¸è¶…è¿‡140ä¸ªæ±‰å­—, ä¸ºç©ºè¿”å›400é”™è¯¯ã€‚
+	 * @param float $lat çº¬åº¦ï¼Œå‘è¡¨å½“å‰å¾®åšæ‰€åœ¨çš„åœ°ç†ä½ç½®ï¼Œæœ‰æ•ˆèŒƒå›´ -90.0åˆ°+90.0, +è¡¨ç¤ºåŒ—çº¬ã€‚å¯é€‰ã€‚
+	 * @param float $long ç»åº¦ã€‚æœ‰æ•ˆèŒƒå›´-180.0åˆ°+180.0, +è¡¨ç¤ºä¸œç»ã€‚å¯é€‰ã€‚
+	 * @param mixed $annotations å¯é€‰å‚æ•°ã€‚å…ƒæ•°æ®ï¼Œä¸»è¦æ˜¯ä¸ºäº†æ–¹ä¾¿ç¬¬ä¸‰æ–¹åº”ç”¨è®°å½•ä¸€äº›é€‚åˆäºè‡ªå·±ä½¿ç”¨çš„ä¿¡æ¯ã€‚æ¯æ¡å¾®åšå¯ä»¥åŒ…å«ä¸€ä¸ªæˆ–è€…å¤šä¸ªå…ƒæ•°æ®ã€‚è¯·ä»¥jsonå­—ä¸²çš„å½¢å¼æäº¤ï¼Œå­—ä¸²é•¿åº¦ä¸è¶…è¿‡512ä¸ªå­—ç¬¦ï¼Œæˆ–è€…æ•°ç»„æ–¹å¼ï¼Œè¦æ±‚json_encodeåå­—ä¸²é•¿åº¦ä¸è¶…è¿‡512ä¸ªå­—ç¬¦ã€‚å…·ä½“å†…å®¹å¯ä»¥è‡ªå®šã€‚ä¾‹å¦‚ï¼š'[{"type2":123}, {"a":"b", "c":"d"}]'æˆ–array(array("type2"=>123), array("a"=>"b", "c"=>"d"))ã€‚
+	 * @param int $visible    å¾®åšçš„å¯è§æ€§ï¼Œ0ï¼šæ‰€æœ‰äººèƒ½çœ‹ï¼Œ1ï¼šä»…è‡ªå·±å¯è§ï¼Œ2ï¼šå¯†å‹å¯è§ï¼Œ3ï¼šæŒ‡å®šåˆ†ç»„å¯è§ï¼Œé»˜è®¤ä¸º0
 	 * @return array
 	 */
 	function update( $status, $lat = NULL, $long = NULL, $annotations = NULL, $visible=0 )
@@ -610,23 +575,21 @@ class WeiboClientV2
 		} elseif (is_array($annotations)) {
 			$params['annotations'] = json_encode($annotations);
 		}
-
 		return $this->oauth->post( 'statuses/update', $params );
 	}
-
 	/**
-	 * ·¢±íÍ¼Æ¬Î¢²©
+	 * å‘è¡¨å›¾ç‰‡å¾®åš
 	 *
-	 * ·¢±íÍ¼Æ¬Î¢²©ÏûÏ¢¡£Ä¿Ç°ÉÏ´«Í¼Æ¬´óĞ¡ÏŞÖÆÎª<5M¡£ 
-	 * <br />×¢Òâ£ºlatºÍlong²ÎÊıĞèÅäºÏÊ¹ÓÃ£¬ÓÃÓÚ±ê¼Ç·¢±íÎ¢²©ÏûÏ¢Ê±ËùÔÚµÄµØÀíÎ»ÖÃ£¬Ö»ÓĞÓÃ»§ÉèÖÃÖĞgeo_enabled=trueÊ±ºòµØÀíÎ»ÖÃĞÅÏ¢²ÅÓĞĞ§¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/upload statuses/upload}
+	 * å‘è¡¨å›¾ç‰‡å¾®åšæ¶ˆæ¯ã€‚ç›®å‰ä¸Šä¼ å›¾ç‰‡å¤§å°é™åˆ¶ä¸º<5Mã€‚ 
+	 * <br />æ³¨æ„ï¼šlatå’Œlongå‚æ•°éœ€é…åˆä½¿ç”¨ï¼Œç”¨äºæ ‡è®°å‘è¡¨å¾®åšæ¶ˆæ¯æ—¶æ‰€åœ¨çš„åœ°ç†ä½ç½®ï¼Œåªæœ‰ç”¨æˆ·è®¾ç½®ä¸­geo_enabled=trueæ—¶å€™åœ°ç†ä½ç½®ä¿¡æ¯æ‰æœ‰æ•ˆã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/upload statuses/upload}
 	 * 
 	 * @access public
-	 * @param string $status Òª¸üĞÂµÄÎ¢²©ĞÅÏ¢¡£ĞÅÏ¢ÄÚÈİ²»³¬¹ı140¸öºº×Ö, Îª¿Õ·µ»Ø400´íÎó¡£
-	 * @param string $pic_path Òª·¢²¼µÄÍ¼Æ¬Â·¾¶, Ö§³Öurl¡£[Ö»Ö§³Öpng/jpg/gifÈıÖÖ¸ñÊ½, Ôö¼Ó¸ñÊ½ÇëĞŞ¸Äget_image_mime·½·¨]
-	 * @param float $lat Î³¶È£¬·¢±íµ±Ç°Î¢²©ËùÔÚµÄµØÀíÎ»ÖÃ£¬ÓĞĞ§·¶Î§ -90.0µ½+90.0, +±íÊ¾±±Î³¡£¿ÉÑ¡¡£
-	 * @param float $long ¿ÉÑ¡²ÎÊı£¬¾­¶È¡£ÓĞĞ§·¶Î§-180.0µ½+180.0, +±íÊ¾¶«¾­¡£¿ÉÑ¡¡£
-	 * @param int $visible    Î¢²©µÄ¿É¼ûĞÔ£¬0£ºËùÓĞÈËÄÜ¿´£¬1£º½ö×Ô¼º¿É¼û£¬2£ºÃÜÓÑ¿É¼û£¬3£ºÖ¸¶¨·Ö×é¿É¼û£¬Ä¬ÈÏÎª0
+	 * @param string $status è¦æ›´æ–°çš„å¾®åšä¿¡æ¯ã€‚ä¿¡æ¯å†…å®¹ä¸è¶…è¿‡140ä¸ªæ±‰å­—, ä¸ºç©ºè¿”å›400é”™è¯¯ã€‚
+	 * @param string $pic_path è¦å‘å¸ƒçš„å›¾ç‰‡è·¯å¾„, æ”¯æŒurlã€‚[åªæ”¯æŒpng/jpg/gifä¸‰ç§æ ¼å¼, å¢åŠ æ ¼å¼è¯·ä¿®æ”¹get_image_mimeæ–¹æ³•]
+	 * @param float $lat çº¬åº¦ï¼Œå‘è¡¨å½“å‰å¾®åšæ‰€åœ¨çš„åœ°ç†ä½ç½®ï¼Œæœ‰æ•ˆèŒƒå›´ -90.0åˆ°+90.0, +è¡¨ç¤ºåŒ—çº¬ã€‚å¯é€‰ã€‚
+	 * @param float $long å¯é€‰å‚æ•°ï¼Œç»åº¦ã€‚æœ‰æ•ˆèŒƒå›´-180.0åˆ°+180.0, +è¡¨ç¤ºä¸œç»ã€‚å¯é€‰ã€‚
+	 * @param int $visible    å¾®åšçš„å¯è§æ€§ï¼Œ0ï¼šæ‰€æœ‰äººèƒ½çœ‹ï¼Œ1ï¼šä»…è‡ªå·±å¯è§ï¼Œ2ï¼šå¯†å‹å¯è§ï¼Œ3ï¼šæŒ‡å®šåˆ†ç»„å¯è§ï¼Œé»˜è®¤ä¸º0
 	 * @return array
 	 */
 	function upload( $status, $pic_path, $lat = NULL, $long = NULL, $visible=0 )
@@ -641,24 +604,22 @@ class WeiboClientV2
 		if ($long) {
 			$params['long'] = floatval($long);
 		}
-
 		return $this->oauth->post( 'statuses/upload', $params, true );
 	}
-
 	/**
-	 * Ö¸¶¨Ò»¸öÍ¼Æ¬URLµØÖ·×¥È¡ºóÉÏ´«²¢Í¬Ê±·¢²¼Ò»ÌõĞÂÎ¢²©
+	 * æŒ‡å®šä¸€ä¸ªå›¾ç‰‡URLåœ°å€æŠ“å–åä¸Šä¼ å¹¶åŒæ—¶å‘å¸ƒä¸€æ¡æ–°å¾®åš
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/upload_url_text statuses/upload_url_text}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/upload_url_text statuses/upload_url_text}
 	 *
-	 * @param string $status  Òª·¢²¼µÄÎ¢²©ÎÄ±¾ÄÚÈİ£¬ÄÚÈİ²»³¬¹ı140¸öºº×Ö¡£
-	 * @param int $visible    Î¢²©µÄ¿É¼ûĞÔ£¬0£ºËùÓĞÈËÄÜ¿´£¬1£º½ö×Ô¼º¿É¼û£¬2£ºÃÜÓÑ¿É¼û£¬3£ºÖ¸¶¨·Ö×é¿É¼û£¬Ä¬ÈÏÎª0
-	 * @param string $list_id Î¢²©µÄ±£»¤Í¶µİÖ¸¶¨·Ö×éID£¬Ö»ÓĞµ±visible²ÎÊıÎª3Ê±ÉúĞ§ÇÒ±ØÑ¡¡£
-	 * @param string $pic_id ÒÑ¾­ÉÏ´«µÄÍ¼Æ¬pid£¬¶à¸öÊ±Ê¹ÓÃÓ¢ÎÄ°ë½Ç¶ººÅ·û·Ö¸ô£¬×î¶à²»³¬¹ı9¸ö¡£
-	 * @param float $lat Î³¶È£¬ÓĞĞ§·¶Î§£º-90.0µ½+90.0£¬+±íÊ¾±±Î³£¬Ä¬ÈÏÎª0.0¡£
-	 * @param float $long ¾­¶È£¬ÓĞĞ§·¶Î§£º-180.0µ½+180.0£¬+±íÊ¾¶«¾­£¬Ä¬ÈÏÎª0.0¡£
-	 * @param string $annotations ÔªÊı¾İ£¬Ö÷ÒªÊÇÎªÁË·½±ãµÚÈı·½Ó¦ÓÃ¼ÇÂ¼Ò»Ğ©ÊÊºÏÓÚ×Ô¼ºÊ¹ÓÃµÄĞÅÏ¢£¬Ã¿ÌõÎ¢²©¿ÉÒÔ°üº¬Ò»¸ö»òÕß¶à¸öÔªÊı¾İ£¬
-	 *                            ±ØĞëÒÔjson×Ö´®µÄĞÎÊ½Ìá½»£¬×Ö´®³¤¶È²»³¬¹ı512¸ö×Ö·û£¬¾ßÌåÄÚÈİ¿ÉÒÔ×Ô¶¨¡£
-	 * @param string $url    Í¼Æ¬µÄURLµØÖ·£¬±ØĞëÒÔhttp¿ªÍ·¡£
+	 * @param string $status  è¦å‘å¸ƒçš„å¾®åšæ–‡æœ¬å†…å®¹ï¼Œå†…å®¹ä¸è¶…è¿‡140ä¸ªæ±‰å­—ã€‚
+	 * @param int $visible    å¾®åšçš„å¯è§æ€§ï¼Œ0ï¼šæ‰€æœ‰äººèƒ½çœ‹ï¼Œ1ï¼šä»…è‡ªå·±å¯è§ï¼Œ2ï¼šå¯†å‹å¯è§ï¼Œ3ï¼šæŒ‡å®šåˆ†ç»„å¯è§ï¼Œé»˜è®¤ä¸º0
+	 * @param string $list_id å¾®åšçš„ä¿æŠ¤æŠ•é€’æŒ‡å®šåˆ†ç»„IDï¼Œåªæœ‰å½“visibleå‚æ•°ä¸º3æ—¶ç”Ÿæ•ˆä¸”å¿…é€‰ã€‚
+	 * @param string $pic_id å·²ç»ä¸Šä¼ çš„å›¾ç‰‡pidï¼Œå¤šä¸ªæ—¶ä½¿ç”¨è‹±æ–‡åŠè§’é€—å·ç¬¦åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡9ä¸ªã€‚
+	 * @param float $lat çº¬åº¦ï¼Œæœ‰æ•ˆèŒƒå›´ï¼š-90.0åˆ°+90.0ï¼Œ+è¡¨ç¤ºåŒ—çº¬ï¼Œé»˜è®¤ä¸º0.0ã€‚
+	 * @param float $long ç»åº¦ï¼Œæœ‰æ•ˆèŒƒå›´ï¼š-180.0åˆ°+180.0ï¼Œ+è¡¨ç¤ºä¸œç»ï¼Œé»˜è®¤ä¸º0.0ã€‚
+	 * @param string $annotations å…ƒæ•°æ®ï¼Œä¸»è¦æ˜¯ä¸ºäº†æ–¹ä¾¿ç¬¬ä¸‰æ–¹åº”ç”¨è®°å½•ä¸€äº›é€‚åˆäºè‡ªå·±ä½¿ç”¨çš„ä¿¡æ¯ï¼Œæ¯æ¡å¾®åšå¯ä»¥åŒ…å«ä¸€ä¸ªæˆ–è€…å¤šä¸ªå…ƒæ•°æ®ï¼Œ
+	 *                            å¿…é¡»ä»¥jsonå­—ä¸²çš„å½¢å¼æäº¤ï¼Œå­—ä¸²é•¿åº¦ä¸è¶…è¿‡512ä¸ªå­—ç¬¦ï¼Œå…·ä½“å†…å®¹å¯ä»¥è‡ªå®šã€‚
+	 * @param string $url    å›¾ç‰‡çš„URLåœ°å€ï¼Œå¿…é¡»ä»¥httpå¼€å¤´ã€‚
 	 * @return array
 	 */
 	function upload_url_text( $status,  $url , $visible=0, $list_id=NULL, $pic_id=NULL, $lat = NULL, $long=NULL, $annotations=NULL)
@@ -684,17 +645,15 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'statuses/upload_url_text', $params, true );
 	}
-
-
 	/**
-	 * »ñÈ¡±íÇéÁĞ±í
+	 * è·å–è¡¨æƒ…åˆ—è¡¨
 	 *
-	 * ·µ»ØĞÂÀËÎ¢²©¹Ù·½ËùÓĞ±íÇé¡¢Ä§·¨±íÇéµÄÏà¹ØĞÅÏ¢¡£°üÀ¨¶ÌÓï¡¢±íÇéÀàĞÍ¡¢±íÇé·ÖÀà£¬ÊÇ·ñÈÈÃÅµÈ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/emotions emotions}
+	 * è¿”å›æ–°æµªå¾®åšå®˜æ–¹æ‰€æœ‰è¡¨æƒ…ã€é­”æ³•è¡¨æƒ…çš„ç›¸å…³ä¿¡æ¯ã€‚åŒ…æ‹¬çŸ­è¯­ã€è¡¨æƒ…ç±»å‹ã€è¡¨æƒ…åˆ†ç±»ï¼Œæ˜¯å¦çƒ­é—¨ç­‰ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/emotions emotions}
 	 * 
 	 * @access public
-	 * @param string $type ±íÇéÀà±ğ¡£"face":ÆÕÍ¨±íÇé£¬"ani"£ºÄ§·¨±íÇé£¬"cartoon"£º¶¯Âş±íÇé¡£Ä¬ÈÏÎª"face"¡£¿ÉÑ¡¡£
-	 * @param string $language ÓïÑÔÀà±ğ£¬"cnname"¼òÌå£¬"twname"·±Ìå¡£Ä¬ÈÏÎª"cnname"¡£¿ÉÑ¡
+	 * @param string $type è¡¨æƒ…ç±»åˆ«ã€‚"face":æ™®é€šè¡¨æƒ…ï¼Œ"ani"ï¼šé­”æ³•è¡¨æƒ…ï¼Œ"cartoon"ï¼šåŠ¨æ¼«è¡¨æƒ…ã€‚é»˜è®¤ä¸º"face"ã€‚å¯é€‰ã€‚
+	 * @param string $language è¯­è¨€ç±»åˆ«ï¼Œ"cnname"ç®€ä½“ï¼Œ"twname"ç¹ä½“ã€‚é»˜è®¤ä¸º"cnname"ã€‚å¯é€‰
 	 * @return array
 	 */
 	function emotions( $type = "face", $language = "cnname" )
@@ -704,19 +663,17 @@ class WeiboClientV2
 		$params['language'] = $language;
 		return $this->oauth->get( 'emotions', $params );
 	}
-
-
 	/**
-	 * ¸ù¾İÎ¢²©ID·µ»ØÄ³ÌõÎ¢²©µÄÆÀÂÛÁĞ±í
+	 * æ ¹æ®å¾®åšIDè¿”å›æŸæ¡å¾®åšçš„è¯„è®ºåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/show comments/show}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/show comments/show}
 	 *
-	 * @param int $sid ĞèÒª²éÑ¯µÄÎ¢²©ID¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØID±Èsince_id´óµÄÆÀÂÛ£¨¼´±Èsince_idÊ±¼äÍíµÄÆÀÂÛ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int $max_id  ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $filter_by_author ×÷ÕßÉ¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÎÒ¹Ø×¢µÄÈË¡¢2£ºÄ°ÉúÈË£¬Ä¬ÈÏÎª0¡£
+	 * @param int $sid éœ€è¦æŸ¥è¯¢çš„å¾®åšIDã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæˆ‘å…³æ³¨çš„äººã€2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function get_comments_by_sid( $sid, $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0 )
@@ -737,18 +694,16 @@ class WeiboClientV2
 		$params['filter_by_author'] = $filter_by_author;
 		return $this->oauth->get( 'comments/show',  $params );
 	}
-
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§Ëù·¢³öµÄÆÀÂÛÁĞ±í
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·æ‰€å‘å‡ºçš„è¯„è®ºåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/by_me comments/by_me}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/by_me comments/by_me}
 	 *
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØID±Èsince_id´óµÄÆÀÂÛ£¨¼´±Èsince_idÊ±¼äÍíµÄÆÀÂÛ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count  µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $filter_by_source À´Ô´É¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÀ´×ÔÎ¢²©µÄÆÀÂÛ¡¢2£ºÀ´×ÔÎ¢ÈºµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count  å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $filter_by_source æ¥æºç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæ¥è‡ªå¾®åšçš„è¯„è®ºã€2ï¼šæ¥è‡ªå¾®ç¾¤çš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function comments_by_me( $page = 1 , $count = 50, $since_id = 0, $max_id = 0,  $filter_by_source = 0 )
@@ -767,18 +722,17 @@ class WeiboClientV2
 		$params['filter_by_source'] = $filter_by_source;
 		return $this->oauth->get( 'comments/by_me', $params );
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§Ëù½ÓÊÕµ½µÄÆÀÂÛÁĞ±í
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·æ‰€æ¥æ”¶åˆ°çš„è¯„è®ºåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/to_me comments/to_me}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/to_me comments/to_me}
 	 *
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØID±Èsince_id´óµÄÆÀÂÛ£¨¼´±Èsince_idÊ±¼äÍíµÄÆÀÂÛ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int $max_id  ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $filter_by_author ×÷ÕßÉ¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÎÒ¹Ø×¢µÄÈË¡¢2£ºÄ°ÉúÈË£¬Ä¬ÈÏÎª0¡£
-	 * @param int $filter_by_source À´Ô´É¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÀ´×ÔÎ¢²©µÄÆÀÂÛ¡¢2£ºÀ´×ÔÎ¢ÈºµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $filter_by_author ä½œè€…ç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæˆ‘å…³æ³¨çš„äººã€2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_source æ¥æºç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæ¥è‡ªå¾®åšçš„è¯„è®ºã€2ï¼šæ¥è‡ªå¾®ç¾¤çš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */ 
 	function comments_to_me( $page = 1 , $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0)
@@ -798,18 +752,17 @@ class WeiboClientV2
 		$params['filter_by_source'] = $filter_by_source;
 		return $this->oauth->get( 'comments/to_me', $params );
 	}
-
 	/**
-	 * ×îĞÂÆÀÂÛ(°´Ê±¼ä)
+	 * æœ€æ–°è¯„è®º(æŒ‰æ—¶é—´)
 	 *
-	 * ·µ»Ø×îĞÂnÌõ·¢ËÍ¼°ÊÕµ½µÄÆÀÂÛ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/timeline comments/timeline}
+	 * è¿”å›æœ€æ–°næ¡å‘é€åŠæ”¶åˆ°çš„è¯„è®ºã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/timeline comments/timeline}
 	 * 
 	 * @access public
-	 * @param int $page Ò³Âë
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬ÔòÖ»·µ»ØID±Èsince_id´óµÄÆÀÂÛ£¨±Èsince_id·¢±íÊ±¼äÍí£©¡£¿ÉÑ¡¡£
-	 * @param int $max_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÆÀÂÛ¡£¿ÉÑ¡¡£
+	 * @param int $page é¡µç 
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™åªè¿”å›IDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆæ¯”since_idå‘è¡¨æ—¶é—´æ™šï¼‰ã€‚å¯é€‰ã€‚
+	 * @param int $max_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è¯„è®ºã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function comments_timeline( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -823,22 +776,19 @@ class WeiboClientV2
 			$this->id_format($max_id);
 			$params['max_id'] = $max_id;
 		}
-
 		return $this->request_with_pager( 'comments/timeline', $page, $count, $params );
 	}
-
-
 	/**
-	 * »ñÈ¡×îĞÂµÄÌáµ½µ±Ç°µÇÂ¼ÓÃ»§µÄÆÀÂÛ£¬¼´@ÎÒµÄÆÀÂÛ
+	 * è·å–æœ€æ–°çš„æåˆ°å½“å‰ç™»å½•ç”¨æˆ·çš„è¯„è®ºï¼Œå³@æˆ‘çš„è¯„è®º
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/mentions comments/mentions}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/mentions comments/mentions}
 	 *
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØID±Èsince_id´óµÄÆÀÂÛ£¨¼´±Èsince_idÊ±¼äÍíµÄÆÀÂÛ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int $max_id  ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $filter_by_author  ×÷ÕßÉ¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÎÒ¹Ø×¢µÄÈË¡¢2£ºÄ°ÉúÈË£¬Ä¬ÈÏÎª0¡£
-	 * @param int $filter_by_source À´Ô´É¸Ñ¡ÀàĞÍ£¬0£ºÈ«²¿¡¢1£ºÀ´×ÔÎ¢²©µÄÆÀÂÛ¡¢2£ºÀ´×ÔÎ¢ÈºµÄÆÀÂÛ£¬Ä¬ÈÏÎª0¡£
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDæ¯”since_idå¤§çš„è¯„è®ºï¼ˆå³æ¯”since_idæ—¶é—´æ™šçš„è¯„è®ºï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $filter_by_author  ä½œè€…ç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæˆ‘å…³æ³¨çš„äººã€2ï¼šé™Œç”Ÿäººï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $filter_by_source æ¥æºç­›é€‰ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šæ¥è‡ªå¾®åšçš„è¯„è®ºã€2ï¼šæ¥è‡ªå¾®ç¾¤çš„è¯„è®ºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */ 
 	function comments_mentions( $page = 1, $count = 50, $since_id = 0, $max_id = 0, $filter_by_author = 0, $filter_by_source = 0)
@@ -852,14 +802,12 @@ class WeiboClientV2
 		$params['filter_by_source'] = $filter_by_source;
 		return $this->oauth->get( 'comments/mentions', $params );
 	}
-
-
 	/**
-	 * ¸ù¾İÆÀÂÛIDÅúÁ¿·µ»ØÆÀÂÛĞÅÏ¢
+	 * æ ¹æ®è¯„è®ºIDæ‰¹é‡è¿”å›è¯„è®ºä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/show_batch comments/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/show_batch comments/show_batch}
 	 *
-	 * @param string $cids ĞèÒª²éÑ¯µÄÅúÁ¿ÆÀÂÛID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î´ó50
+	 * @param string $cids éœ€è¦æŸ¥è¯¢çš„æ‰¹é‡è¯„è®ºIDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤§50
 	 * @return array
 	 */
 	function comments_show_batch( $cids )
@@ -875,16 +823,14 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'comments/show_batch', $params );
 	}
-
-
 	/**
-	 * ¶ÔÒ»ÌõÎ¢²©½øĞĞÆÀÂÛ
+	 * å¯¹ä¸€æ¡å¾®åšè¿›è¡Œè¯„è®º
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/create comments/create}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/create comments/create}
 	 *
-	 * @param string $comment ÆÀÂÛÄÚÈİ£¬ÄÚÈİ²»³¬¹ı140¸öºº×Ö¡£
-	 * @param int $id ĞèÒªÆÀÂÛµÄÎ¢²©ID¡£
-	 * @param int $comment_ori µ±ÆÀÂÛ×ª·¢Î¢²©Ê±£¬ÊÇ·ñÆÀÂÛ¸øÔ­Î¢²©£¬0£º·ñ¡¢1£ºÊÇ£¬Ä¬ÈÏÎª0¡£
+	 * @param string $comment è¯„è®ºå†…å®¹ï¼Œå†…å®¹ä¸è¶…è¿‡140ä¸ªæ±‰å­—ã€‚
+	 * @param int $id éœ€è¦è¯„è®ºçš„å¾®åšIDã€‚
+	 * @param int $comment_ori å½“è¯„è®ºè½¬å‘å¾®åšæ—¶ï¼Œæ˜¯å¦è¯„è®ºç»™åŸå¾®åšï¼Œ0ï¼šå¦ã€1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function send_comment( $id , $comment , $comment_ori = 0)
@@ -896,15 +842,14 @@ class WeiboClientV2
 		$params['comment_ori'] = $comment_ori;
 		return $this->oauth->post( 'comments/create', $params );
 	}
-
 	/**
-	 * É¾³ıµ±Ç°ÓÃ»§µÄÎ¢²©ÆÀÂÛĞÅÏ¢¡£
+	 * åˆ é™¤å½“å‰ç”¨æˆ·çš„å¾®åšè¯„è®ºä¿¡æ¯ã€‚
 	 *
-	 * ×¢Òâ£ºÖ»ÄÜÉ¾³ı×Ô¼º·¢²¼µÄÆÀÂÛ£¬·¢²¼Î¢²©µÄÓÃ»§²»¿ÉÒÔÉ¾³ıÆäËûÈËµÄÆÀÂÛ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/statuses/comment_destroy statuses/comment_destroy}
+	 * æ³¨æ„ï¼šåªèƒ½åˆ é™¤è‡ªå·±å‘å¸ƒçš„è¯„è®ºï¼Œå‘å¸ƒå¾®åšçš„ç”¨æˆ·ä¸å¯ä»¥åˆ é™¤å…¶ä»–äººçš„è¯„è®ºã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/statuses/comment_destroy statuses/comment_destroy}
 	 * 
 	 * @access public
-	 * @param int $cid ÒªÉ¾³ıµÄÆÀÂÛid
+	 * @param int $cid è¦åˆ é™¤çš„è¯„è®ºid
 	 * @return array
 	 */
 	function comment_destroy( $cid )
@@ -913,16 +858,14 @@ class WeiboClientV2
 		$params['cid'] = $cid;
 		return $this->oauth->post( 'comments/destroy', $params);
 	}
-
-
 	/**
-	 * ¸ù¾İÆÀÂÛIDÅúÁ¿É¾³ıÆÀÂÛ
+	 * æ ¹æ®è¯„è®ºIDæ‰¹é‡åˆ é™¤è¯„è®º
 	 *
-	 * ×¢Òâ£ºÖ»ÄÜÉ¾³ı×Ô¼º·¢²¼µÄÆÀÂÛ£¬·¢²¿Î¢²©µÄÓÃ»§²»¿ÉÒÔÉ¾³ıÆäËûÈËµÄÆÀÂÛ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/destroy_batch comments/destroy_batch}
+	 * æ³¨æ„ï¼šåªèƒ½åˆ é™¤è‡ªå·±å‘å¸ƒçš„è¯„è®ºï¼Œå‘éƒ¨å¾®åšçš„ç”¨æˆ·ä¸å¯ä»¥åˆ é™¤å…¶ä»–äººçš„è¯„è®ºã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/destroy_batch comments/destroy_batch}
 	 *
 	 * @access public
-	 * @param string $ids ĞèÒªÉ¾³ıµÄÆÀÂÛID£¬ÓÃ°ë½Ç¶ººÅ¸ô¿ª£¬×î¶à20¸ö¡£
+	 * @param string $ids éœ€è¦åˆ é™¤çš„è¯„è®ºIDï¼Œç”¨åŠè§’é€—å·éš”å¼€ï¼Œæœ€å¤š20ä¸ªã€‚
 	 * @return array
 	 */
 	function comment_destroy_batch( $ids )
@@ -938,20 +881,18 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'comments/destroy_batch', $params);
 	}
-
-
 	/**
-	 * »Ø¸´Ò»ÌõÆÀÂÛ
+	 * å›å¤ä¸€æ¡è¯„è®º
 	 *
-	 * Îª·ÀÖ¹ÖØ¸´£¬·¢²¼µÄĞÅÏ¢Óë×îºóÒ»ÌõÆÀÂÛ/»Ø¸´ĞÅÏ¢Ò»Ñù»°£¬½«»á±»ºöÂÔ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/comments/reply comments/reply}
+	 * ä¸ºé˜²æ­¢é‡å¤ï¼Œå‘å¸ƒçš„ä¿¡æ¯ä¸æœ€åä¸€æ¡è¯„è®º/å›å¤ä¿¡æ¯ä¸€æ ·è¯ï¼Œå°†ä¼šè¢«å¿½ç•¥ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/comments/reply comments/reply}
 	 * 
 	 * @access public
-	 * @param int $sid Î¢²©id
-	 * @param string $text ÆÀÂÛÄÚÈİ¡£
-	 * @param int $cid ÆÀÂÛid
-	 * @param int $without_mention 1£º»Ø¸´ÖĞ²»×Ô¶¯¼ÓÈë¡°»Ø¸´@ÓÃ»§Ãû¡±£¬0£º»Ø¸´ÖĞ×Ô¶¯¼ÓÈë¡°»Ø¸´@ÓÃ»§Ãû¡±.Ä¬ÈÏÎª0.
-     * @param int $comment_ori	  µ±ÆÀÂÛ×ª·¢Î¢²©Ê±£¬ÊÇ·ñÆÀÂÛ¸øÔ­Î¢²©£¬0£º·ñ¡¢1£ºÊÇ£¬Ä¬ÈÏÎª0¡£
+	 * @param int $sid å¾®åšid
+	 * @param string $text è¯„è®ºå†…å®¹ã€‚
+	 * @param int $cid è¯„è®ºid
+	 * @param int $without_mention 1ï¼šå›å¤ä¸­ä¸è‡ªåŠ¨åŠ å…¥â€œå›å¤@ç”¨æˆ·åâ€ï¼Œ0ï¼šå›å¤ä¸­è‡ªåŠ¨åŠ å…¥â€œå›å¤@ç”¨æˆ·åâ€.é»˜è®¤ä¸º0.
+     * @param int $comment_ori	  å½“è¯„è®ºè½¬å‘å¾®åšæ—¶ï¼Œæ˜¯å¦è¯„è®ºç»™åŸå¾®åšï¼Œ0ï¼šå¦ã€1ï¼šæ˜¯ï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function reply( $sid, $text, $cid, $without_mention = 0, $comment_ori = 0 )
@@ -964,19 +905,16 @@ class WeiboClientV2
 		$params['cid'] = $cid;
 		$params['without_mention'] = $without_mention;
 		$params['comment_ori'] = $comment_ori;
-
 		return $this->oauth->post( 'comments/reply', $params );
-
 	}
-
 	/**
-	 * ¸ù¾İÓÃ»§UID»òêÇ³Æ»ñÈ¡ÓÃ»§×ÊÁÏ
+	 * æ ¹æ®ç”¨æˆ·UIDæˆ–æ˜µç§°è·å–ç”¨æˆ·èµ„æ–™
 	 *
-	 * °´ÓÃ»§UID»òêÇ³Æ·µ»ØÓÃ»§×ÊÁÏ£¬Í¬Ê±Ò²½«·µ»ØÓÃ»§µÄ×îĞÂ·¢²¼µÄÎ¢²©¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/users/show users/show}
+	 * æŒ‰ç”¨æˆ·UIDæˆ–æ˜µç§°è¿”å›ç”¨æˆ·èµ„æ–™ï¼ŒåŒæ—¶ä¹Ÿå°†è¿”å›ç”¨æˆ·çš„æœ€æ–°å‘å¸ƒçš„å¾®åšã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show users/show}
 	 * 
 	 * @access public
-	 * @param int  $uid ÓÃ»§UID¡£
+	 * @param int  $uid ç”¨æˆ·UIDã€‚
 	 * @return array
 	 */
 	function show_user_by_id( $uid )
@@ -986,35 +924,32 @@ class WeiboClientV2
 			$this->id_format($uid);
 			$params['uid'] = $uid;
 		}
-
 		return $this->oauth->get('users/show', $params );
 	}
 	
 	/**
-	 * ¸ù¾İÓÃ»§UID»òêÇ³Æ»ñÈ¡ÓÃ»§×ÊÁÏ
+	 * æ ¹æ®ç”¨æˆ·UIDæˆ–æ˜µç§°è·å–ç”¨æˆ·èµ„æ–™
 	 *
-	 * °´ÓÃ»§UID»òêÇ³Æ·µ»ØÓÃ»§×ÊÁÏ£¬Í¬Ê±Ò²½«·µ»ØÓÃ»§µÄ×îĞÂ·¢²¼µÄÎ¢²©¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/users/show users/show}
+	 * æŒ‰ç”¨æˆ·UIDæˆ–æ˜µç§°è¿”å›ç”¨æˆ·èµ„æ–™ï¼ŒåŒæ—¶ä¹Ÿå°†è¿”å›ç”¨æˆ·çš„æœ€æ–°å‘å¸ƒçš„å¾®åšã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show users/show}
 	 * 
 	 * @access public
-	 * @param string  $screen_name ÓÃ»§UID¡£
+	 * @param string  $screen_name ç”¨æˆ·UIDã€‚
 	 * @return array
 	 */
 	function show_user_by_name( $screen_name )
 	{
 		$params = array();
 		$params['screen_name'] = $screen_name;
-
 		return $this->oauth->get( 'users/show', $params );
 	}
-
 	/**
-	 * Í¨¹ı¸öĞÔ»¯ÓòÃû»ñÈ¡ÓÃ»§×ÊÁÏÒÔ¼°ÓÃ»§×îĞÂµÄÒ»ÌõÎ¢²©
+	 * é€šè¿‡ä¸ªæ€§åŒ–åŸŸåè·å–ç”¨æˆ·èµ„æ–™ä»¥åŠç”¨æˆ·æœ€æ–°çš„ä¸€æ¡å¾®åš
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/users/domain_show users/domain_show}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/domain_show users/domain_show}
 	 * 
 	 * @access public
-	 * @param mixed $domain ÓÃ»§¸öĞÔÓòÃû¡£ÀıÈç£ºlazypeople£¬¶ø²»ÊÇhttp://weibo.com/lazypeople
+	 * @param mixed $domain ç”¨æˆ·ä¸ªæ€§åŸŸåã€‚ä¾‹å¦‚ï¼šlazypeopleï¼Œè€Œä¸æ˜¯http://weibo.com/lazypeople
 	 * @return array
 	 */
 	function domain_show( $domain )
@@ -1023,13 +958,12 @@ class WeiboClientV2
 		$params['domain'] = $domain;
 		return $this->oauth->get( 'users/domain_show', $params );
 	}
-
 	 /**
-	 * ÅúÁ¿»ñÈ¡ÓÃ»§ĞÅÏ¢°´uids
+	 * æ‰¹é‡è·å–ç”¨æˆ·ä¿¡æ¯æŒ‰uids
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
 	 *
-	 * @param string $uids ĞèÒª²éÑ¯µÄÓÃ»§ID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬Ò»´Î×î¶à20¸ö¡£
+	 * @param string $uids éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·IDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ªã€‚
 	 * @return array
 	 */
 	function users_show_batch_by_id( $uids )
@@ -1047,11 +981,11 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * ÅúÁ¿»ñÈ¡ÓÃ»§ĞÅÏ¢°´screen_name
+	 * æ‰¹é‡è·å–ç”¨æˆ·ä¿¡æ¯æŒ‰screen_name
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/users/show_batch users/show_batch}
 	 *
-	 * @param string  $screen_name ĞèÒª²éÑ¯µÄÓÃ»§êÇ³Æ£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬Ò»´Î×î¶à20¸ö¡£
+	 * @param string  $screen_name éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·æ˜µç§°ï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š20ä¸ªã€‚
 	 * @return array
 	 */
 	function users_show_batch_by_name( $screen_name )
@@ -1064,18 +998,16 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'users/show_batch', $params );
 	}
-
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ¹Ø×¢ÁĞ±í
+	 * è·å–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨
 	 *
-	 * Èç¹ûÃ»ÓĞÌá¹©cursor²ÎÊı£¬½«Ö»·µ»Ø×îÇ°ÃæµÄ5000¸ö¹Ø×¢id
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
+	 * å¦‚æœæ²¡æœ‰æä¾›cursorå‚æ•°ï¼Œå°†åªè¿”å›æœ€å‰é¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
 	 * 
 	 * @access public
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50£¬×î´ó²»³¬¹ı200¡£
-	 * @param int $uid  Òª»ñÈ¡µÄÓÃ»§µÄID¡£
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
+	 * @param int $uid  è¦è·å–çš„ç”¨æˆ·çš„IDã€‚
 	 * @return array
 	 */
 	function friends_by_id( $uid, $cursor = 0, $count = 50 )
@@ -1084,21 +1016,20 @@ class WeiboClientV2
 		$params['cursor'] = $cursor;
 		$params['count'] = $count;
 		$params['uid'] = $uid;
-
 		return $this->oauth->get( 'friendships/friends', $params );
 	}
 	
 	
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ¹Ø×¢ÁĞ±í
+	 * è·å–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨
 	 *
-	 * Èç¹ûÃ»ÓĞÌá¹©cursor²ÎÊı£¬½«Ö»·µ»Ø×îÇ°ÃæµÄ5000¸ö¹Ø×¢id
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
+	 * å¦‚æœæ²¡æœ‰æä¾›cursorå‚æ•°ï¼Œå°†åªè¿”å›æœ€å‰é¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends friendships/friends}
 	 * 
 	 * @access public
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50£¬×î´ó²»³¬¹ı200¡£
-	 * @param string $screen_name  Òª»ñÈ¡µÄÓÃ»§µÄ screen_name
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
+	 * @param string $screen_name  è¦è·å–çš„ç”¨æˆ·çš„ screen_name
 	 * @return array
 	 */
 	function friends_by_name( $screen_name, $cursor = 0, $count = 50 )
@@ -1109,17 +1040,15 @@ class WeiboClientV2
 		$params['screen_name'] = $screen_name;
 		return $this->oauth->get( 'friendships/friends', $params );
 	}
-
-
 	/**
-	 * »ñÈ¡Á½¸öÓÃ»§Ö®¼äµÄ¹²Í¬¹Ø×¢ÈËÁĞ±í
+	 * è·å–ä¸¤ä¸ªç”¨æˆ·ä¹‹é—´çš„å…±åŒå…³æ³¨äººåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends/in_common friendships/friends/in_common}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/in_common friendships/friends/in_common}
 	 *
-	 * @param int $uid  ĞèÒª»ñÈ¡¹²Í¬¹Ø×¢¹ØÏµµÄÓÃ»§UID
-	 * @param int $suid  ĞèÒª»ñÈ¡¹²Í¬¹Ø×¢¹ØÏµµÄÓÃ»§UID£¬Ä¬ÈÏÎªµ±Ç°µÇÂ¼ÓÃ»§¡£
-	 * @param int $count  µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page  ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
+	 * @param int $uid  éœ€è¦è·å–å…±åŒå…³æ³¨å…³ç³»çš„ç”¨æˆ·UID
+	 * @param int $suid  éœ€è¦è·å–å…±åŒå…³æ³¨å…³ç³»çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰ç™»å½•ç”¨æˆ·ã€‚
+	 * @param int $count  å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function friends_in_common( $uid, $suid = NULL, $page = 1, $count = 50 )
@@ -1131,16 +1060,15 @@ class WeiboClientV2
 		$params['page'] = $page;
 		return $this->oauth->get( 'friendships/friends/in_common', $params  );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄË«Ïò¹Ø×¢ÁĞ±í£¬¼´»¥·ÛÁĞ±í
+	 * è·å–ç”¨æˆ·çš„åŒå‘å…³æ³¨åˆ—è¡¨ï¼Œå³äº’ç²‰åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral friendships/friends/bilateral}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral friendships/friends/bilateral}
 	 *
-	 * @param int $uid  ĞèÒª»ñÈ¡Ë«Ïò¹Ø×¢ÁĞ±íµÄÓÃ»§UID¡£
-	 * @param int $count  µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page  ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $sort  ÅÅĞòÀàĞÍ£¬0£º°´¹Ø×¢Ê±¼ä×î½üÅÅĞò£¬Ä¬ÈÏÎª0¡£
+	 * @param int $uid  éœ€è¦è·å–åŒå‘å…³æ³¨åˆ—è¡¨çš„ç”¨æˆ·UIDã€‚
+	 * @param int $count  å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $sort  æ’åºç±»å‹ï¼Œ0ï¼šæŒ‰å…³æ³¨æ—¶é—´æœ€è¿‘æ’åºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function bilateral( $uid, $page = 1, $count = 50, $sort = 0 )
@@ -1152,16 +1080,15 @@ class WeiboClientV2
 		$params['sort'] = $sort;
 		return $this->oauth->get( 'friendships/friends/bilateral', $params  );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄË«Ïò¹Ø×¢uidÁĞ±í
+	 * è·å–ç”¨æˆ·çš„åŒå‘å…³æ³¨uidåˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral/ids friendships/friends/bilateral/ids}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/bilateral/ids friendships/friends/bilateral/ids}
 	 *
-	 * @param int $uid  ĞèÒª»ñÈ¡Ë«Ïò¹Ø×¢ÁĞ±íµÄÓÃ»§UID¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page  ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $sort  ÅÅĞòÀàĞÍ£¬0£º°´¹Ø×¢Ê±¼ä×î½üÅÅĞò£¬Ä¬ÈÏÎª0¡£
+	 * @param int $uid  éœ€è¦è·å–åŒå‘å…³æ³¨åˆ—è¡¨çš„ç”¨æˆ·UIDã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $sort  æ’åºç±»å‹ï¼Œ0ï¼šæŒ‰å…³æ³¨æ—¶é—´æœ€è¿‘æ’åºï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function bilateral_ids( $uid, $page = 1, $count = 50, $sort = 0)
@@ -1173,17 +1100,16 @@ class WeiboClientV2
 		$params['sort'] = $sort;
 		return $this->oauth->get( 'friendships/friends/bilateral/ids',  $params  );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ¹Ø×¢ÁĞ±íuid
+	 * è·å–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨uid
 	 *
-	 * Èç¹ûÃ»ÓĞÌá¹©cursor²ÎÊı£¬½«Ö»·µ»Ø×îÇ°ÃæµÄ5000¸ö¹Ø×¢id
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
+	 * å¦‚æœæ²¡æœ‰æä¾›cursorå‚æ•°ï¼Œå°†åªè¿”å›æœ€å‰é¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
 	 * 
 	 * @access public
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¨¼´Ò³Ãæ´óĞ¡£©£¬²»´óÓÚ5000, Ä¬ÈÏ·µ»Ø500¡£
-	 * @param int $uid Òª»ñÈ¡µÄÓÃ»§ UID£¬Ä¬ÈÏÎªµ±Ç°ÓÃ»§
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼ˆå³é¡µé¢å¤§å°ï¼‰ï¼Œä¸å¤§äº5000, é»˜è®¤è¿”å›500ã€‚
+	 * @param int $uid è¦è·å–çš„ç”¨æˆ· UIDï¼Œé»˜è®¤ä¸ºå½“å‰ç”¨æˆ·
 	 * @return array
 	 */
 	function friends_ids_by_id( $uid, $cursor = 0, $count = 500 )
@@ -1197,15 +1123,15 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ¹Ø×¢ÁĞ±íuid
+	 * è·å–ç”¨æˆ·çš„å…³æ³¨åˆ—è¡¨uid
 	 *
-	 * Èç¹ûÃ»ÓĞÌá¹©cursor²ÎÊı£¬½«Ö»·µ»Ø×îÇ°ÃæµÄ5000¸ö¹Ø×¢id
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
+	 * å¦‚æœæ²¡æœ‰æä¾›cursorå‚æ•°ï¼Œå°†åªè¿”å›æœ€å‰é¢çš„5000ä¸ªå…³æ³¨id
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/ids friendships/friends/ids}
 	 * 
 	 * @access public
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¨¼´Ò³Ãæ´óĞ¡£©£¬²»´óÓÚ5000, Ä¬ÈÏ·µ»Ø500¡£
-	 * @param string $screen_name Òª»ñÈ¡µÄÓÃ»§µÄ screen_name£¬Ä¬ÈÏÎªµ±Ç°ÓÃ»§
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼ˆå³é¡µé¢å¤§å°ï¼‰ï¼Œä¸å¤§äº5000, é»˜è®¤è¿”å›500ã€‚
+	 * @param string $screen_name è¦è·å–çš„ç”¨æˆ·çš„ screen_nameï¼Œé»˜è®¤ä¸ºå½“å‰ç”¨æˆ·
 	 * @return array
 	 */
 	function friends_ids_by_name( $screen_name, $cursor = 0, $count = 500 )
@@ -1216,14 +1142,12 @@ class WeiboClientV2
 		$params['screen_name'] = $screen_name;
 		return $this->oauth->get( 'friendships/friends/ids', $params );
 	}
-
-
 	/**
-	 * ÅúÁ¿»ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§µÄ¹Ø×¢ÈËµÄ±¸×¢ĞÅÏ¢
+	 * æ‰¹é‡è·å–å½“å‰ç™»å½•ç”¨æˆ·çš„å…³æ³¨äººçš„å¤‡æ³¨ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends/remark_batch friendships/friends/remark_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends/remark_batch friendships/friends/remark_batch}
 	 *
-	 * @param string $uids  ĞèÒª»ñÈ¡±¸×¢µÄÓÃ»§UID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı50¸ö¡£
+	 * @param string $uids  éœ€è¦è·å–å¤‡æ³¨çš„ç”¨æˆ·UIDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡50ä¸ªã€‚
 	 * @return array
 	 **/
 	function friends_remark_batch( $uids )
@@ -1239,15 +1163,14 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'friendships/friends/remark_batch', $params  );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ·ÛË¿ÁĞ±í
+	 * è·å–ç”¨æˆ·çš„ç²‰ä¸åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param int $uid  ĞèÒª²éÑ¯µÄÓÃ»§UID
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50£¬×î´ó²»³¬¹ı200¡£
-	 * @param int $cursor false ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
+	 * @param int $uid  éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·UID
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
+	 * @param int $cursor false è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_by_id( $uid , $cursor = 0 , $count = 50)
@@ -1261,13 +1184,13 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ·ÛË¿ÁĞ±í
+	 * è·å–ç”¨æˆ·çš„ç²‰ä¸åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param string $screen_name  ĞèÒª²éÑ¯µÄÓÃ»§µÄêÇ³Æ
-	 * @param int  $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50£¬×î´ó²»³¬¹ı200¡£
-	 * @param int  $cursor false ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
+	 * @param string $screen_name  éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·çš„æ˜µç§°
+	 * @param int  $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
+	 * @param int  $cursor false è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_by_name( $screen_name, $cursor = 0 , $count = 50 )
@@ -1278,15 +1201,14 @@ class WeiboClientV2
 		$params['cursor'] = $cursor;
 		return $this->oauth->get( 'friendships/followers', $params  );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ·ÛË¿ÁĞ±íuid
+	 * è·å–ç”¨æˆ·çš„ç²‰ä¸åˆ—è¡¨uid
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param int $uid ĞèÒª²éÑ¯µÄÓÃ»§UID
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50£¬×î´ó²»³¬¹ı200¡£
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
+	 * @param int $uid éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·UID
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_ids_by_id( $uid, $cursor = 0 , $count = 50 )
@@ -1300,13 +1222,13 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ·ÛË¿ÁĞ±íuid
+	 * è·å–ç”¨æˆ·çš„ç²‰ä¸åˆ—è¡¨uid
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers friendships/followers}
 	 *
-	 * @param string $screen_name ĞèÒª²éÑ¯µÄÓÃ»§screen_name
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50£¬×î´ó²»³¬¹ı200¡£
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
+	 * @param string $screen_name éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·screen_name
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 **/
 	function followers_ids_by_name( $screen_name, $cursor = 0 , $count = 50 )
@@ -1317,14 +1239,13 @@ class WeiboClientV2
 		$params['cursor'] = $cursor;
 		return $this->oauth->get( 'friendships/followers/ids', $params  );
 	}
-
 	/**
-	 * »ñÈ¡ÓÅÖÊ·ÛË¿
+	 * è·å–ä¼˜è´¨ç²‰ä¸
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/followers/active friendships/followers/active}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/followers/active friendships/followers/active}
 	 *
-	 * @param int $uid ĞèÒª²éÑ¯µÄÓÃ»§UID¡£
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª20£¬×î´ó²»³¬¹ı200¡£
+	 * @param int $uid éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·UIDã€‚
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º20ï¼Œæœ€å¤§ä¸è¶…è¿‡200ã€‚
      * @return array
 	 **/
 	function followers_active( $uid,  $count = 20)
@@ -1335,16 +1256,14 @@ class WeiboClientV2
 		$param['count'] = $count;
 		return $this->oauth->get( 'friendships/followers/active', $param);
 	}
-
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§µÄ¹Ø×¢ÈËÖĞÓÖ¹Ø×¢ÁËÖ¸¶¨ÓÃ»§µÄÓÃ»§ÁĞ±í
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·çš„å…³æ³¨äººä¸­åˆå…³æ³¨äº†æŒ‡å®šç”¨æˆ·çš„ç”¨æˆ·åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/friends_chain/followers friendships/friends_chain/followers}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/friends_chain/followers friendships/friends_chain/followers}
 	 *
-	 * @param int $uid Ö¸¶¨µÄ¹Ø×¢Ä¿±êÓÃ»§UID¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
+	 * @param int $uid æŒ‡å®šçš„å…³æ³¨ç›®æ ‡ç”¨æˆ·UIDã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 **/
 	function friends_chain_followers( $uid, $page = 1, $count = 50 )
@@ -1356,16 +1275,15 @@ class WeiboClientV2
 		$params['page'] = $page;
 		return $this->oauth->get( 'friendships/friends_chain/followers',  $params );
 	}
-
 	/**
-	 * ·µ»ØÁ½¸öÓÃ»§¹ØÏµµÄÏêÏ¸Çé¿ö
+	 * è¿”å›ä¸¤ä¸ªç”¨æˆ·å…³ç³»çš„è¯¦ç»†æƒ…å†µ
 	 *
-	 * Èç¹ûÔ´ÓÃ»§»òÄ¿µÄÓÃ»§²»´æÔÚ£¬½«·µ»ØhttpµÄ400´íÎó
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
+	 * å¦‚æœæºç”¨æˆ·æˆ–ç›®çš„ç”¨æˆ·ä¸å­˜åœ¨ï¼Œå°†è¿”å›httpçš„400é”™è¯¯
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
 	 * 
 	 * @access public
-	 * @param mixed $target_id Ä¿±êÓÃ»§UID
-	 * @param mixed $source_id Ô´ÓÃ»§UID£¬¿ÉÑ¡£¬Ä¬ÈÏÎªµ±Ç°µÄÓÃ»§
+	 * @param mixed $target_id ç›®æ ‡ç”¨æˆ·UID
+	 * @param mixed $source_id æºç”¨æˆ·UIDï¼Œå¯é€‰ï¼Œé»˜è®¤ä¸ºå½“å‰çš„ç”¨æˆ·
 	 * @return array
 	 */
 	function is_followed_by_id( $target_id, $source_id = NULL )
@@ -1373,46 +1291,40 @@ class WeiboClientV2
 		$params = array();
 		$this->id_format($target_id);
 		$params['target_id'] = $target_id;
-
 		if ( $source_id != NULL ) {
 			$this->id_format($source_id);
 			$params['source_id'] = $source_id;
 		}
-
 		return $this->oauth->get( 'friendships/show', $params );
 	}
-
 	/**
-	 * ·µ»ØÁ½¸öÓÃ»§¹ØÏµµÄÏêÏ¸Çé¿ö
+	 * è¿”å›ä¸¤ä¸ªç”¨æˆ·å…³ç³»çš„è¯¦ç»†æƒ…å†µ
 	 *
-	 * Èç¹ûÔ´ÓÃ»§»òÄ¿µÄÓÃ»§²»´æÔÚ£¬½«·µ»ØhttpµÄ400´íÎó
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
+	 * å¦‚æœæºç”¨æˆ·æˆ–ç›®çš„ç”¨æˆ·ä¸å­˜åœ¨ï¼Œå°†è¿”å›httpçš„400é”™è¯¯
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/show friendships/show}
 	 * 
 	 * @access public
-	 * @param mixed $target_name Ä¿±êÓÃ»§µÄÎ¢²©êÇ³Æ
-	 * @param mixed $source_name Ô´ÓÃ»§µÄÎ¢²©êÇ³Æ£¬¿ÉÑ¡£¬Ä¬ÈÏÎªµ±Ç°µÄÓÃ»§
+	 * @param mixed $target_name ç›®æ ‡ç”¨æˆ·çš„å¾®åšæ˜µç§°
+	 * @param mixed $source_name æºç”¨æˆ·çš„å¾®åšæ˜µç§°ï¼Œå¯é€‰ï¼Œé»˜è®¤ä¸ºå½“å‰çš„ç”¨æˆ·
 	 * @return array
 	 */
 	function is_followed_by_name( $target_name, $source_name = NULL )
 	{
 		$params = array();
 		$params['target_screen_name'] = $target_name;
-
 		if ( $source_name != NULL ) {
 			$params['source_screen_name'] = $source_name;
 		}
-
 		return $this->oauth->get( 'friendships/show', $params );
 	}
-
 	/**
-	 * ¹Ø×¢Ò»¸öÓÃ»§¡£
+	 * å…³æ³¨ä¸€ä¸ªç”¨æˆ·ã€‚
 	 *
-	 * ³É¹¦Ôò·µ»Ø¹Ø×¢ÈËµÄ×ÊÁÏ£¬Ä¿Ç°×î¶à¹Ø×¢2000ÈË£¬Ê§°ÜÔò·µ»ØÒ»Ìõ×Ö·û´®µÄËµÃ÷¡£Èç¹ûÒÑ¾­¹Ø×¢ÁË´ËÈË£¬Ôò·µ»Øhttp 403µÄ×´Ì¬¡£¹Ø×¢²»´æÔÚµÄID½«·µ»Ø400¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
+	 * æˆåŠŸåˆ™è¿”å›å…³æ³¨äººçš„èµ„æ–™ï¼Œç›®å‰æœ€å¤šå…³æ³¨2000äººï¼Œå¤±è´¥åˆ™è¿”å›ä¸€æ¡å­—ç¬¦ä¸²çš„è¯´æ˜ã€‚å¦‚æœå·²ç»å…³æ³¨äº†æ­¤äººï¼Œåˆ™è¿”å›http 403çš„çŠ¶æ€ã€‚å…³æ³¨ä¸å­˜åœ¨çš„IDå°†è¿”å›400ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
 	 * 
 	 * @access public
-	 * @param int $uid Òª¹Ø×¢µÄÓÃ»§UID
+	 * @param int $uid è¦å…³æ³¨çš„ç”¨æˆ·UID
 	 * @return array
 	 */
 	function follow_by_id( $uid )
@@ -1424,13 +1336,13 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * ¹Ø×¢Ò»¸öÓÃ»§¡£
+	 * å…³æ³¨ä¸€ä¸ªç”¨æˆ·ã€‚
 	 *
-	 * ³É¹¦Ôò·µ»Ø¹Ø×¢ÈËµÄ×ÊÁÏ£¬Ä¿Ç°µÄ×î¶à¹Ø×¢2000ÈË£¬Ê§°ÜÔò·µ»ØÒ»Ìõ×Ö·û´®µÄËµÃ÷¡£Èç¹ûÒÑ¾­¹Ø×¢ÁË´ËÈË£¬Ôò·µ»Øhttp 403µÄ×´Ì¬¡£¹Ø×¢²»´æÔÚµÄID½«·µ»Ø400¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
+	 * æˆåŠŸåˆ™è¿”å›å…³æ³¨äººçš„èµ„æ–™ï¼Œç›®å‰çš„æœ€å¤šå…³æ³¨2000äººï¼Œå¤±è´¥åˆ™è¿”å›ä¸€æ¡å­—ç¬¦ä¸²çš„è¯´æ˜ã€‚å¦‚æœå·²ç»å…³æ³¨äº†æ­¤äººï¼Œåˆ™è¿”å›http 403çš„çŠ¶æ€ã€‚å…³æ³¨ä¸å­˜åœ¨çš„IDå°†è¿”å›400ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/create friendships/create}
 	 * 
 	 * @access public
-	 * @param string $screen_name Òª¹Ø×¢µÄÓÃ»§êÇ³Æ
+	 * @param string $screen_name è¦å…³æ³¨çš„ç”¨æˆ·æ˜µç§°
 	 * @return array
 	 */
 	function follow_by_name( $screen_name )
@@ -1439,14 +1351,12 @@ class WeiboClientV2
 		$params['screen_name'] = $screen_name;
 		return $this->oauth->post( 'friendships/create', $params);
 	}
-
-
 	/**
-	 * ¸ù¾İÓÃ»§UIDÅúÁ¿¹Ø×¢ÓÃ»§
+	 * æ ¹æ®ç”¨æˆ·UIDæ‰¹é‡å…³æ³¨ç”¨æˆ·
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/create_batch friendships/create_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/create_batch friendships/create_batch}
 	 *
-	 * @param string $uids Òª¹Ø×¢µÄÓÃ»§UID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı20¸ö¡£
+	 * @param string $uids è¦å…³æ³¨çš„ç”¨æˆ·UIDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡20ä¸ªã€‚
 	 * @return array
 	 */
 	function follow_create_batch( $uids )
@@ -1462,15 +1372,14 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'friendships/create_batch', $params);
 	}
-
 	/**
-	 * È¡Ïû¹Ø×¢Ä³ÓÃ»§
+	 * å–æ¶ˆå…³æ³¨æŸç”¨æˆ·
 	 *
-	 * È¡Ïû¹Ø×¢Ä³ÓÃ»§¡£³É¹¦Ôò·µ»Ø±»È¡Ïû¹Ø×¢ÈËµÄ×ÊÁÏ£¬Ê§°ÜÔò·µ»ØÒ»Ìõ×Ö·û´®µÄËµÃ÷¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
+	 * å–æ¶ˆå…³æ³¨æŸç”¨æˆ·ã€‚æˆåŠŸåˆ™è¿”å›è¢«å–æ¶ˆå…³æ³¨äººçš„èµ„æ–™ï¼Œå¤±è´¥åˆ™è¿”å›ä¸€æ¡å­—ç¬¦ä¸²çš„è¯´æ˜ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
 	 * 
 	 * @access public
-	 * @param int $uid ÒªÈ¡Ïû¹Ø×¢µÄÓÃ»§UID
+	 * @param int $uid è¦å–æ¶ˆå…³æ³¨çš„ç”¨æˆ·UID
 	 * @return array
 	 */
 	function unfollow_by_id( $uid )
@@ -1482,13 +1391,13 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * È¡Ïû¹Ø×¢Ä³ÓÃ»§
+	 * å–æ¶ˆå…³æ³¨æŸç”¨æˆ·
 	 *
-	 * È¡Ïû¹Ø×¢Ä³ÓÃ»§¡£³É¹¦Ôò·µ»Ø±»È¡Ïû¹Ø×¢ÈËµÄ×ÊÁÏ£¬Ê§°ÜÔò·µ»ØÒ»Ìõ×Ö·û´®µÄËµÃ÷¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
+	 * å–æ¶ˆå…³æ³¨æŸç”¨æˆ·ã€‚æˆåŠŸåˆ™è¿”å›è¢«å–æ¶ˆå…³æ³¨äººçš„èµ„æ–™ï¼Œå¤±è´¥åˆ™è¿”å›ä¸€æ¡å­—ç¬¦ä¸²çš„è¯´æ˜ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/destroy friendships/destroy}
 	 * 
 	 * @access public
-	 * @param string $screen_name ÒªÈ¡Ïû¹Ø×¢µÄÓÃ»§êÇ³Æ
+	 * @param string $screen_name è¦å–æ¶ˆå…³æ³¨çš„ç”¨æˆ·æ˜µç§°
 	 * @return array
 	 */
 	function unfollow_by_name( $screen_name )
@@ -1497,16 +1406,15 @@ class WeiboClientV2
 		$params['screen_name'] = $screen_name;
 		return $this->oauth->post( 'friendships/destroy', $params);
 	}
-
 	/**
-	 * ¸üĞÂµ±Ç°µÇÂ¼ÓÃ»§Ëù¹Ø×¢µÄÄ³¸öºÃÓÑµÄ±¸×¢ĞÅÏ¢
+	 * æ›´æ–°å½“å‰ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„æŸä¸ªå¥½å‹çš„å¤‡æ³¨ä¿¡æ¯
 	 *
-	 * Ö»ÄÜĞŞ¸Äµ±Ç°µÇÂ¼ÓÃ»§Ëù¹Ø×¢µÄÓÃ»§µÄ±¸×¢ĞÅÏ¢¡£·ñÔò½«¸ø³ö400´íÎó¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/friendships/remark/update friendships/remark/update}
+	 * åªèƒ½ä¿®æ”¹å½“å‰ç™»å½•ç”¨æˆ·æ‰€å…³æ³¨çš„ç”¨æˆ·çš„å¤‡æ³¨ä¿¡æ¯ã€‚å¦åˆ™å°†ç»™å‡º400é”™è¯¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/friendships/remark/update friendships/remark/update}
 	 * 
 	 * @access public
-	 * @param int $uid ĞèÒªĞŞ¸Ä±¸×¢ĞÅÏ¢µÄÓÃ»§ID¡£
-	 * @param string $remark ±¸×¢ĞÅÏ¢¡£
+	 * @param int $uid éœ€è¦ä¿®æ”¹å¤‡æ³¨ä¿¡æ¯çš„ç”¨æˆ·IDã€‚
+	 * @param string $remark å¤‡æ³¨ä¿¡æ¯ã€‚
 	 * @return array
 	 */
 	function update_remark( $uid, $remark )
@@ -1517,18 +1425,17 @@ class WeiboClientV2
 		$params['remark'] = $remark;
 		return $this->oauth->post( 'friendships/remark/update', $params);
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§×îĞÂË½ĞÅÁĞ±í
+	 * è·å–å½“å‰ç”¨æˆ·æœ€æ–°ç§ä¿¡åˆ—è¡¨
 	 *
-	 * ·µ»ØÓÃ»§µÄ×îĞÂnÌõË½ĞÅ£¬²¢°üº¬·¢ËÍÕßºÍ½ÓÊÜÕßµÄÏêÏ¸×ÊÁÏ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages direct_messages}
+	 * è¿”å›ç”¨æˆ·çš„æœ€æ–°næ¡ç§ä¿¡ï¼Œå¹¶åŒ…å«å‘é€è€…å’Œæ¥å—è€…çš„è¯¦ç»†èµ„æ–™ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages direct_messages}
 	 * 
 	 * @access public
-	 * @param int $page Ò³Âë
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£
-	 * @param int64 $since_id ·µ»ØID±ÈÊıÖµsince_id´ó£¨±Èsince_idÊ±¼äÍíµÄ£©µÄË½ĞÅ¡£¿ÉÑ¡¡£
-	 * @param int64 $max_id ·µ»ØID²»´óÓÚmax_id(Ê±¼ä²»ÍíÓÚmax_id)µÄË½ĞÅ¡£¿ÉÑ¡¡£
+	 * @param int $page é¡µç 
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int64 $since_id è¿”å›IDæ¯”æ•°å€¼since_idå¤§ï¼ˆæ¯”since_idæ—¶é—´æ™šçš„ï¼‰çš„ç§ä¿¡ã€‚å¯é€‰ã€‚
+	 * @param int64 $max_id è¿”å›IDä¸å¤§äºmax_id(æ—¶é—´ä¸æ™šäºmax_id)çš„ç§ä¿¡ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function list_dm( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -1542,21 +1449,19 @@ class WeiboClientV2
 			$this->id_format($max_id);
 			$params['max_id'] = $max_id;
 		}
-
 		return $this->request_with_pager( 'direct_messages', $page, $count, $params );
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§·¢ËÍµÄ×îĞÂË½ĞÅÁĞ±í
+	 * è·å–å½“å‰ç”¨æˆ·å‘é€çš„æœ€æ–°ç§ä¿¡åˆ—è¡¨
 	 *
-	 * ·µ»ØµÇÂ¼ÓÃ»§ÒÑ·¢ËÍ×îĞÂ50ÌõË½ĞÅ¡£°üÀ¨·¢ËÍÕßºÍ½ÓÊÜÕßµÄÏêÏ¸×ÊÁÏ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/sent direct_messages/sent}
+	 * è¿”å›ç™»å½•ç”¨æˆ·å·²å‘é€æœ€æ–°50æ¡ç§ä¿¡ã€‚åŒ…æ‹¬å‘é€è€…å’Œæ¥å—è€…çš„è¯¦ç»†èµ„æ–™ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/sent direct_messages/sent}
 	 * 
 	 * @access public
-	 * @param int $page Ò³Âë
-	 * @param int $count Ã¿´Î·µ»ØµÄ×î´ó¼ÇÂ¼Êı£¬×î¶à·µ»Ø200Ìõ£¬Ä¬ÈÏ50¡£
-	 * @param int64 $since_id ·µ»ØID±ÈÊıÖµsince_id´ó£¨±Èsince_idÊ±¼äÍíµÄ£©µÄË½ĞÅ¡£¿ÉÑ¡¡£
-	 * @param int64 $max_id ·µ»ØID²»´óÓÚmax_id(Ê±¼ä²»ÍíÓÚmax_id)µÄË½ĞÅ¡£¿ÉÑ¡¡£
+	 * @param int $page é¡µç 
+	 * @param int $count æ¯æ¬¡è¿”å›çš„æœ€å¤§è®°å½•æ•°ï¼Œæœ€å¤šè¿”å›200æ¡ï¼Œé»˜è®¤50ã€‚
+	 * @param int64 $since_id è¿”å›IDæ¯”æ•°å€¼since_idå¤§ï¼ˆæ¯”since_idæ—¶é—´æ™šçš„ï¼‰çš„ç§ä¿¡ã€‚å¯é€‰ã€‚
+	 * @param int64 $max_id è¿”å›IDä¸å¤§äºmax_id(æ—¶é—´ä¸æ™šäºmax_id)çš„ç§ä¿¡ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function list_dm_sent( $page = 1, $count = 50, $since_id = 0, $max_id = 0 )
@@ -1570,18 +1475,15 @@ class WeiboClientV2
 			$this->id_format($max_id);
 			$params['max_id'] = $max_id;
 		}
-
 		return $this->request_with_pager( 'direct_messages/sent', $page, $count, $params );
 	}
-
-
 	/**
-	 * »ñÈ¡Óëµ±Ç°µÇÂ¼ÓÃ»§ÓĞË½ĞÅÍùÀ´µÄÓÃ»§ÁĞ±í£¬Óë¸ÃÓÃ»§ÍùÀ´µÄ×îĞÂË½ĞÅ
+	 * è·å–ä¸å½“å‰ç™»å½•ç”¨æˆ·æœ‰ç§ä¿¡å¾€æ¥çš„ç”¨æˆ·åˆ—è¡¨ï¼Œä¸è¯¥ç”¨æˆ·å¾€æ¥çš„æœ€æ–°ç§ä¿¡
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/user_list direct_messages/user_list}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/user_list direct_messages/user_list}
 	 *
-	 * @param int $count  µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª20¡£
-	 * @param int $cursor ·µ»Ø½á¹ûµÄÓÎ±ê£¬ÏÂÒ»Ò³ÓÃ·µ»ØÖµÀïµÄnext_cursor£¬ÉÏÒ»Ò³ÓÃprevious_cursor£¬Ä¬ÈÏÎª0¡£
+	 * @param int $count  å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º20ã€‚
+	 * @param int $cursor è¿”å›ç»“æœçš„æ¸¸æ ‡ï¼Œä¸‹ä¸€é¡µç”¨è¿”å›å€¼é‡Œçš„next_cursorï¼Œä¸Šä¸€é¡µç”¨previous_cursorï¼Œé»˜è®¤ä¸º0ã€‚
 	 * @return array
 	 */
 	function dm_user_list( $count = 20, $cursor = 0)
@@ -1591,17 +1493,16 @@ class WeiboClientV2
 		$params['cursor'] = $cursor;
 		return $this->oauth->get( 'direct_messages/user_list', $params );
 	} 
-
 	/**
-	 * »ñÈ¡ÓëÖ¸¶¨ÓÃ»§µÄÍùÀ´Ë½ĞÅÁĞ±í
+	 * è·å–ä¸æŒ‡å®šç”¨æˆ·çš„å¾€æ¥ç§ä¿¡åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/conversation direct_messages/conversation}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/conversation direct_messages/conversation}
 	 *
-	 * @param int $uid ĞèÒª²éÑ¯µÄÓÃ»§µÄUID¡£
-	 * @param int $since_id ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØID±Èsince_id´óµÄË½ĞÅ£¨¼´±Èsince_idÊ±¼äÍíµÄË½ĞÅ£©£¬Ä¬ÈÏÎª0¡£
-	 * @param int $max_id  ÈôÖ¸¶¨´Ë²ÎÊı£¬Ôò·µ»ØIDĞ¡ÓÚ»òµÈÓÚmax_idµÄË½ĞÅ£¬Ä¬ÈÏÎª0¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page  ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
+	 * @param int $uid éœ€è¦æŸ¥è¯¢çš„ç”¨æˆ·çš„UIDã€‚
+	 * @param int $since_id è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDæ¯”since_idå¤§çš„ç§ä¿¡ï¼ˆå³æ¯”since_idæ—¶é—´æ™šçš„ç§ä¿¡ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $max_id  è‹¥æŒ‡å®šæ­¤å‚æ•°ï¼Œåˆ™è¿”å›IDå°äºæˆ–ç­‰äºmax_idçš„ç§ä¿¡ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page  è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function dm_conversation( $uid, $page = 1, $count = 50, $since_id = 0, $max_id = 0)
@@ -1621,13 +1522,12 @@ class WeiboClientV2
 		$params['page'] = $page;
 		return $this->oauth->get( 'direct_messages/conversation', $params );
 	}
-
 	/**
-	 * ¸ù¾İË½ĞÅIDÅúÁ¿»ñÈ¡Ë½ĞÅÄÚÈİ
+	 * æ ¹æ®ç§ä¿¡IDæ‰¹é‡è·å–ç§ä¿¡å†…å®¹
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/show_batch direct_messages/show_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/show_batch direct_messages/show_batch}
 	 *
-	 * @param string  $dmids ĞèÒª²éÑ¯µÄË½ĞÅID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬Ò»´Î×î¶à50¸ö
+	 * @param string  $dmids éœ€è¦æŸ¥è¯¢çš„ç§ä¿¡IDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œä¸€æ¬¡æœ€å¤š50ä¸ª
 	 * @return array
 	 */
 	function dm_show_batch( $dmids )
@@ -1643,17 +1543,16 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'direct_messages/show_batch',  $params );
 	}
-
 	/**
-	 * ·¢ËÍË½ĞÅ
+	 * å‘é€ç§ä¿¡
 	 *
-	 * ·¢ËÍÒ»ÌõË½ĞÅ¡£³É¹¦½«·µ»ØÍêÕûµÄ·¢ËÍÏûÏ¢¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
+	 * å‘é€ä¸€æ¡ç§ä¿¡ã€‚æˆåŠŸå°†è¿”å›å®Œæ•´çš„å‘é€æ¶ˆæ¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
 	 * 
 	 * @access public
-	 * @param int $uid ÓÃ»§UID
-	 * @param string $text Òª·¢ÉúµÄÏûÏ¢ÄÚÈİ£¬ÎÄ±¾´óĞ¡±ØĞëĞ¡ÓÚ300¸öºº×Ö¡£
-	 * @param int $id ĞèÒª·¢ËÍµÄÎ¢²©ID¡£
+	 * @param int $uid ç”¨æˆ·UID
+	 * @param string $text è¦å‘ç”Ÿçš„æ¶ˆæ¯å†…å®¹ï¼Œæ–‡æœ¬å¤§å°å¿…é¡»å°äº300ä¸ªæ±‰å­—ã€‚
+	 * @param int $id éœ€è¦å‘é€çš„å¾®åšIDã€‚
 	 * @return array
 	 */
 	function send_dm_by_id( $uid, $text, $id = NULL )
@@ -1670,15 +1569,15 @@ class WeiboClientV2
 	}
 	
 	/**
-	 * ·¢ËÍË½ĞÅ
+	 * å‘é€ç§ä¿¡
 	 *
-	 * ·¢ËÍÒ»ÌõË½ĞÅ¡£³É¹¦½«·µ»ØÍêÕûµÄ·¢ËÍÏûÏ¢¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
+	 * å‘é€ä¸€æ¡ç§ä¿¡ã€‚æˆåŠŸå°†è¿”å›å®Œæ•´çš„å‘é€æ¶ˆæ¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/new direct_messages/new}
 	 * 
 	 * @access public
-	 * @param string $screen_name ÓÃ»§êÇ³Æ
-	 * @param string $text Òª·¢ÉúµÄÏûÏ¢ÄÚÈİ£¬ÎÄ±¾´óĞ¡±ØĞëĞ¡ÓÚ300¸öºº×Ö¡£
-	 * @param int $id ĞèÒª·¢ËÍµÄÎ¢²©ID¡£
+	 * @param string $screen_name ç”¨æˆ·æ˜µç§°
+	 * @param string $text è¦å‘ç”Ÿçš„æ¶ˆæ¯å†…å®¹ï¼Œæ–‡æœ¬å¤§å°å¿…é¡»å°äº300ä¸ªæ±‰å­—ã€‚
+	 * @param int $id éœ€è¦å‘é€çš„å¾®åšIDã€‚
 	 * @return array
 	 */
 	function send_dm_by_name( $screen_name, $text, $id = NULL )
@@ -1692,15 +1591,14 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'direct_messages/new', $params);
 	}
-
 	/**
-	 * É¾³ıÒ»ÌõË½ĞÅ
+	 * åˆ é™¤ä¸€æ¡ç§ä¿¡
 	 *
-	 * °´IDÉ¾³ıË½ĞÅ¡£²Ù×÷ÓÃ»§±ØĞëÎªË½ĞÅµÄ½ÓÊÕÈË¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/destroy direct_messages/destroy}
+	 * æŒ‰IDåˆ é™¤ç§ä¿¡ã€‚æ“ä½œç”¨æˆ·å¿…é¡»ä¸ºç§ä¿¡çš„æ¥æ”¶äººã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/destroy direct_messages/destroy}
 	 * 
 	 * @access public
-	 * @param int $did ÒªÉ¾³ıµÄË½ĞÅÖ÷¼üID
+	 * @param int $did è¦åˆ é™¤çš„ç§ä¿¡ä¸»é”®ID
 	 * @return array
 	 */
 	function delete_dm( $did )
@@ -1710,15 +1608,14 @@ class WeiboClientV2
 		$params['id'] = $did;
 		return $this->oauth->post('direct_messages/destroy', $params);
 	}
-
 	/**
-	 * ÅúÁ¿É¾³ıË½ĞÅ
+	 * æ‰¹é‡åˆ é™¤ç§ä¿¡
 	 *
-	 * ÅúÁ¿É¾³ıµ±Ç°µÇÂ¼ÓÃ»§µÄË½ĞÅ¡£³öÏÖÒì³£Ê±£¬·µ»Ø400´íÎó¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/direct_messages/destroy_batch direct_messages/destroy_batch}
+	 * æ‰¹é‡åˆ é™¤å½“å‰ç™»å½•ç”¨æˆ·çš„ç§ä¿¡ã€‚å‡ºç°å¼‚å¸¸æ—¶ï¼Œè¿”å›400é”™è¯¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/direct_messages/destroy_batch direct_messages/destroy_batch}
 	 * 
 	 * @access public
-	 * @param mixed $dids ÓûÉ¾³ıµÄÒ»×éË½ĞÅID£¬ÓÃ°ë½Ç¶ººÅ¸ô¿ª£¬»òÕßÓÉÒ»×éÆÀÂÛID×é³ÉµÄÊı×é¡£×î¶à20¸ö¡£ÀıÈç£º"4976494627, 4976262053"»òarray(4976494627,4976262053);
+	 * @param mixed $dids æ¬²åˆ é™¤çš„ä¸€ç»„ç§ä¿¡IDï¼Œç”¨åŠè§’é€—å·éš”å¼€ï¼Œæˆ–è€…ç”±ä¸€ç»„è¯„è®ºIDç»„æˆçš„æ•°ç»„ã€‚æœ€å¤š20ä¸ªã€‚ä¾‹å¦‚ï¼š"4976494627, 4976262053"æˆ–array(4976494627,4976262053);
 	 * @return array
 	 */
 	function delete_dms( $dids )
@@ -1732,18 +1629,15 @@ class WeiboClientV2
 		} else {
 			$params['ids'] = $dids;
 		}
-
 		return $this->oauth->post( 'direct_messages/destroy_batch', $params);
 	}
 	
-
-
 	/**
-	 * »ñÈ¡ÓÃ»§»ù±¾ĞÅÏ¢
+	 * è·å–ç”¨æˆ·åŸºæœ¬ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/basic account/profile/basic}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/basic account/profile/basic}
 	 *
-	 * @param int $uid  ĞèÒª»ñÈ¡»ù±¾ĞÅÏ¢µÄÓÃ»§UID£¬Ä¬ÈÏÎªµ±Ç°µÇÂ¼ÓÃ»§¡£
+	 * @param int $uid  éœ€è¦è·å–åŸºæœ¬ä¿¡æ¯çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰ç™»å½•ç”¨æˆ·ã€‚
 	 * @return array
 	 */
 	function account_profile_basic( $uid = NULL  )
@@ -1755,13 +1649,12 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'account/profile/basic', $params );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ½ÌÓıĞÅÏ¢
+	 * è·å–ç”¨æˆ·çš„æ•™è‚²ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/education account/profile/education}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/education account/profile/education}
 	 *
-	 * @param int $uid  ĞèÒª»ñÈ¡½ÌÓıĞÅÏ¢µÄÓÃ»§UID£¬Ä¬ÈÏÎªµ±Ç°µÇÂ¼ÓÃ»§¡£
+	 * @param int $uid  éœ€è¦è·å–æ•™è‚²ä¿¡æ¯çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰ç™»å½•ç”¨æˆ·ã€‚
 	 * @return array
 	 */
 	function account_education( $uid = NULL )
@@ -1773,13 +1666,12 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'account/profile/education', $params );
 	}
-
 	/**
-	 * ÅúÁ¿»ñÈ¡ÓÃ»§µÄ½ÌÓıĞÅÏ¢
+	 * æ‰¹é‡è·å–ç”¨æˆ·çš„æ•™è‚²ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/education_batch account/profile/education_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/education_batch account/profile/education_batch}
 	 *
-	 * @param string $uids ĞèÒª»ñÈ¡½ÌÓıĞÅÏ¢µÄÓÃ»§UID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı20¡£
+	 * @param string $uids éœ€è¦è·å–æ•™è‚²ä¿¡æ¯çš„ç”¨æˆ·UIDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡20ã€‚
 	 * @return array
 	 */
 	function account_education_batch( $uids  )
@@ -1793,17 +1685,14 @@ class WeiboClientV2
 		} else {
 			$params['uids'] = $uids;
 		}
-
 		return $this->oauth->get( 'account/profile/education_batch', $params );
 	}
-
-
 	/**
-	 * »ñÈ¡ÓÃ»§µÄÖ°ÒµĞÅÏ¢
+	 * è·å–ç”¨æˆ·çš„èŒä¸šä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/career account/profile/career}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/career account/profile/career}
 	 *
-	 * @param int $uid  ĞèÒª»ñÈ¡½ÌÓıĞÅÏ¢µÄÓÃ»§UID£¬Ä¬ÈÏÎªµ±Ç°µÇÂ¼ÓÃ»§¡£
+	 * @param int $uid  éœ€è¦è·å–æ•™è‚²ä¿¡æ¯çš„ç”¨æˆ·UIDï¼Œé»˜è®¤ä¸ºå½“å‰ç™»å½•ç”¨æˆ·ã€‚
 	 * @return array
 	 */
 	function account_career( $uid = NULL )
@@ -1815,13 +1704,12 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'account/profile/career', $params );
 	}
-
 	/**
-	 * ÅúÁ¿»ñÈ¡ÓÃ»§µÄÖ°ÒµĞÅÏ¢
+	 * æ‰¹é‡è·å–ç”¨æˆ·çš„èŒä¸šä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/career_batch account/profile/career_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/career_batch account/profile/career_batch}
 	 *
-	 * @param string $uids ĞèÒª»ñÈ¡½ÌÓıĞÅÏ¢µÄÓÃ»§UID£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı20¡£
+	 * @param string $uids éœ€è¦è·å–æ•™è‚²ä¿¡æ¯çš„ç”¨æˆ·UIDï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡20ã€‚
 	 * @return array
 	 */
 	function account_career_batch( $uids )
@@ -1835,14 +1723,12 @@ class WeiboClientV2
 		} else {
 			$params['uids'] = $uids;
 		}
-
 		return $this->oauth->get( 'account/profile/career_batch', $params );
 	}
-
 	/**
-	 * »ñÈ¡ÒşË½ĞÅÏ¢ÉèÖÃÇé¿ö
+	 * è·å–éšç§ä¿¡æ¯è®¾ç½®æƒ…å†µ
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/get_privacy account/get_privacy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/get_privacy account/get_privacy}
 	 * 
 	 * @access public
 	 * @return array
@@ -1851,35 +1737,32 @@ class WeiboClientV2
 	{
 		return $this->oauth->get('account/get_privacy');
 	}
-
 	/**
-	 * »ñÈ¡ËùÓĞµÄÑ§Ğ£ÁĞ±í
+	 * è·å–æ‰€æœ‰çš„å­¦æ ¡åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/school_list account/profile/school_list}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/school_list account/profile/school_list}
 	 *
-	 * @param array $query ËÑË÷Ñ¡Ïî¡£¸ñÊ½£ºarray('key0'=>'value0', 'key1'=>'value1', ....)¡£Ö§³ÖµÄkey:
-	 *  - province	int		Ê¡·İ·¶Î§£¬Ê¡·İID¡£
-	 *  - city		int		³ÇÊĞ·¶Î§£¬³ÇÊĞID¡£
-	 *  - area		int		ÇøÓò·¶Î§£¬ÇøID¡£
-	 *  - type		int		Ñ§Ğ£ÀàĞÍ£¬1£º´óÑ§¡¢2£º¸ßÖĞ¡¢3£ºÖĞ×¨¼¼Ğ£¡¢4£º³õÖĞ¡¢5£ºĞ¡Ñ§£¬Ä¬ÈÏÎª1¡£
-	 *  - capital	string	Ñ§Ğ£Ê××ÖÄ¸£¬Ä¬ÈÏÎªA¡£
-	 *  - keyword	string	Ñ§Ğ£Ãû³Æ¹Ø¼ü×Ö¡£
-	 *  - count		int		·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
-	 * ²ÎÊıkeywordÓëcapital¶şÕß±ØÑ¡ÆäÒ»£¬ÇÒÖ»ÄÜÑ¡ÆäÒ»¡£°´Ê××ÖÄ¸capital²éÑ¯Ê±£¬±ØĞëÌá¹©province²ÎÊı¡£
+	 * @param array $query æœç´¢é€‰é¡¹ã€‚æ ¼å¼ï¼šarray('key0'=>'value0', 'key1'=>'value1', ....)ã€‚æ”¯æŒçš„key:
+	 *  - province	int		çœä»½èŒƒå›´ï¼Œçœä»½IDã€‚
+	 *  - city		int		åŸå¸‚èŒƒå›´ï¼ŒåŸå¸‚IDã€‚
+	 *  - area		int		åŒºåŸŸèŒƒå›´ï¼ŒåŒºIDã€‚
+	 *  - type		int		å­¦æ ¡ç±»å‹ï¼Œ1ï¼šå¤§å­¦ã€2ï¼šé«˜ä¸­ã€3ï¼šä¸­ä¸“æŠ€æ ¡ã€4ï¼šåˆä¸­ã€5ï¼šå°å­¦ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - capital	string	å­¦æ ¡é¦–å­—æ¯ï¼Œé»˜è®¤ä¸ºAã€‚
+	 *  - keyword	string	å­¦æ ¡åç§°å…³é”®å­—ã€‚
+	 *  - count		int		è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 * å‚æ•°keywordä¸capitaläºŒè€…å¿…é€‰å…¶ä¸€ï¼Œä¸”åªèƒ½é€‰å…¶ä¸€ã€‚æŒ‰é¦–å­—æ¯capitalæŸ¥è¯¢æ—¶ï¼Œå¿…é¡»æä¾›provinceå‚æ•°ã€‚
 	 * @access public
 	 * @return array
 	 */
 	function school_list( $query )
 	{
 		$params = $query;
-
 		return $this->oauth->get( 'account/profile/school_list', $params );
 	}
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§µÄAPI·ÃÎÊÆµÂÊÏŞÖÆÇé¿ö
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·çš„APIè®¿é—®é¢‘ç‡é™åˆ¶æƒ…å†µ
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/rate_limit_status account/rate_limit_status}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/rate_limit_status account/rate_limit_status}
 	 * 
 	 * @access public
 	 * @return array
@@ -1888,11 +1771,10 @@ class WeiboClientV2
 	{
 		return $this->oauth->get( 'account/rate_limit_status' );
 	}
-
 	/**
-	 * OAuthÊÚÈ¨Ö®ºó£¬»ñÈ¡ÊÚÈ¨ÓÃ»§µÄUID
+	 * OAuthæˆæƒä¹‹åï¼Œè·å–æˆæƒç”¨æˆ·çš„UID
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/get_uid account/get_uid}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/get_uid account/get_uid}
 	 * 
 	 * @access public
 	 * @return array
@@ -1901,75 +1783,70 @@ class WeiboClientV2
 	{
 		return $this->oauth->get( 'account/get_uid' );
 	}
-
-
 	/**
-	 * ¸ü¸ÄÓÃ»§×ÊÁÏ
+	 * æ›´æ”¹ç”¨æˆ·èµ„æ–™
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/basic_update account/profile/basic_update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/basic_update account/profile/basic_update}
 	 * 
 	 * @access public
-	 * @param array $profile ÒªĞŞ¸ÄµÄ×ÊÁÏ¡£¸ñÊ½£ºarray('key1'=>'value1', 'key2'=>'value2', .....)¡£
-	 * Ö§³ÖĞŞ¸ÄµÄÏî£º
-	 *  - screen_name		string	ÓÃ»§êÇ³Æ£¬²»¿ÉÎª¿Õ¡£
-	 *  - gender	i		string	ÓÃ»§ĞÔ±ğ£¬m£ºÄĞ¡¢f£ºÅ®£¬²»¿ÉÎª¿Õ¡£
-	 *  - real_name			string	ÓÃ»§ÕæÊµĞÕÃû¡£
-	 *  - real_name_visible	int		ÕæÊµĞÕÃû¿É¼û·¶Î§£¬0£º×Ô¼º¿É¼û¡¢1£º¹Ø×¢ÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
-	 *  - province	true	int		Ê¡·İ´úÂëID£¬²»¿ÉÎª¿Õ¡£
-	 *  - city	true		int		³ÇÊĞ´úÂëID£¬²»¿ÉÎª¿Õ¡£
-	 *  - birthday			string	ÓÃ»§ÉúÈÕ£¬¸ñÊ½£ºyyyy-mm-dd¡£
-	 *  - birthday_visible	int		ÉúÈÕ¿É¼û·¶Î§£¬0£º±£ÃÜ¡¢1£ºÖ»ÏÔÊ¾ÔÂÈÕ¡¢2£ºÖ»ÏÔÊ¾ĞÇ×ù¡¢3£ºËùÓĞÈË¿É¼û¡£
-	 *  - qq				string	ÓÃ»§QQºÅÂë¡£
-	 *  - qq_visible		int		ÓÃ»§QQ¿É¼û·¶Î§£¬0£º×Ô¼º¿É¼û¡¢1£º¹Ø×¢ÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
-	 *  - msn				string	ÓÃ»§MSN¡£
-	 *  - msn_visible		int		ÓÃ»§MSN¿É¼û·¶Î§£¬0£º×Ô¼º¿É¼û¡¢1£º¹Ø×¢ÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
-	 *  - url				string	ÓÃ»§²©¿ÍµØÖ·¡£
-	 *  - url_visible		int		ÓÃ»§²©¿ÍµØÖ·¿É¼û·¶Î§£¬0£º×Ô¼º¿É¼û¡¢1£º¹Ø×¢ÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
-	 *  - credentials_type	int		Ö¤¼şÀàĞÍ£¬1£ºÉí·İÖ¤¡¢2£ºÑ§ÉúÖ¤¡¢3£º¾ü¹ÙÖ¤¡¢4£º»¤ÕÕ¡£
-	 *  - credentials_num	string	Ö¤¼şºÅÂë¡£
-	 *  - email				string	ÓÃ»§³£ÓÃÓÊÏäµØÖ·¡£
-	 *  - email_visible		int		ÓÃ»§³£ÓÃÓÊÏäµØÖ·¿É¼û·¶Î§£¬0£º×Ô¼º¿É¼û¡¢1£º¹Ø×¢ÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
-	 *  - lang				string	ÓïÑÔ°æ±¾£¬zh_cn£º¼òÌåÖĞÎÄ¡¢zh_tw£º·±ÌåÖĞÎÄ¡£
-	 *  - description		string	ÓÃ»§ÃèÊö£¬×î³¤²»³¬¹ı70¸öºº×Ö¡£
-	 * ÌîĞ´birthday²ÎÊıÊ±£¬×öÈçÏÂÔ¼¶¨£º
-	 *  - Ö»ÌîÄê·İÊ±£¬²ÉÓÃ1986-00-00¸ñÊ½£»
-	 *  - Ö»ÌîÔÂ·İÊ±£¬²ÉÓÃ0000-08-00¸ñÊ½£»
-	 *  - Ö»ÌîÄ³ÈÕÊ±£¬²ÉÓÃ0000-00-28¸ñÊ½¡£
+	 * @param array $profile è¦ä¿®æ”¹çš„èµ„æ–™ã€‚æ ¼å¼ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒä¿®æ”¹çš„é¡¹ï¼š
+	 *  - screen_name		string	ç”¨æˆ·æ˜µç§°ï¼Œä¸å¯ä¸ºç©ºã€‚
+	 *  - gender	i		string	ç”¨æˆ·æ€§åˆ«ï¼Œmï¼šç”·ã€fï¼šå¥³ï¼Œä¸å¯ä¸ºç©ºã€‚
+	 *  - real_name			string	ç”¨æˆ·çœŸå®å§“åã€‚
+	 *  - real_name_visible	int		çœŸå®å§“åå¯è§èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å¯è§ã€1ï¼šå…³æ³¨äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - province	true	int		çœä»½ä»£ç IDï¼Œä¸å¯ä¸ºç©ºã€‚
+	 *  - city	true		int		åŸå¸‚ä»£ç IDï¼Œä¸å¯ä¸ºç©ºã€‚
+	 *  - birthday			string	ç”¨æˆ·ç”Ÿæ—¥ï¼Œæ ¼å¼ï¼šyyyy-mm-ddã€‚
+	 *  - birthday_visible	int		ç”Ÿæ—¥å¯è§èŒƒå›´ï¼Œ0ï¼šä¿å¯†ã€1ï¼šåªæ˜¾ç¤ºæœˆæ—¥ã€2ï¼šåªæ˜¾ç¤ºæ˜Ÿåº§ã€3ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - qq				string	ç”¨æˆ·QQå·ç ã€‚
+	 *  - qq_visible		int		ç”¨æˆ·QQå¯è§èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å¯è§ã€1ï¼šå…³æ³¨äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - msn				string	ç”¨æˆ·MSNã€‚
+	 *  - msn_visible		int		ç”¨æˆ·MSNå¯è§èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å¯è§ã€1ï¼šå…³æ³¨äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - url				string	ç”¨æˆ·åšå®¢åœ°å€ã€‚
+	 *  - url_visible		int		ç”¨æˆ·åšå®¢åœ°å€å¯è§èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å¯è§ã€1ï¼šå…³æ³¨äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - credentials_type	int		è¯ä»¶ç±»å‹ï¼Œ1ï¼šèº«ä»½è¯ã€2ï¼šå­¦ç”Ÿè¯ã€3ï¼šå†›å®˜è¯ã€4ï¼šæŠ¤ç…§ã€‚
+	 *  - credentials_num	string	è¯ä»¶å·ç ã€‚
+	 *  - email				string	ç”¨æˆ·å¸¸ç”¨é‚®ç®±åœ°å€ã€‚
+	 *  - email_visible		int		ç”¨æˆ·å¸¸ç”¨é‚®ç®±åœ°å€å¯è§èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å¯è§ã€1ï¼šå…³æ³¨äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - lang				string	è¯­è¨€ç‰ˆæœ¬ï¼Œzh_cnï¼šç®€ä½“ä¸­æ–‡ã€zh_twï¼šç¹ä½“ä¸­æ–‡ã€‚
+	 *  - description		string	ç”¨æˆ·æè¿°ï¼Œæœ€é•¿ä¸è¶…è¿‡70ä¸ªæ±‰å­—ã€‚
+	 * å¡«å†™birthdayå‚æ•°æ—¶ï¼Œåšå¦‚ä¸‹çº¦å®šï¼š
+	 *  - åªå¡«å¹´ä»½æ—¶ï¼Œé‡‡ç”¨1986-00-00æ ¼å¼ï¼›
+	 *  - åªå¡«æœˆä»½æ—¶ï¼Œé‡‡ç”¨0000-08-00æ ¼å¼ï¼›
+	 *  - åªå¡«æŸæ—¥æ—¶ï¼Œé‡‡ç”¨0000-00-28æ ¼å¼ã€‚
 	 * @return array
 	 */
 	function update_profile( $profile )
 	{
 		return $this->oauth->post( 'account/profile/basic_update',  $profile);
 	}
-
-
 	/**
-	 * ÉèÖÃ½ÌÓıĞÅÏ¢
+	 * è®¾ç½®æ•™è‚²ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/edu_update account/profile/edu_update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/edu_update account/profile/edu_update}
 	 * 
 	 * @access public
-	 * @param array $edu_update ÒªĞŞ¸ÄµÄÑ§Ğ£ĞÅÏ¢¡£¸ñÊ½£ºarray('key1'=>'value1', 'key2'=>'value2', .....)¡£
-	 * Ö§³ÖÉèÖÃµÄÏî£º
-	 *  - type			int		Ñ§Ğ£ÀàĞÍ£¬1£º´óÑ§¡¢2£º¸ßÖĞ¡¢3£ºÖĞ×¨¼¼Ğ£¡¢4£º³õÖĞ¡¢5£ºĞ¡Ñ§£¬Ä¬ÈÏÎª1¡£±ØÌî²ÎÊı
-	 *  - school_id	`	int		Ñ§Ğ£´úÂë£¬±ØÌî²ÎÊı
-	 *  - id			string	ĞèÒªĞŞ¸ÄµÄ½ÌÓıĞÅÏ¢ID£¬²»´«ÔòÎªĞÂ½¨£¬´«ÔòÎª¸üĞÂ¡£
-	 *  - year			int		ÈëÑ§Äê·İ£¬×îĞ¡Îª1900£¬×î´ó²»³¬¹ıµ±Ç°Äê·İ
-	 *  - department	string	ÔºÏµ»òÕß°à±ğ¡£
-	 *  - visible		int		¿ª·ÅµÈ¼¶£¬0£º½ö×Ô¼º¿É¼û¡¢1£º¹Ø×¢µÄÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
+	 * @param array $edu_update è¦ä¿®æ”¹çš„å­¦æ ¡ä¿¡æ¯ã€‚æ ¼å¼ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒè®¾ç½®çš„é¡¹ï¼š
+	 *  - type			int		å­¦æ ¡ç±»å‹ï¼Œ1ï¼šå¤§å­¦ã€2ï¼šé«˜ä¸­ã€3ï¼šä¸­ä¸“æŠ€æ ¡ã€4ï¼šåˆä¸­ã€5ï¼šå°å­¦ï¼Œé»˜è®¤ä¸º1ã€‚å¿…å¡«å‚æ•°
+	 *  - school_id	`	int		å­¦æ ¡ä»£ç ï¼Œå¿…å¡«å‚æ•°
+	 *  - id			string	éœ€è¦ä¿®æ”¹çš„æ•™è‚²ä¿¡æ¯IDï¼Œä¸ä¼ åˆ™ä¸ºæ–°å»ºï¼Œä¼ åˆ™ä¸ºæ›´æ–°ã€‚
+	 *  - year			int		å…¥å­¦å¹´ä»½ï¼Œæœ€å°ä¸º1900ï¼Œæœ€å¤§ä¸è¶…è¿‡å½“å‰å¹´ä»½
+	 *  - department	string	é™¢ç³»æˆ–è€…ç­åˆ«ã€‚
+	 *  - visible		int		å¼€æ”¾ç­‰çº§ï¼Œ0ï¼šä»…è‡ªå·±å¯è§ã€1ï¼šå…³æ³¨çš„äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
 	 * @return array
 	 */
 	function edu_update( $edu_update )
 	{
 		return $this->oauth->post( 'account/profile/edu_update',  $edu_update);
 	}
-
 	/**
-	 * ¸ù¾İÑ§Ğ£IDÉ¾³ıÓÃ»§µÄ½ÌÓıĞÅÏ¢
+	 * æ ¹æ®å­¦æ ¡IDåˆ é™¤ç”¨æˆ·çš„æ•™è‚²ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/edu_destroy account/profile/edu_destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/edu_destroy account/profile/edu_destroy}
 	 * 
-	 * @param int $id ½ÌÓıĞÅÏ¢ÀïµÄÑ§Ğ£ID¡£
+	 * @param int $id æ•™è‚²ä¿¡æ¯é‡Œçš„å­¦æ ¡IDã€‚
 	 * @return array
 	 */
 	function edu_destroy( $id )
@@ -1979,38 +1856,36 @@ class WeiboClientV2
 		$params['id'] = $id;
 		return $this->oauth->post( 'account/profile/edu_destroy', $params);
 	}
-
 	/**
-	 * ÉèÖÃÖ°ÒµĞÅÏ¢
+	 * è®¾ç½®èŒä¸šä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/car_update account/profile/car_update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/car_update account/profile/car_update}
 	 * 
-	 * @param array $car_update ÒªĞŞ¸ÄµÄÖ°ÒµĞÅÏ¢¡£¸ñÊ½£ºarray('key1'=>'value1', 'key2'=>'value2', .....)¡£
-	 * Ö§³ÖÉèÖÃµÄÏî£º
-	 *  - id			string	ĞèÒª¸üĞÂµÄÖ°ÒµĞÅÏ¢ID¡£
-	 *  - start			int		½øÈë¹«Ë¾Äê·İ£¬×îĞ¡Îª1900£¬×î´óÎªµ±ÄêÄê·İ¡£
-	 *  - end			int		Àë¿ª¹«Ë¾Äê·İ£¬ÖÁ½ñÌî0¡£
-	 *  - department	string	¹¤×÷²¿ÃÅ¡£
-	 *  - visible		int		¿É¼û·¶Î§£¬0£º×Ô¼º¿É¼û¡¢1£º¹Ø×¢ÈË¿É¼û¡¢2£ºËùÓĞÈË¿É¼û¡£
-	 *  - province		int		Ê¡·İ´úÂëID£¬²»¿ÉÎª¿ÕÖµ¡£
-	 *  - city			int		³ÇÊĞ´úÂëID£¬²»¿ÉÎª¿ÕÖµ¡£
-	 *  - company		string	¹«Ë¾Ãû³Æ£¬²»¿ÉÎª¿ÕÖµ¡£
-	 * ²ÎÊıprovinceÓëcity¶şÕß±ØÑ¡ÆäÒ»<br />
-	 * ²ÎÊıidÎª¿Õ£¬ÔòÎªĞÂ½¨Ö°ÒµĞÅÏ¢£¬²ÎÊıcompany±äÎª±ØÌîÏî£¬²ÎÊıid·Ç¿Õ£¬ÔòÎª¸üĞÂ£¬²ÎÊıcompany¿ÉÑ¡
+	 * @param array $car_update è¦ä¿®æ”¹çš„èŒä¸šä¿¡æ¯ã€‚æ ¼å¼ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒè®¾ç½®çš„é¡¹ï¼š
+	 *  - id			string	éœ€è¦æ›´æ–°çš„èŒä¸šä¿¡æ¯IDã€‚
+	 *  - start			int		è¿›å…¥å…¬å¸å¹´ä»½ï¼Œæœ€å°ä¸º1900ï¼Œæœ€å¤§ä¸ºå½“å¹´å¹´ä»½ã€‚
+	 *  - end			int		ç¦»å¼€å…¬å¸å¹´ä»½ï¼Œè‡³ä»Šå¡«0ã€‚
+	 *  - department	string	å·¥ä½œéƒ¨é—¨ã€‚
+	 *  - visible		int		å¯è§èŒƒå›´ï¼Œ0ï¼šè‡ªå·±å¯è§ã€1ï¼šå…³æ³¨äººå¯è§ã€2ï¼šæ‰€æœ‰äººå¯è§ã€‚
+	 *  - province		int		çœä»½ä»£ç IDï¼Œä¸å¯ä¸ºç©ºå€¼ã€‚
+	 *  - city			int		åŸå¸‚ä»£ç IDï¼Œä¸å¯ä¸ºç©ºå€¼ã€‚
+	 *  - company		string	å…¬å¸åç§°ï¼Œä¸å¯ä¸ºç©ºå€¼ã€‚
+	 * å‚æ•°provinceä¸cityäºŒè€…å¿…é€‰å…¶ä¸€<br />
+	 * å‚æ•°idä¸ºç©ºï¼Œåˆ™ä¸ºæ–°å»ºèŒä¸šä¿¡æ¯ï¼Œå‚æ•°companyå˜ä¸ºå¿…å¡«é¡¹ï¼Œå‚æ•°idéç©ºï¼Œåˆ™ä¸ºæ›´æ–°ï¼Œå‚æ•°companyå¯é€‰
 	 * @return array
 	 */
 	function car_update( $car_update )
 	{
 		return $this->oauth->post( 'account/profile/car_update', $car_update);
 	}
-
 	/**
-	 * ¸ù¾İ¹«Ë¾IDÉ¾³ıÓÃ»§µÄÖ°ÒµĞÅÏ¢
+	 * æ ¹æ®å…¬å¸IDåˆ é™¤ç”¨æˆ·çš„èŒä¸šä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/profile/car_destroy account/profile/car_destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/profile/car_destroy account/profile/car_destroy}
 	 * 
 	 * @access public
-	 * @param int $id  Ö°ÒµĞÅÏ¢ÀïµÄ¹«Ë¾ID
+	 * @param int $id  èŒä¸šä¿¡æ¯é‡Œçš„å…¬å¸ID
 	 * @return array
 	 */
 	function car_destroy( $id )
@@ -2020,54 +1895,49 @@ class WeiboClientV2
 		$params['id'] = $id;
 		return $this->oauth->post( 'account/profile/car_destroy', $params);
 	}
-
 	/**
-	 * ¸ü¸ÄÍ·Ïñ
+	 * æ›´æ”¹å¤´åƒ
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/avatar/upload account/avatar/upload}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/avatar/upload account/avatar/upload}
 	 *
-	 * @param string $image_path ÒªÉÏ´«µÄÍ·ÏñÂ·¾¶, Ö§³Öurl¡£[Ö»Ö§³Öpng/jpg/gifÈıÖÖ¸ñÊ½, Ôö¼Ó¸ñÊ½ÇëĞŞ¸Äget_image_mime·½·¨] ±ØĞëÎªĞ¡ÓÚ700KµÄÓĞĞ§µÄGIF, JPGÍ¼Æ¬. Èç¹ûÍ¼Æ¬´óÓÚ500ÏñËØ½«°´±ÈÀıËõ·Å¡£
+	 * @param string $image_path è¦ä¸Šä¼ çš„å¤´åƒè·¯å¾„, æ”¯æŒurlã€‚[åªæ”¯æŒpng/jpg/gifä¸‰ç§æ ¼å¼, å¢åŠ æ ¼å¼è¯·ä¿®æ”¹get_image_mimeæ–¹æ³•] å¿…é¡»ä¸ºå°äº700Kçš„æœ‰æ•ˆçš„GIF, JPGå›¾ç‰‡. å¦‚æœå›¾ç‰‡å¤§äº500åƒç´ å°†æŒ‰æ¯”ä¾‹ç¼©æ”¾ã€‚
 	 * @return array
 	 */
 	function update_profile_image( $image_path )
 	{
 		$params = array();
 		$params['image'] = "@{$image_path}";
-
 		return $this->oauth->post('account/avatar/upload', $params, true);
 	}
-
 	/**
-	 * ÉèÖÃÒşË½ĞÅÏ¢
+	 * è®¾ç½®éšç§ä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/account/update_privacy account/update_privacy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/account/update_privacy account/update_privacy}
 	 * 
-	 * @param array $privacy_settings ÒªĞŞ¸ÄµÄÒşË½ÉèÖÃ¡£¸ñÊ½£ºarray('key1'=>'value1', 'key2'=>'value2', .....)¡£
-	 * Ö§³ÖÉèÖÃµÄÏî£º
-	 *  - comment	int	ÊÇ·ñ¿ÉÒÔÆÀÂÛÎÒµÄÎ¢²©£¬0£ºËùÓĞÈË¡¢1£º¹Ø×¢µÄÈË£¬Ä¬ÈÏÎª0¡£
-	 *  - geo		int	ÊÇ·ñ¿ªÆôµØÀíĞÅÏ¢£¬0£º²»¿ªÆô¡¢1£º¿ªÆô£¬Ä¬ÈÏÎª1¡£
-	 *  - message	int	ÊÇ·ñ¿ÉÒÔ¸øÎÒ·¢Ë½ĞÅ£¬0£ºËùÓĞÈË¡¢1£º¹Ø×¢µÄÈË£¬Ä¬ÈÏÎª0¡£
-	 *  - realname	int	ÊÇ·ñ¿ÉÒÔÍ¨¹ıÕæÃûËÑË÷µ½ÎÒ£¬0£º²»¿ÉÒÔ¡¢1£º¿ÉÒÔ£¬Ä¬ÈÏÎª0¡£
-	 *  - badge		int	Ñ«ÕÂÊÇ·ñ¿É¼û£¬0£º²»¿É¼û¡¢1£º¿É¼û£¬Ä¬ÈÏÎª1¡£
-	 *  - mobile	int	ÊÇ·ñ¿ÉÒÔÍ¨¹ıÊÖ»úºÅÂëËÑË÷µ½ÎÒ£¬0£º²»¿ÉÒÔ¡¢1£º¿ÉÒÔ£¬Ä¬ÈÏÎª0¡£
-	 * ÒÔÉÏ²ÎÊıÈ«²¿Ñ¡Ìî
+	 * @param array $privacy_settings è¦ä¿®æ”¹çš„éšç§è®¾ç½®ã€‚æ ¼å¼ï¼šarray('key1'=>'value1', 'key2'=>'value2', .....)ã€‚
+	 * æ”¯æŒè®¾ç½®çš„é¡¹ï¼š
+	 *  - comment	int	æ˜¯å¦å¯ä»¥è¯„è®ºæˆ‘çš„å¾®åšï¼Œ0ï¼šæ‰€æœ‰äººã€1ï¼šå…³æ³¨çš„äººï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - geo		int	æ˜¯å¦å¼€å¯åœ°ç†ä¿¡æ¯ï¼Œ0ï¼šä¸å¼€å¯ã€1ï¼šå¼€å¯ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - message	int	æ˜¯å¦å¯ä»¥ç»™æˆ‘å‘ç§ä¿¡ï¼Œ0ï¼šæ‰€æœ‰äººã€1ï¼šå…³æ³¨çš„äººï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - realname	int	æ˜¯å¦å¯ä»¥é€šè¿‡çœŸåæœç´¢åˆ°æˆ‘ï¼Œ0ï¼šä¸å¯ä»¥ã€1ï¼šå¯ä»¥ï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - badge		int	å‹‹ç« æ˜¯å¦å¯è§ï¼Œ0ï¼šä¸å¯è§ã€1ï¼šå¯è§ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - mobile	int	æ˜¯å¦å¯ä»¥é€šè¿‡æ‰‹æœºå·ç æœç´¢åˆ°æˆ‘ï¼Œ0ï¼šä¸å¯ä»¥ã€1ï¼šå¯ä»¥ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * ä»¥ä¸Šå‚æ•°å…¨éƒ¨é€‰å¡«
 	 * @return array
 	 */
 	function update_privacy( $privacy_settings )
 	{
 		return $this->oauth->post( 'account/update_privacy', $privacy_settings);
 	}
-
-
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§µÄÊÕ²ØÁĞ±í
+	 * è·å–å½“å‰ç”¨æˆ·çš„æ”¶è—åˆ—è¡¨
 	 *
-	 * ·µ»ØÓÃ»§µÄ·¢²¼µÄ×î½ü20ÌõÊÕ²ØĞÅÏ¢£¬ºÍÓÃ»§ÊÕ²ØÒ³Ãæ·µ»ØÄÚÈİÊÇÒ»ÖÂµÄ¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites favorites}
+	 * è¿”å›ç”¨æˆ·çš„å‘å¸ƒçš„æœ€è¿‘20æ¡æ”¶è—ä¿¡æ¯ï¼Œå’Œç”¨æˆ·æ”¶è—é¡µé¢è¿”å›å†…å®¹æ˜¯ä¸€è‡´çš„ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites favorites}
 	 * 
 	 * @access public
-	 * @param  int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param  int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
+	 * @param  int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param  int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
 	 * @return array
 	 */
 	function get_favorites( $page = 1, $count = 50 )
@@ -2075,19 +1945,16 @@ class WeiboClientV2
 		$params = array();
 		$params['page'] = intval($page);
 		$params['count'] = intval($count);
-
 		return $this->oauth->get( 'favorites', $params );
 	}
-
-
 	/**
-	 * ¸ù¾İÊÕ²ØID»ñÈ¡Ö¸¶¨µÄÊÕ²ØĞÅÏ¢
+	 * æ ¹æ®æ”¶è—IDè·å–æŒ‡å®šçš„æ”¶è—ä¿¡æ¯
 	 *
-	 * ¸ù¾İÊÕ²ØID»ñÈ¡Ö¸¶¨µÄÊÕ²ØĞÅÏ¢¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/show favorites/show}
+	 * æ ¹æ®æ”¶è—IDè·å–æŒ‡å®šçš„æ”¶è—ä¿¡æ¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/show favorites/show}
 	 * 
 	 * @access public
-	 * @param int $id ĞèÒª²éÑ¯µÄÊÕ²ØID¡£
+	 * @param int $id éœ€è¦æŸ¥è¯¢çš„æ”¶è—IDã€‚
 	 * @return array
 	 */
 	function favorites_show( $id )
@@ -2097,17 +1964,15 @@ class WeiboClientV2
 		$params['id'] = $id;
 		return $this->oauth->get( 'favorites/show', $params );
 	}
-
-
 	/**
-	 * ¸ù¾İ±êÇ©»ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§¸Ã±êÇ©ÏÂµÄÊÕ²ØÁĞ±í
+	 * æ ¹æ®æ ‡ç­¾è·å–å½“å‰ç™»å½•ç”¨æˆ·è¯¥æ ‡ç­¾ä¸‹çš„æ”¶è—åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/by_tags favorites/by_tags}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/by_tags favorites/by_tags}
 	 *
 	 * 
-	 * @param int $tid  ĞèÒª²éÑ¯µÄ±êÇ©ID¡£'
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
+	 * @param int $tid  éœ€è¦æŸ¥è¯¢çš„æ ‡ç­¾IDã€‚'
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function favorites_by_tags( $tid, $page = 1, $count = 50)
@@ -2118,16 +1983,14 @@ class WeiboClientV2
 		$params['page'] = $page;
 		return $this->oauth->get( 'favorites/by_tags', $params );
 	}
-
-
 	/**
-	 * »ñÈ¡µ±Ç°µÇÂ¼ÓÃ»§µÄÊÕ²Ø±êÇ©ÁĞ±í
+	 * è·å–å½“å‰ç™»å½•ç”¨æˆ·çš„æ”¶è—æ ‡ç­¾åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/tags favorites/tags}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags favorites/tags}
 	 * 
 	 * @access public
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª50¡£
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º50ã€‚
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
 	 * @return array
 	 */
 	function favorites_tags( $page = 1, $count = 50)
@@ -2137,15 +2000,13 @@ class WeiboClientV2
 		$params['page'] = $page;
 		return $this->oauth->get( 'favorites/tags', $params );
 	}
-
-
 	/**
-	 * ÊÕ²ØÒ»ÌõÎ¢²©ĞÅÏ¢
+	 * æ”¶è—ä¸€æ¡å¾®åšä¿¡æ¯
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/create favorites/create}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/create favorites/create}
 	 * 
 	 * @access public
-	 * @param int $sid ÊÕ²ØµÄÎ¢²©id
+	 * @param int $sid æ”¶è—çš„å¾®åšid
 	 * @return array
 	 */
 	function add_to_favorites( $sid )
@@ -2153,17 +2014,15 @@ class WeiboClientV2
 		$this->id_format($sid);
 		$params = array();
 		$params['id'] = $sid;
-
 		return $this->oauth->post( 'favorites/create', $params );
 	}
-
 	/**
-	 * É¾³ıÎ¢²©ÊÕ²Ø¡£
+	 * åˆ é™¤å¾®åšæ”¶è—ã€‚
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/destroy favorites/destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/destroy favorites/destroy}
 	 * 
 	 * @access public
-	 * @param int $id ÒªÉ¾³ıµÄÊÕ²ØÎ¢²©ĞÅÏ¢ID.
+	 * @param int $id è¦åˆ é™¤çš„æ”¶è—å¾®åšä¿¡æ¯ID.
 	 * @return array
 	 */
 	function remove_from_favorites( $id )
@@ -2173,16 +2032,14 @@ class WeiboClientV2
 		$params['id'] = $id;
 		return $this->oauth->post( 'favorites/destroy', $params);
 	}
-
-
 	/**
-	 * ÅúÁ¿É¾³ıÎ¢²©ÊÕ²Ø¡£
+	 * æ‰¹é‡åˆ é™¤å¾®åšæ”¶è—ã€‚
 	 *
-	 * ÅúÁ¿É¾³ıµ±Ç°µÇÂ¼ÓÃ»§µÄÊÕ²Ø¡£³öÏÖÒì³£Ê±£¬·µ»ØHTTP400´íÎó¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/destroy_batch favorites/destroy_batch}
+	 * æ‰¹é‡åˆ é™¤å½“å‰ç™»å½•ç”¨æˆ·çš„æ”¶è—ã€‚å‡ºç°å¼‚å¸¸æ—¶ï¼Œè¿”å›HTTP400é”™è¯¯ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/destroy_batch favorites/destroy_batch}
 	 * 
 	 * @access public
-	 * @param mixed $fids ÓûÉ¾³ıµÄÒ»×éË½ĞÅID£¬ÓÃ°ë½Ç¶ººÅ¸ô¿ª£¬»òÕßÓÉÒ»×éÆÀÂÛID×é³ÉµÄÊı×é¡£×î¶à20¸ö¡£ÀıÈç£º"231101027525486630,201100826122315375"»òarray(231101027525486630,201100826122315375);
+	 * @param mixed $fids æ¬²åˆ é™¤çš„ä¸€ç»„ç§ä¿¡IDï¼Œç”¨åŠè§’é€—å·éš”å¼€ï¼Œæˆ–è€…ç”±ä¸€ç»„è¯„è®ºIDç»„æˆçš„æ•°ç»„ã€‚æœ€å¤š20ä¸ªã€‚ä¾‹å¦‚ï¼š"231101027525486630,201100826122315375"æˆ–array(231101027525486630,201100826122315375);
 	 * @return array
 	 */
 	function remove_from_favorites_batch( $fids )
@@ -2196,19 +2053,16 @@ class WeiboClientV2
 		} else {
 			$params['ids'] = $fids;
 		}
-
 		return $this->oauth->post( 'favorites/destroy_batch', $params);
 	}
-
-
 	/**
-	 * ¸üĞÂÒ»ÌõÊÕ²ØµÄÊÕ²Ø±êÇ©
+	 * æ›´æ–°ä¸€æ¡æ”¶è—çš„æ”¶è—æ ‡ç­¾
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/tags/update favorites/tags/update}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags/update favorites/tags/update}
 	 * 
 	 * @access public
-	 * @param int $id ĞèÒª¸üĞÂµÄÊÕ²ØID¡£
-	 * @param string $tags ĞèÒª¸üĞÂµÄ±êÇ©ÄÚÈİ£¬ÓÃ°ë½Ç¶ººÅ·Ö¸ô£¬×î¶à²»³¬¹ı2Ìõ¡£
+	 * @param int $id éœ€è¦æ›´æ–°çš„æ”¶è—IDã€‚
+	 * @param string $tags éœ€è¦æ›´æ–°çš„æ ‡ç­¾å†…å®¹ï¼Œç”¨åŠè§’é€—å·åˆ†éš”ï¼Œæœ€å¤šä¸è¶…è¿‡2æ¡ã€‚
 	 * @return array
 	 */
 	function favorites_tags_update( $id,  $tags )
@@ -2225,14 +2079,13 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'favorites/tags/update', $params );
 	}
-
 	/**
-	 * ¸üĞÂµ±Ç°µÇÂ¼ÓÃ»§ËùÓĞÊÕ²ØÏÂµÄÖ¸¶¨±êÇ©
+	 * æ›´æ–°å½“å‰ç™»å½•ç”¨æˆ·æ‰€æœ‰æ”¶è—ä¸‹çš„æŒ‡å®šæ ‡ç­¾
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/tags/update_batch favorites/tags/update_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags/update_batch favorites/tags/update_batch}
 	 *
-	 * @param int $tid  ĞèÒª¸üĞÂµÄ±êÇ©ID¡£±ØÌî
-	 * @param string $tag  ĞèÒª¸üĞÂµÄ±êÇ©ÄÚÈİ¡£±ØÌî
+	 * @param int $tid  éœ€è¦æ›´æ–°çš„æ ‡ç­¾IDã€‚å¿…å¡«
+	 * @param string $tag  éœ€è¦æ›´æ–°çš„æ ‡ç­¾å†…å®¹ã€‚å¿…å¡«
 	 * @return array
 	 */
 	function favorites_update_batch( $tid, $tag )
@@ -2242,14 +2095,13 @@ class WeiboClientV2
 		$params['tag'] = $tag;
 		return $this->oauth->post( 'favorites/tags/update_batch', $params);
 	}
-
 	/**
-	 * É¾³ıµ±Ç°µÇÂ¼ÓÃ»§ËùÓĞÊÕ²ØÏÂµÄÖ¸¶¨±êÇ©
+	 * åˆ é™¤å½“å‰ç™»å½•ç”¨æˆ·æ‰€æœ‰æ”¶è—ä¸‹çš„æŒ‡å®šæ ‡ç­¾
 	 *
-	 * É¾³ı±êÇ©ºó£¬¸ÃÓÃ»§ËùÓĞÊÕ²ØÖĞ£¬Ìí¼ÓÁË¸Ã±êÇ©µÄÊÕ²Ø¾ù½â³ıÓë¸Ã±êÇ©µÄ¹ØÁª¹ØÏµ
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/favorites/tags/destroy_batch favorites/tags/destroy_batch}
+	 * åˆ é™¤æ ‡ç­¾åï¼Œè¯¥ç”¨æˆ·æ‰€æœ‰æ”¶è—ä¸­ï¼Œæ·»åŠ äº†è¯¥æ ‡ç­¾çš„æ”¶è—å‡è§£é™¤ä¸è¯¥æ ‡ç­¾çš„å…³è”å…³ç³»
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/favorites/tags/destroy_batch favorites/tags/destroy_batch}
 	 *
-	 * @param int $tid  ĞèÒª¸üĞÂµÄ±êÇ©ID¡£±ØÌî
+	 * @param int $tid  éœ€è¦æ›´æ–°çš„æ ‡ç­¾IDã€‚å¿…å¡«
 	 * @return array
 	 */
 	function favorites_tags_destroy_batch( $tid )
@@ -2258,15 +2110,14 @@ class WeiboClientV2
 		$params['tid'] = $tid;
 		return $this->oauth->post( 'favorites/tags/destroy_batch', $params);
 	}
-
 	/**
-	 * »ñÈ¡Ä³ÓÃ»§µÄ»°Ìâ
+	 * è·å–æŸç”¨æˆ·çš„è¯é¢˜
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends trends}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends trends}
 	 * 
-	 * @param int $uid ²éÑ¯ÓÃ»§µÄID¡£Ä¬ÈÏÎªµ±Ç°ÓÃ»§¡£¿ÉÑ¡¡£
-	 * @param int $page Ö¸¶¨·µ»Ø½á¹ûµÄÒ³Âë¡£¿ÉÑ¡¡£
-	 * @param int $count µ¥Ò³´óĞ¡¡£È±Ê¡Öµ10¡£¿ÉÑ¡¡£
+	 * @param int $uid æŸ¥è¯¢ç”¨æˆ·çš„IDã€‚é»˜è®¤ä¸ºå½“å‰ç”¨æˆ·ã€‚å¯é€‰ã€‚
+	 * @param int $page æŒ‡å®šè¿”å›ç»“æœçš„é¡µç ã€‚å¯é€‰ã€‚
+	 * @param int $count å•é¡µå¤§å°ã€‚ç¼ºçœå€¼10ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function get_trends( $uid = NULL, $page = 1, $count = 10 )
@@ -2283,15 +2134,13 @@ class WeiboClientV2
 		$params['count'] = $count;
 		return $this->oauth->get( 'trends', $params );
 	}
-
-
 	/**
-	 * ÅĞ¶Ïµ±Ç°ÓÃ»§ÊÇ·ñ¹Ø×¢Ä³»°Ìâ
+	 * åˆ¤æ–­å½“å‰ç”¨æˆ·æ˜¯å¦å…³æ³¨æŸè¯é¢˜
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends/is_follow trends/is_follow}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/is_follow trends/is_follow}
 	 * 
 	 * @access public
-	 * @param string $trend_name »°Ìâ¹Ø¼ü×Ö¡£
+	 * @param string $trend_name è¯é¢˜å…³é”®å­—ã€‚
 	 * @return array
 	 */
 	function trends_is_follow( $trend_name )
@@ -2300,63 +2149,56 @@ class WeiboClientV2
 		$params['trend_name'] = $trend_name;
 		return $this->oauth->get( 'trends/is_follow', $params );
 	}
-
 	/**
-	 * ·µ»Ø×î½üÒ»Ğ¡Ê±ÄÚµÄÈÈÃÅ»°Ìâ
+	 * è¿”å›æœ€è¿‘ä¸€å°æ—¶å†…çš„çƒ­é—¨è¯é¢˜
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends/hourly trends/hourly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/hourly trends/hourly}
 	 * 
-	 * @param  int $base_app ÊÇ·ñ»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ¡£1±íÊ¾»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ£¬Ä¬ÈÏÎª0¡£¿ÉÑ¡¡£
+	 * @param  int $base_app æ˜¯å¦åŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ã€‚1è¡¨ç¤ºåŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ï¼Œé»˜è®¤ä¸º0ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function hourly_trends( $base_app = 0 )
 	{
 		$params = array();
 		$params['base_app'] = $base_app;
-
 		return $this->oauth->get( 'trends/hourly', $params );
 	}
-
 	/**
-	 * ·µ»Ø×î½üÒ»ÌìÄÚµÄÈÈÃÅ»°Ìâ
+	 * è¿”å›æœ€è¿‘ä¸€å¤©å†…çš„çƒ­é—¨è¯é¢˜
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends/daily trends/daily}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/daily trends/daily}
 	 * 
-	 * @param int $base_app ÊÇ·ñ»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ¡£1±íÊ¾»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ£¬Ä¬ÈÏÎª0¡£¿ÉÑ¡¡£
+	 * @param int $base_app æ˜¯å¦åŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ã€‚1è¡¨ç¤ºåŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ï¼Œé»˜è®¤ä¸º0ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function daily_trends( $base_app = 0 )
 	{
 		$params = array();
 		$params['base_app'] = $base_app;
-
 		return $this->oauth->get( 'trends/daily', $params );
 	}
-
 	/**
-	 * ·µ»Ø×î½üÒ»ÖÜÄÚµÄÈÈÃÅ»°Ìâ
+	 * è¿”å›æœ€è¿‘ä¸€å‘¨å†…çš„çƒ­é—¨è¯é¢˜
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends/weekly trends/weekly}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/weekly trends/weekly}
 	 * 
 	 * @access public
-	 * @param int $base_app ÊÇ·ñ»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ¡£1±íÊ¾»ùÓÚµ±Ç°Ó¦ÓÃÀ´»ñÈ¡Êı¾İ£¬Ä¬ÈÏÎª0¡£¿ÉÑ¡¡£
+	 * @param int $base_app æ˜¯å¦åŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ã€‚1è¡¨ç¤ºåŸºäºå½“å‰åº”ç”¨æ¥è·å–æ•°æ®ï¼Œé»˜è®¤ä¸º0ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function weekly_trends( $base_app = 0 )
 	{
 		$params = array();
 		$params['base_app'] = $base_app;
-
 		return $this->oauth->get( 'trends/weekly', $params );
 	}
-
 	/**
-	 * ¹Ø×¢Ä³»°Ìâ
+	 * å…³æ³¨æŸè¯é¢˜
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends/follow trends/follow}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/follow trends/follow}
 	 * 
 	 * @access public
-	 * @param string $trend_name Òª¹Ø×¢µÄ»°Ìâ¹Ø¼ü´Ê¡£
+	 * @param string $trend_name è¦å…³æ³¨çš„è¯é¢˜å…³é”®è¯ã€‚
 	 * @return array
 	 */
 	function follow_trends( $trend_name )
@@ -2365,34 +2207,30 @@ class WeiboClientV2
 		$params['trend_name'] = $trend_name;
 		return $this->oauth->post( 'trends/follow', $params );
 	}
-
 	/**
-	 * È¡Ïû¶ÔÄ³»°ÌâµÄ¹Ø×¢
+	 * å–æ¶ˆå¯¹æŸè¯é¢˜çš„å…³æ³¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/trends/destroy trends/destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/trends/destroy trends/destroy}
 	 * 
 	 * @access public
-	 * @param int $tid ÒªÈ¡Ïû¹Ø×¢µÄ»°ÌâID¡£
+	 * @param int $tid è¦å–æ¶ˆå…³æ³¨çš„è¯é¢˜IDã€‚
 	 * @return array
 	 */
 	function unfollow_trends( $tid )
 	{
 		$this->id_format($tid);
-
 		$params = array();
 		$params['trend_id'] = $tid;
-
 		return $this->oauth->post( 'trends/destroy', $params );
 	}
-
 	/**
-	 * ·µ»ØÖ¸¶¨ÓÃ»§µÄ±êÇ©ÁĞ±í
+	 * è¿”å›æŒ‡å®šç”¨æˆ·çš„æ ‡ç­¾åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/tags tags}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags tags}
 	 * 
-	 * @param int $uid ²éÑ¯ÓÃ»§µÄID¡£Ä¬ÈÏÎªµ±Ç°ÓÃ»§¡£¿ÉÑ¡¡£
-	 * @param int $page Ö¸¶¨·µ»Ø½á¹ûµÄÒ³Âë¡£¿ÉÑ¡¡£
-	 * @param int $count µ¥Ò³´óĞ¡¡£È±Ê¡Öµ20£¬×î´óÖµ200¡£¿ÉÑ¡¡£
+	 * @param int $uid æŸ¥è¯¢ç”¨æˆ·çš„IDã€‚é»˜è®¤ä¸ºå½“å‰ç”¨æˆ·ã€‚å¯é€‰ã€‚
+	 * @param int $page æŒ‡å®šè¿”å›ç»“æœçš„é¡µç ã€‚å¯é€‰ã€‚
+	 * @param int $count å•é¡µå¤§å°ã€‚ç¼ºçœå€¼20ï¼Œæœ€å¤§å€¼200ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function get_tags( $uid = NULL, $page = 1, $count = 20 )
@@ -2409,13 +2247,12 @@ class WeiboClientV2
 		$params['count'] = $count;
 		return $this->oauth->get( 'tags', $params );
 	}
-
 	/**
-	 * ÅúÁ¿»ñÈ¡ÓÃ»§µÄ±êÇ©ÁĞ±í
+	 * æ‰¹é‡è·å–ç”¨æˆ·çš„æ ‡ç­¾åˆ—è¡¨
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/tags/tags_batch tags/tags_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/tags_batch tags/tags_batch}
 	 * 
-	 * @param  string $uids Òª»ñÈ¡±êÇ©µÄÓÃ»§ID¡£×î´ó20£¬¶ººÅ·Ö¸ô¡£±ØÌî
+	 * @param  string $uids è¦è·å–æ ‡ç­¾çš„ç”¨æˆ·IDã€‚æœ€å¤§20ï¼Œé€—å·åˆ†éš”ã€‚å¿…å¡«
 	 * @return array
 	 */
 	function get_tags_batch( $uids )
@@ -2431,14 +2268,13 @@ class WeiboClientV2
 		}
 		return $this->oauth->get( 'tags/tags_batch', $params );
 	}
-
 	/**
-	 * ·µ»ØÓÃ»§¸ĞĞËÈ¤µÄ±êÇ©
+	 * è¿”å›ç”¨æˆ·æ„Ÿå…´è¶£çš„æ ‡ç­¾
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/tags/suggestions tags/suggestions}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/suggestions tags/suggestions}
 	 * 
 	 * @access public
-	 * @param int $count µ¥Ò³´óĞ¡¡£È±Ê¡Öµ10£¬×î´óÖµ10¡£¿ÉÑ¡¡£
+	 * @param int $count å•é¡µå¤§å°ã€‚ç¼ºçœå€¼10ï¼Œæœ€å¤§å€¼10ã€‚å¯é€‰ã€‚
 	 * @return array
 	 */
 	function get_suggest_tags( $count = 10)
@@ -2447,14 +2283,13 @@ class WeiboClientV2
 		$params['count'] = intval($count);
 		return $this->oauth->get( 'tags/suggestions', $params );
 	}
-
 	/**
-	 * Îªµ±Ç°µÇÂ¼ÓÃ»§Ìí¼ÓĞÂµÄÓÃ»§±êÇ©
+	 * ä¸ºå½“å‰ç™»å½•ç”¨æˆ·æ·»åŠ æ–°çš„ç”¨æˆ·æ ‡ç­¾
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/tags/create tags/create}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/create tags/create}
 	 * 
 	 * @access public
-	 * @param mixed $tags Òª´´½¨µÄÒ»×é±êÇ©£¬Ã¿¸ö±êÇ©µÄ³¤¶È²»¿É³¬¹ı7¸öºº×Ö£¬14¸ö°ë½Ç×Ö·û¡£¶à¸ö±êÇ©Ö®¼äÓÃ¶ººÅ¼ä¸ô£¬»òÓÉ¶à¸ö±êÇ©¹¹³ÉµÄÊı×é¡£Èç£º"abc,drf,efgh,tt"»òarray("abc", "drf", "efgh", "tt")
+	 * @param mixed $tags è¦åˆ›å»ºçš„ä¸€ç»„æ ‡ç­¾ï¼Œæ¯ä¸ªæ ‡ç­¾çš„é•¿åº¦ä¸å¯è¶…è¿‡7ä¸ªæ±‰å­—ï¼Œ14ä¸ªåŠè§’å­—ç¬¦ã€‚å¤šä¸ªæ ‡ç­¾ä¹‹é—´ç”¨é€—å·é—´éš”ï¼Œæˆ–ç”±å¤šä¸ªæ ‡ç­¾æ„æˆçš„æ•°ç»„ã€‚å¦‚ï¼š"abc,drf,efgh,tt"æˆ–array("abc", "drf", "efgh", "tt")
 	 * @return array
 	 */
 	function add_tags( $tags )
@@ -2467,14 +2302,13 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'tags/create', $params);
 	}
-
 	/**
-	 * É¾³ı±êÇ©
+	 * åˆ é™¤æ ‡ç­¾
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/tags/destroy tags/destroy}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/destroy tags/destroy}
 	 * 
 	 * @access public
-	 * @param int $tag_id ±êÇ©ID£¬±ØÌî²ÎÊı
+	 * @param int $tag_id æ ‡ç­¾IDï¼Œå¿…å¡«å‚æ•°
 	 * @return array
 	 */
 	function delete_tag( $tag_id )
@@ -2483,14 +2317,13 @@ class WeiboClientV2
 		$params['tag_id'] = $tag_id;
 		return $this->oauth->post( 'tags/destroy', $params );
 	}
-
 	/**
-	 * ÅúÁ¿É¾³ı±êÇ©
+	 * æ‰¹é‡åˆ é™¤æ ‡ç­¾
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/tags/destroy_batch tags/destroy_batch}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/tags/destroy_batch tags/destroy_batch}
 	 * 
 	 * @access public
-	 * @param mixed $ids ±ØÑ¡²ÎÊı£¬ÒªÉ¾³ıµÄtag id£¬¶à¸öidÓÃ°ë½Ç¶ººÅ·Ö¸î£¬×î¶à10¸ö¡£»òÓÉ¶à¸ötag id¹¹³ÉµÄÊı×é¡£Èç£º¡°553,554,555"»òarray(553, 554, 555)
+	 * @param mixed $ids å¿…é€‰å‚æ•°ï¼Œè¦åˆ é™¤çš„tag idï¼Œå¤šä¸ªidç”¨åŠè§’é€—å·åˆ†å‰²ï¼Œæœ€å¤š10ä¸ªã€‚æˆ–ç”±å¤šä¸ªtag idæ„æˆçš„æ•°ç»„ã€‚å¦‚ï¼šâ€œ553,554,555"æˆ–array(553, 554, 555)
 	 * @return array
 	 */
 	function delete_tags( $ids )
@@ -2503,14 +2336,12 @@ class WeiboClientV2
 		}
 		return $this->oauth->post( 'tags/destroy_batch', $params );
 	}
-
-
 	/**
-	 * ÑéÖ¤êÇ³ÆÊÇ·ñ¿ÉÓÃ£¬²¢¸øÓè½¨ÒéêÇ³Æ
+	 * éªŒè¯æ˜µç§°æ˜¯å¦å¯ç”¨ï¼Œå¹¶ç»™äºˆå»ºè®®æ˜µç§°
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/register/verify_nickname register/verify_nickname}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/register/verify_nickname register/verify_nickname}
 	 *
-	 * @param string $nickname ĞèÒªÑéÖ¤µÄêÇ³Æ¡£4-20¸ö×Ö·û£¬Ö§³ÖÖĞÓ¢ÎÄ¡¢Êı×Ö¡¢"_"»ò¼õºÅ¡£±ØÌî
+	 * @param string $nickname éœ€è¦éªŒè¯çš„æ˜µç§°ã€‚4-20ä¸ªå­—ç¬¦ï¼Œæ”¯æŒä¸­è‹±æ–‡ã€æ•°å­—ã€"_"æˆ–å‡å·ã€‚å¿…å¡«
 	 * @return array
 	 */
 	function verify_nickname( $nickname )
@@ -2519,16 +2350,13 @@ class WeiboClientV2
 		$params['nickname'] = $nickname;
 		return $this->oauth->get( 'register/verify_nickname', $params );
 	}
-
-
-
 	/**
-	 * ËÑË÷ÓÃ»§Ê±µÄÁªÏëËÑË÷½¨Òé
+	 * æœç´¢ç”¨æˆ·æ—¶çš„è”æƒ³æœç´¢å»ºè®®
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/suggestions/users search/suggestions/users}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/users search/suggestions/users}
 	 *
-	 * @param string $q ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë×öURLencoding¡£±ØÌî,ÖĞ¼ä×îºÃ²»Òª³öÏÖ¿Õ¸ñ
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
+	 * @param string $q æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»åšURLencodingã€‚å¿…å¡«,ä¸­é—´æœ€å¥½ä¸è¦å‡ºç°ç©ºæ ¼
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function search_users( $q,  $count = 10 )
@@ -2538,15 +2366,13 @@ class WeiboClientV2
 		$params['count'] = $count;
 		return $this->oauth->get( 'search/suggestions/users',  $params );
 	}
-
-
 	/**
-	 * ËÑË÷Î¢²©Ê±µÄÁªÏëËÑË÷½¨Òé
+	 * æœç´¢å¾®åšæ—¶çš„è”æƒ³æœç´¢å»ºè®®
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/suggestions/statuses search/suggestions/statuses}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/statuses search/suggestions/statuses}
 	 *
-	 * @param string $q ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë×öURLencoding¡£±ØÌî
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
+	 * @param string $q æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»åšURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function search_statuses( $q,  $count = 10)
@@ -2556,16 +2382,14 @@ class WeiboClientV2
 		$params['count'] = $count;
 		return $this->oauth->get( 'search/suggestions/statuses', $params );
 	}
-
-
 	/**
-	 * ËÑË÷Ñ§Ğ£Ê±µÄÁªÏëËÑË÷½¨Òé
+	 * æœç´¢å­¦æ ¡æ—¶çš„è”æƒ³æœç´¢å»ºè®®
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/suggestions/schools search/suggestions/schools}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/schools search/suggestions/schools}
 	 *
-	 * @param string $q ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë×öURLencoding¡£±ØÌî
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
-	 * @param int type Ñ§Ğ£ÀàĞÍ£¬0£ºÈ«²¿¡¢1£º´óÑ§¡¢2£º¸ßÖĞ¡¢3£ºÖĞ×¨¼¼Ğ£¡¢4£º³õÖĞ¡¢5£ºĞ¡Ñ§£¬Ä¬ÈÏÎª0¡£Ñ¡Ìî
+	 * @param string $q æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»åšURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 * @param int type å­¦æ ¡ç±»å‹ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šå¤§å­¦ã€2ï¼šé«˜ä¸­ã€3ï¼šä¸­ä¸“æŠ€æ ¡ã€4ï¼šåˆä¸­ã€5ï¼šå°å­¦ï¼Œé»˜è®¤ä¸º0ã€‚é€‰å¡«
 	 * @return array
 	 */
 	function search_schools( $q,  $count = 10,  $type = 1)
@@ -2576,14 +2400,13 @@ class WeiboClientV2
 		$params['type'] = $type;
 		return $this->oauth->get( 'search/suggestions/schools', $params );
 	}
-
 	/**
-	 * ËÑË÷¹«Ë¾Ê±µÄÁªÏëËÑË÷½¨Òé
+	 * æœç´¢å…¬å¸æ—¶çš„è”æƒ³æœç´¢å»ºè®®
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/suggestions/companies search/suggestions/companies}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/companies search/suggestions/companies}
 	 *
-	 * @param string $q ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë×öURLencoding¡£±ØÌî
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
+	 * @param string $q æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»åšURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function search_companies( $q, $count = 10)
@@ -2593,17 +2416,15 @@ class WeiboClientV2
 		$params['count'] = $count;
 		return $this->oauth->get( 'search/suggestions/companies', $params );
 	}
-
-
 	/**
-	 * £ÀÓÃ»§Ê±µÄÁªÏë½¨Òé
+	 * ï¼ ç”¨æˆ·æ—¶çš„è”æƒ³å»ºè®®
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/suggestions/at_users search/suggestions/at_users}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/suggestions/at_users search/suggestions/at_users}
 	 *
-	 * @param string $q ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë×öURLencoding¡£±ØÌî
-	 * @param int $count ·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
-	 * @param int $type ÁªÏëÀàĞÍ£¬0£º¹Ø×¢¡¢1£º·ÛË¿¡£±ØÌî
-	 * @param int $range ÁªÏë·¶Î§£¬0£ºÖ»ÁªÏë¹Ø×¢ÈË¡¢1£ºÖ»ÁªÏë¹Ø×¢ÈËµÄ±¸×¢¡¢2£ºÈ«²¿£¬Ä¬ÈÏÎª2¡£Ñ¡Ìî
+	 * @param string $q æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»åšURLencodingã€‚å¿…å¡«
+	 * @param int $count è¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 * @param int $type è”æƒ³ç±»å‹ï¼Œ0ï¼šå…³æ³¨ã€1ï¼šç²‰ä¸ã€‚å¿…å¡«
+	 * @param int $range è”æƒ³èŒƒå›´ï¼Œ0ï¼šåªè”æƒ³å…³æ³¨äººã€1ï¼šåªè”æƒ³å…³æ³¨äººçš„å¤‡æ³¨ã€2ï¼šå…¨éƒ¨ï¼Œé»˜è®¤ä¸º2ã€‚é€‰å¡«
 	 * @return array
 	 */
 	function search_at_users( $q, $count = 10, $type=0, $range = 2)
@@ -2615,108 +2436,96 @@ class WeiboClientV2
 		$params['range'] = $range;
 		return $this->oauth->get( 'search/suggestions/at_users', $params );
 	}
-
-
 	
-
-
 	/**
-	 * ËÑË÷ÓëÖ¸¶¨µÄÒ»¸ö»ò¶à¸öÌõ¼şÏàÆ¥ÅäµÄÎ¢²©
+	 * æœç´¢ä¸æŒ‡å®šçš„ä¸€ä¸ªæˆ–å¤šä¸ªæ¡ä»¶ç›¸åŒ¹é…çš„å¾®åš
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/statuses search/statuses}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/statuses search/statuses}
 	 *
-	 * @param array $query ËÑË÷Ñ¡Ïî¡£¸ñÊ½£ºarray('key0'=>'value0', 'key1'=>'value1', ....)¡£Ö§³ÖµÄkey:
-	 *  - q				string	ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë½øĞĞURLencode¡£
-	 *  - filter_ori	int		¹ıÂËÆ÷£¬ÊÇ·ñÎªÔ­´´£¬0£ºÈ«²¿¡¢1£ºÔ­´´¡¢2£º×ª·¢£¬Ä¬ÈÏÎª0¡£
-	 *  - filter_pic	int		¹ıÂËÆ÷¡£ÊÇ·ñ°üº¬Í¼Æ¬£¬0£ºÈ«²¿¡¢1£º°üº¬¡¢2£º²»°üº¬£¬Ä¬ÈÏÎª0¡£
-	 *  - fuid			int		ËÑË÷µÄÎ¢²©×÷ÕßµÄÓÃ»§UID¡£
-	 *  - province		int		ËÑË÷µÄÊ¡·İ·¶Î§£¬Ê¡·İID¡£
-	 *  - city			int		ËÑË÷µÄ³ÇÊĞ·¶Î§£¬³ÇÊĞID¡£
-	 *  - starttime		int		¿ªÊ¼Ê±¼ä£¬UnixÊ±¼ä´Á¡£
-	 *  - endtime		int		½áÊøÊ±¼ä£¬UnixÊ±¼ä´Á¡£
-	 *  - count			int		µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
-	 *  - page			int		·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 *  - needcount		boolean	·µ»Ø½á¹ûÖĞÊÇ·ñ°üº¬·µ»Ø¼ÇÂ¼Êı£¬true£º·µ»Ø¡¢false£º²»·µ»Ø£¬Ä¬ÈÏÎªfalse¡£
-	 *  - base_app		int		ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
-	 * needcount²ÎÊı²»Í¬£¬»áµ¼ÖÂÏàÓ¦µÄ·µ»ØÖµ½á¹¹²»Í¬
-	 * ÒÔÉÏ²ÎÊıÈ«²¿Ñ¡Ìî
+	 * @param array $query æœç´¢é€‰é¡¹ã€‚æ ¼å¼ï¼šarray('key0'=>'value0', 'key1'=>'value1', ....)ã€‚æ”¯æŒçš„key:
+	 *  - q				string	æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»è¿›è¡ŒURLencodeã€‚
+	 *  - filter_ori	int		è¿‡æ»¤å™¨ï¼Œæ˜¯å¦ä¸ºåŸåˆ›ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŸåˆ›ã€2ï¼šè½¬å‘ï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - filter_pic	int		è¿‡æ»¤å™¨ã€‚æ˜¯å¦åŒ…å«å›¾ç‰‡ï¼Œ0ï¼šå…¨éƒ¨ã€1ï¼šåŒ…å«ã€2ï¼šä¸åŒ…å«ï¼Œé»˜è®¤ä¸º0ã€‚
+	 *  - fuid			int		æœç´¢çš„å¾®åšä½œè€…çš„ç”¨æˆ·UIDã€‚
+	 *  - province		int		æœç´¢çš„çœä»½èŒƒå›´ï¼Œçœä»½IDã€‚
+	 *  - city			int		æœç´¢çš„åŸå¸‚èŒƒå›´ï¼ŒåŸå¸‚IDã€‚
+	 *  - starttime		int		å¼€å§‹æ—¶é—´ï¼ŒUnixæ—¶é—´æˆ³ã€‚
+	 *  - endtime		int		ç»“æŸæ—¶é—´ï¼ŒUnixæ—¶é—´æˆ³ã€‚
+	 *  - count			int		å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 *  - page			int		è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - needcount		boolean	è¿”å›ç»“æœä¸­æ˜¯å¦åŒ…å«è¿”å›è®°å½•æ•°ï¼Œtrueï¼šè¿”å›ã€falseï¼šä¸è¿”å›ï¼Œé»˜è®¤ä¸ºfalseã€‚
+	 *  - base_app		int		æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * needcountå‚æ•°ä¸åŒï¼Œä¼šå¯¼è‡´ç›¸åº”çš„è¿”å›å€¼ç»“æ„ä¸åŒ
+	 * ä»¥ä¸Šå‚æ•°å…¨éƒ¨é€‰å¡«
 	 * @return array
 	 */
 	function search_statuses_high( $query )
 	{
 		return $this->oauth->get( 'search/statuses', $query );
 	}
-
-
-
 	/**
-	 * Í¨¹ı¹Ø¼ü´ÊËÑË÷ÓÃ»§
+	 * é€šè¿‡å…³é”®è¯æœç´¢ç”¨æˆ·
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/search/users search/users}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/search/users search/users}
 	 *
-	 * @param array $query ËÑË÷Ñ¡Ïî¡£¸ñÊ½£ºarray('key0'=>'value0', 'key1'=>'value1', ....)¡£Ö§³ÖµÄkey:
-	 *  - q			string	ËÑË÷µÄ¹Ø¼ü×Ö£¬±ØĞë½øĞĞURLencode¡£
-	 *  - snick		int		ËÑË÷·¶Î§ÊÇ·ñ°üº¬êÇ³Æ£¬0£º²»°üº¬¡¢1£º°üº¬¡£
-	 *  - sdomain	int		ËÑË÷·¶Î§ÊÇ·ñ°üº¬¸öĞÔÓòÃû£¬0£º²»°üº¬¡¢1£º°üº¬¡£
-	 *  - sintro	int		ËÑË÷·¶Î§ÊÇ·ñ°üº¬¼ò½é£¬0£º²»°üº¬¡¢1£º°üº¬¡£
-	 *  - stag		int		ËÑË÷·¶Î§ÊÇ·ñ°üº¬±êÇ©£¬0£º²»°üº¬¡¢1£º°üº¬¡£
-	 *  - province	int		ËÑË÷µÄÊ¡·İ·¶Î§£¬Ê¡·İID¡£
-	 *  - city		int		ËÑË÷µÄ³ÇÊĞ·¶Î§£¬³ÇÊĞID¡£
-	 *  - gender	string	ËÑË÷µÄĞÔ±ğ·¶Î§£¬m£ºÄĞ¡¢f£ºÅ®¡£
-	 *  - comorsch	string	ËÑË÷µÄ¹«Ë¾Ñ§Ğ£Ãû³Æ¡£
-	 *  - sort		int		ÅÅĞò·½Ê½£¬1£º°´¸üĞÂÊ±¼ä¡¢2£º°´·ÛË¿Êı£¬Ä¬ÈÏÎª1¡£
-	 *  - count		int		µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
-	 *  - page		int		·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 *  - base_app	int		ÊÇ·ñÖ»»ñÈ¡µ±Ç°Ó¦ÓÃµÄÊı¾İ¡£0Îª·ñ£¨ËùÓĞÊı¾İ£©£¬1ÎªÊÇ£¨½öµ±Ç°Ó¦ÓÃ£©£¬Ä¬ÈÏÎª0¡£
-	 * ÒÔÉÏËùÓĞ²ÎÊıÈ«²¿Ñ¡Ìî
+	 * @param array $query æœç´¢é€‰é¡¹ã€‚æ ¼å¼ï¼šarray('key0'=>'value0', 'key1'=>'value1', ....)ã€‚æ”¯æŒçš„key:
+	 *  - q			string	æœç´¢çš„å…³é”®å­—ï¼Œå¿…é¡»è¿›è¡ŒURLencodeã€‚
+	 *  - snick		int		æœç´¢èŒƒå›´æ˜¯å¦åŒ…å«æ˜µç§°ï¼Œ0ï¼šä¸åŒ…å«ã€1ï¼šåŒ…å«ã€‚
+	 *  - sdomain	int		æœç´¢èŒƒå›´æ˜¯å¦åŒ…å«ä¸ªæ€§åŸŸåï¼Œ0ï¼šä¸åŒ…å«ã€1ï¼šåŒ…å«ã€‚
+	 *  - sintro	int		æœç´¢èŒƒå›´æ˜¯å¦åŒ…å«ç®€ä»‹ï¼Œ0ï¼šä¸åŒ…å«ã€1ï¼šåŒ…å«ã€‚
+	 *  - stag		int		æœç´¢èŒƒå›´æ˜¯å¦åŒ…å«æ ‡ç­¾ï¼Œ0ï¼šä¸åŒ…å«ã€1ï¼šåŒ…å«ã€‚
+	 *  - province	int		æœç´¢çš„çœä»½èŒƒå›´ï¼Œçœä»½IDã€‚
+	 *  - city		int		æœç´¢çš„åŸå¸‚èŒƒå›´ï¼ŒåŸå¸‚IDã€‚
+	 *  - gender	string	æœç´¢çš„æ€§åˆ«èŒƒå›´ï¼Œmï¼šç”·ã€fï¼šå¥³ã€‚
+	 *  - comorsch	string	æœç´¢çš„å…¬å¸å­¦æ ¡åç§°ã€‚
+	 *  - sort		int		æ’åºæ–¹å¼ï¼Œ1ï¼šæŒ‰æ›´æ–°æ—¶é—´ã€2ï¼šæŒ‰ç²‰ä¸æ•°ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - count		int		å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
+	 *  - page		int		è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 *  - base_app	int		æ˜¯å¦åªè·å–å½“å‰åº”ç”¨çš„æ•°æ®ã€‚0ä¸ºå¦ï¼ˆæ‰€æœ‰æ•°æ®ï¼‰ï¼Œ1ä¸ºæ˜¯ï¼ˆä»…å½“å‰åº”ç”¨ï¼‰ï¼Œé»˜è®¤ä¸º0ã€‚
+	 * ä»¥ä¸Šæ‰€æœ‰å‚æ•°å…¨éƒ¨é€‰å¡«
 	 * @return array
 	 */
 	function search_users_keywords( $query )
 	{
 		return $this->oauth->get( 'search/users', $query );
 	}
-
-
-
 	/**
-	 * »ñÈ¡ÏµÍ³ÍÆ¼öÓÃ»§
+	 * è·å–ç³»ç»Ÿæ¨èç”¨æˆ·
 	 *
-	 * ·µ»ØÏµÍ³ÍÆ¼öµÄÓÃ»§ÁĞ±í¡£
-	 * <br />¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/suggestions/users/hot suggestions/users/hot}
+	 * è¿”å›ç³»ç»Ÿæ¨èçš„ç”¨æˆ·åˆ—è¡¨ã€‚
+	 * <br />å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/hot suggestions/users/hot}
 	 * 
 	 * @access public
-	 * @param string $category ·ÖÀà£¬¿ÉÑ¡²ÎÊı£¬·µ»ØÄ³Ò»Àà±ğµÄÍÆ¼öÓÃ»§£¬Ä¬ÈÏÎª default¡£Èç¹û²»ÔÚÒÔÏÂ·ÖÀàÖĞ£¬·µ»Ø¿ÕÁĞ±í£º<br />
-	 *  - default:ÈËÆø¹Ø×¢
-	 *  - ent:Ó°ÊÓÃûĞÇ
-	 *  - hk_famous:¸ÛÌ¨ÃûÈË
-	 *  - model:Ä£ÌØ
-	 *  - cooking:ÃÀÊ³&½¡¿µ
-	 *  - sport:ÌåÓıÃûÈË
-	 *  - finance:ÉÌ½çÃûÈË
-	 *  - tech:IT»¥ÁªÍø
-	 *  - singer:¸èÊÖ
-	 *  - writer£º×÷¼Ò
-	 *  - moderator:Ö÷³ÖÈË
-	 *  - medium:Ã½Ìå×Ü±à
-	 *  - stockplayer:³´¹É¸ßÊÖ
+	 * @param string $category åˆ†ç±»ï¼Œå¯é€‰å‚æ•°ï¼Œè¿”å›æŸä¸€ç±»åˆ«çš„æ¨èç”¨æˆ·ï¼Œé»˜è®¤ä¸º defaultã€‚å¦‚æœä¸åœ¨ä»¥ä¸‹åˆ†ç±»ä¸­ï¼Œè¿”å›ç©ºåˆ—è¡¨ï¼š<br />
+	 *  - default:äººæ°”å…³æ³¨
+	 *  - ent:å½±è§†åæ˜Ÿ
+	 *  - hk_famous:æ¸¯å°åäºº
+	 *  - model:æ¨¡ç‰¹
+	 *  - cooking:ç¾é£Ÿ&å¥åº·
+	 *  - sport:ä½“è‚²åäºº
+	 *  - finance:å•†ç•Œåäºº
+	 *  - tech:ITäº’è”ç½‘
+	 *  - singer:æ­Œæ‰‹
+	 *  - writerï¼šä½œå®¶
+	 *  - moderator:ä¸»æŒäºº
+	 *  - medium:åª’ä½“æ€»ç¼–
+	 *  - stockplayer:ç‚’è‚¡é«˜æ‰‹
 	 * @return array
 	 */
 	function hot_users( $category = "default" )
 	{
 		$params = array();
 		$params['category'] = $category;
-
 		return $this->oauth->get( 'suggestions/users/hot', $params );
 	}
-
 	/**
-	 * »ñÈ¡ÓÃ»§¿ÉÄÜ¸ĞĞËÈ¤µÄÈË
+	 * è·å–ç”¨æˆ·å¯èƒ½æ„Ÿå…´è¶£çš„äºº
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/suggestions/users/may_interested suggestions/users/may_interested}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/may_interested suggestions/users/may_interested}
 	 * 
 	 * @access public
-	 * @param int $page ·µ»Ø½á¹ûµÄÒ³Âë£¬Ä¬ÈÏÎª1¡£
-	 * @param int $count µ¥Ò³·µ»ØµÄ¼ÇÂ¼ÌõÊı£¬Ä¬ÈÏÎª10¡£
+	 * @param int $page è¿”å›ç»“æœçš„é¡µç ï¼Œé»˜è®¤ä¸º1ã€‚
+	 * @param int $count å•é¡µè¿”å›çš„è®°å½•æ¡æ•°ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 * @ignore
 	 */
@@ -2727,15 +2536,14 @@ class WeiboClientV2
 		$params['count'] = $count;
 		return $this->oauth->get( 'suggestions/users/may_interested', $params);
 	}
-
 	/**
-	 * ¸ù¾İÒ»¶ÎÎ¢²©ÕıÎÄÍÆ¼öÏà¹ØÎ¢²©ÓÃ»§¡£ 
+	 * æ ¹æ®ä¸€æ®µå¾®åšæ­£æ–‡æ¨èç›¸å…³å¾®åšç”¨æˆ·ã€‚ 
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/suggestions/users/by_status suggestions/users/by_status}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/by_status suggestions/users/by_status}
 	 * 
 	 * @access public
-	 * @param string $content Î¢²©ÕıÎÄÄÚÈİ¡£
-	 * @param int $num ·µ»Ø½á¹ûÊıÄ¿£¬Ä¬ÈÏÎª10¡£
+	 * @param string $content å¾®åšæ­£æ–‡å†…å®¹ã€‚
+	 * @param int $num è¿”å›ç»“æœæ•°ç›®ï¼Œé»˜è®¤ä¸º10ã€‚
 	 * @return array
 	 */
 	function suggestions_users_by_status( $content, $num = 10 )
@@ -2745,14 +2553,13 @@ class WeiboClientV2
 		$params['num'] = $num;
 		return $this->oauth->get( 'suggestions/users/by_status', $params);
 	}
-
 	/**
-	 * ÈÈÃÅÊÕ²Ø
+	 * çƒ­é—¨æ”¶è—
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/suggestions/favorites/hot suggestions/favorites/hot}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/favorites/hot suggestions/favorites/hot}
 	 *
-	 * @param int $count Ã¿Ò³·µ»Ø½á¹ûÊı£¬Ä¬ÈÏ20¡£Ñ¡Ìî
-	 * @param int $page ·µ»ØÒ³Âë£¬Ä¬ÈÏ1¡£Ñ¡Ìî
+	 * @param int $count æ¯é¡µè¿”å›ç»“æœæ•°ï¼Œé»˜è®¤20ã€‚é€‰å¡«
+	 * @param int $page è¿”å›é¡µç ï¼Œé»˜è®¤1ã€‚é€‰å¡«
 	 * @return array
 	 */
 	function hot_favorites( $page = 1, $count = 20 )
@@ -2762,13 +2569,12 @@ class WeiboClientV2
 		$params['page'] = $page;
 		return $this->oauth->get( 'suggestions/favorites/hot', $params);
 	}
-
 	/**
-	 * °ÑÄ³ÈË±êÊ¶Îª²»¸ĞĞËÈ¤µÄÈË
+	 * æŠŠæŸäººæ ‡è¯†ä¸ºä¸æ„Ÿå…´è¶£çš„äºº
 	 *
-	 * ¶ÔÓ¦API£º{@link http://open.weibo.com/wiki/2/suggestions/users/not_interested suggestions/users/not_interested}
+	 * å¯¹åº”APIï¼š{@link http://open.weibo.com/wiki/2/suggestions/users/not_interested suggestions/users/not_interested}
 	 *
-	 * @param int $uid ²»¸ĞĞËÈ¤µÄÓÃ»§µÄUID¡£
+	 * @param int $uid ä¸æ„Ÿå…´è¶£çš„ç”¨æˆ·çš„UIDã€‚
 	 * @return array
 	 */
 	function put_users_not_interested( $uid )
@@ -2777,11 +2583,7 @@ class WeiboClientV2
 		$params['uid'] = $uid;
 		return $this->oauth->post( 'suggestions/users/not_interested', $params);
 	}
-
-
-
 	// =========================================
-
 	/**
 	 * @ignore
 	 */
@@ -2789,10 +2591,8 @@ class WeiboClientV2
 	{
 		if( $page ) $params['page'] = $page;
 		if( $count ) $params['count'] = $count;
-
 		return $this->oauth->get($url, $params );
 	}
-
 	/**
 	 * @ignore
 	 */
@@ -2801,19 +2601,14 @@ class WeiboClientV2
 		if( $page ) $params['page'] = $page;
 		if( $count ) $params['count'] = $count;
 		if( $cursor )$params['cursor'] =  $cursor;
-
 		if( $post ) $method = 'post';
 		else $method = 'get';
-
 		if ( $uid_or_name !== NULL ) {
 			$this->id_format($uid_or_name);
 			$params['id'] = $uid_or_name;
 		}
-
 		return $this->oauth->$method($url, $params );
-
 	}
-
 	/**
 	 * @ignore
 	 */
@@ -2824,5 +2619,5 @@ class WeiboClientV2
 			$id = trim($id);
 		}
 	}
-
 }
+

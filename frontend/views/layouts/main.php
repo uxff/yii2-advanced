@@ -47,6 +47,8 @@ AppAsset::register($this);
             'items' =>[
                 ['label' => 'Contact', 'url' => ['/site/contact']],
                 ['label' => 'Customer contact', 'url' => ['/customer_contact/index']],
+                ['label' => 'Weibo Grasp mining', 'url' => ['/grasp/mining']],
+                ['label' => 'Weibo Grasp put', 'url' => ['/grasp/put']],
             ],
         ],
         ['label' => 'MapTopo', 

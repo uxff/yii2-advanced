@@ -205,8 +205,10 @@ class GraspController extends Controller
         if ($tokenRet && $tokenRet[0]['token']) {
             $token = $tokenRet[0]['token'];
             $client = new WeiboClientV2(self::WB_AKEY, self::WB_SKEY, $token);
+            Yii::warning('init weibo client success: uid='.$uid.' token='.$token);
         } else {
-            echo '不能获取客户端，可能是该账户被禁用。';
+            Yii::error('cannot init weibo client');
+            //echo '不能获取客户端，可能是该账户被禁用。';
         }
         return $client;
     }
@@ -264,6 +266,7 @@ class GraspController extends Controller
             $okList[] = $line[$i];
         }
 
+        //$cadidateBefore = $this->getCandidate();
         $allNum = $this->saveCandidate($okList);
 
         $this->jsonSuccess('ok', [
@@ -271,6 +274,7 @@ class GraspController extends Controller
             'ok_count' => count($okList),
             'all_saved' => $allNum,
             'list' => $okList,
+            //'cadidate_before' => $cadidateBefore,
         ]);
     }
     public function actionPut() {
@@ -317,7 +321,7 @@ class GraspController extends Controller
                 }
             }
             $cntList = array_merge($cntList, $list);
-            file_put_contents($filepath, json_encode($cntList));
+            file_put_contents($filepath, json_encode($cntList, JSON_UNESCAPED_UNICODE));
             $ret = count($cntList);
         } catch (Excetion $e) {
             $msg = $e->getMessage();
@@ -333,7 +337,7 @@ class GraspController extends Controller
         $filepath = $this->getCandidateFile();
         $line = json_decode(file_get_contents($filepath), true);
         $one = array_shift($line);
-        file_put_contents($filepath, json_encode($line));
+        file_put_contents($filepath, json_encode($line, JSON_UNESCAPED_UNICODE));
         return $one;
     }
 }
