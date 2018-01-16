@@ -245,7 +245,7 @@ class GraspController extends Controller
             if (!in_array($line[$i]['user']['name'], $this->listen_list))
             {
                 //print_r('非专业微博:['.$line[$i]['text'].']<br/>');
-                continue;
+                //continue;
             }
             $hasIntent = false;
             foreach ($this->unlike_word as $kw)
